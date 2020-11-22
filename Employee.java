@@ -52,7 +52,7 @@ public class Employee {
 	}
 	@Override
 	public String toString() {
-		return "Emploee [id=" + id + ", name=" + name + ", surname=" + surname + ", unit=" + unit + ", transportation="
+		return "Employee [id=" + id + ", name=" + name + ", surname=" + surname + ", unit=" + unit + ", transportation="
 				+ transportation + "]";
 	}
 	public static void printEmployees (){
