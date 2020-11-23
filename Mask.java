@@ -31,7 +31,7 @@ public class Mask {
 	}
 
 	public static void initialization() {
-		for (int i=0 ; i<29 ; i++) {
+		for (int i=0 ; i<49 ; i++) {
 			nomask[i].setDoneTelework(false) ;
 			nomask[i].setTimes(0);
 		}
