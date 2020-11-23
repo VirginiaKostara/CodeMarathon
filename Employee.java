@@ -52,11 +52,8 @@ public class Employee {
 	}
 	@Override
 	public String toString() {
-<<<<<<< HEAD
+
 		return "Employee [id=" + id + ", name=" + name + ", surname=" + surname + ", unit=" + unit + ", transportation="
-=======
-		return "Emploee [id=" + id + ", name=" + name + ", surname=" + surname + ", unit=" + unit + ", transportation="
->>>>>>> 8383c2f813aecd0b9c4c4f7ed84440f112eb8ae2
 				+ transportation + "]";
 	}
 	public static void printEmployees (){
@@ -67,12 +64,8 @@ public class Employee {
 		}
 		System.out.println();
 	}
-
 	public static void fireEmployee(int id) {
 		employees[id-1]=null;
 	}
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 8383c2f813aecd0b9c4c4f7ed84440f112eb8ae2
