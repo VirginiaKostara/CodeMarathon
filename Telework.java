@@ -2,8 +2,8 @@ import java.security.SecureRandom;
 public class Telework extends Employee {
 	public static Telework [] teleworkers = new Telework [50];
 	protected enum Status { COVIDCASE, UNCONFIRMEDCASE1, UNCONFIRMEDCASE2, NORMAL };
-	int [] quarantine_responsible= new int [50];
-	int [] quarantine_days=new int [50];
+	private int [] quarantine_responsible= new int [50];
+	private int [] quarantine_days=new int [50];
 	Status [] WorkStatus = new Status [50];
 	private static int c1 = 0;
 	public Telework (String name, String surname, String unit, String transportation, Status [] WorkStatus,int [] quarantine_responsible ,int [] quarantine_days) {
@@ -81,4 +81,18 @@ public class Telework extends Employee {
 			}
 		}
 	}
-	
+public void checkCovidCase(boolean result, int id) {
+		if (result == false) {
+			for (i=0;i<Employee.employees.length;i++) {
+				if (quarantine_responsible[i] == id) {
+					WorkStatus[i] = Status.NORMAL;
+					quarantine_days[i] = 0;
+					quarantine_responsible[i] = -2;   /* -2 γιατι επιστρεφει στην φυσικη εργασια ( το -1 χρησιμοποιειται ηδη για αλλο σκοπο)*/
+				}
+			}
+		} else {
+			WorkStatus[id-1] = Status.COVIDCASE;
+			CovidCases.createCase(id);
+		}
+	}
+
