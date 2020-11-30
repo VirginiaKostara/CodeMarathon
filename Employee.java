@@ -10,6 +10,7 @@ public class Employee {
 	private String transportation;
 	public static Employee[]employees=new Employee[50];
 
+	// Δημιουργία κατασκευαστή
 	public Employee(String name, String surname, String unit, String transportation) {
 		employees[count]= this;
 		count++;
@@ -20,6 +21,8 @@ public class Employee {
 		this.transportation = transportation;
 
 	}
+
+	//Δημόσιες μέθοδοι get και set για πρόσβαση στα πεδία της κλάσης
 	public int getId() {
 		return id;
 	}
@@ -50,12 +53,14 @@ public class Employee {
 	public void setTransportation(String transportation) {
 		this.transportation = transportation;
 	}
+
+	//toString μέθοδος για τα αντικείμενα της κλάσης
 	@Override
 	public String toString() {
-
 		return "Employee [id=" + id + ", name=" + name + ", surname=" + surname + ", unit=" + unit + ", transportation="
 				+ transportation + "]";
 	}
+	//Δημόσια στατική μέθοδος για την εκτύπωση του πίνακα των εργαζομένων
 	public static void printEmployees (){
 		for(int i=0;i< employees.length;i++) {
 			if(employees[i]!=null)
@@ -64,8 +69,8 @@ public class Employee {
 		}
 		System.out.println();
 	}
+	// Δημόσια στατική μέθοδο για την διαγραφή εργαζομένων λόγω απουσίας μάσκας
 	public static void fireEmployee(int id) {
 		employees[id-1]=null;
 	}
-
 }
