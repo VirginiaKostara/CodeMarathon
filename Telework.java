@@ -21,6 +21,7 @@ public class Telework extends Employee {
 			WorkStatus[i]=Status.UNCONFIRMEDCASE1;
 			quarantine_days[i]=1;
 			quarantine_responsible[i]=i+1;
+//μπορει να λεω βλακείες είναι και αργά, αλλα δε θα έπρεπε να περιεχει και την εκδοχή i-1 για να είναι σωστότερο;
 			for(int x=0;x<Employee.employees.length;x++) {
 				if(i!=x && teleworkers[i].getUnit().equals(teleworkers[x].getUnit())) {
 					WorkStatus[x]=Status.UNCONFIRMEDCASE2;
