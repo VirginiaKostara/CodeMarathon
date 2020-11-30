@@ -3,7 +3,7 @@ public class Telework extends Employee {
 	public static Telework [] teleworkers = new Telework [50];
 	protected enum Status { COVIDCASE, UNCONFIRMEDCASE1, UNCONFIRMEDCASE2, NORMAL };
 	private int quarantine_responsible;
-	private int [] quarantine_days;
+	private int quarantine_days;
 	Status WorkStatus;
 	private static int c1 = 0;
 	public Telework (String name, String surname, String unit, String transportation, Status WorkStatus,int quarantine_responsible ,int quarantine_days) {
