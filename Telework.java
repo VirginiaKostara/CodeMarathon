@@ -39,6 +39,12 @@ public class Telework extends Employee {
 			teleworkers[i].WorkStatus=Status.UNCONFIRMEDCASE1;
 			teleworkers[i].quarantine_days=1;
 			teleworkers[i].quarantine_responsible=i+1;
+=======
+			WorkStatus[i]=Status.UNCONFIRMEDCASE1;
+			quarantine_days[i]=1;
+			quarantine_responsible[i]=i+1;
+//μπορει να λεω βλακείες είναι και αργά, αλλα δε θα έπρεπε να περιεχει και την εκδοχή i-1 για να είναι σωστότερο;
+>>>>>>> 624104a2d7014c05f2e40a50c946f766c001a988
 			for(int x=0;x<Employee.employees.length;x++) {
 				if(i!=x && teleworkers[i].getUnit().equals(teleworkers[x].getUnit())) {
 					teleworkers[x].WorkStatus=Status.UNCONFIRMEDCASE2;
