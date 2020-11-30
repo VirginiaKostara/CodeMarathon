@@ -2,11 +2,11 @@ import java.security.SecureRandom;
 public class Telework extends Employee {
 	public static Telework [] teleworkers = new Telework [50];
 	protected enum Status { COVIDCASE, UNCONFIRMEDCASE1, UNCONFIRMEDCASE2, NORMAL };
-	private int [] quarantine_responsible= new int [50];
-	private int [] quarantine_days=new int [50];
-	Status [] WorkStatus = new Status [50];
+	private int quarantine_responsible;
+	private int [] quarantine_days;
+	Status WorkStatus;
 	private static int c1 = 0;
-	public Telework (String name, String surname, String unit, String transportation, Status [] WorkStatus,int [] quarantine_responsible ,int [] quarantine_days) {
+	public Telework (String name, String surname, String unit, String transportation, Status WorkStatus,int quarantine_responsible ,int quarantine_days) {
 		super(name, surname , unit, transportation);
 		this.WorkStatus= WorkStatus;
 		this.quarantine_responsible = quarantine_responsible;
@@ -15,66 +15,80 @@ public class Telework extends Employee {
 		c1++;
 	}
 	int i;
+	public int getQuarantine_responsible() {
+		return quarantine_responsible;
+	}
+	public void setQuarantine_responsible(int quarantine_responsible) {
+		this.quarantine_responsible = quarantine_responsible;
+	}
+	public int getQuarantine_days() {
+		return quarantine_days;
+	}
+	public void setQuarantine_days(int quarantine_days) {
+		this.quarantine_days = quarantine_days;
+	}
+	public Status getWorkStatus() {
+		return WorkStatus;
+	}
+	public void setWorkStatus(Status workStatus) {
+		WorkStatus = workStatus;
+	}
 	public void findTeleworkers() {
 	for ( i=0;i<Employee.employees.length;i++) {
 		if(Thermometer.thermometrhseis[i] > 37) {
-			WorkStatus[i]=Status.UNCONFIRMEDCASE1;
-			quarantine_days[i]=1;
-			quarantine_responsible[i]=i+1;
+			teleworkers[i].WorkStatus=Status.UNCONFIRMEDCASE1;
+			teleworkers[i].quarantine_days=1;
+			teleworkers[i].quarantine_responsible=i+1;
 			for(int x=0;x<Employee.employees.length;x++) {
 				if(i!=x && teleworkers[i].getUnit().equals(teleworkers[x].getUnit())) {
-					WorkStatus[x]=Status.UNCONFIRMEDCASE2;
-					quarantine_days[x]=1;
-					quarantine_responsible[x]=i+1;
+					teleworkers[x].WorkStatus=Status.UNCONFIRMEDCASE2;
+					teleworkers[x].quarantine_days=1;
+					teleworkers[x].quarantine_responsible=i+1;
 				}
 			}
 			if(teleworkers[i].getId()<=32) {
 				if(teleworkers[i].getId() % 2 == 0) {
-					WorkStatus[i-1]=Status.UNCONFIRMEDCASE2;
-					quarantine_days[i-1]=1;
-					quarantine_responsible[i-1]=i+1;
+					teleworkers[i-1].WorkStatus=Status.UNCONFIRMEDCASE2;
+					teleworkers[i-1].quarantine_days=1;
+					teleworkers[i-1].quarantine_responsible=i+1;
 				}
 				else {
-					WorkStatus[i+1]=Status.UNCONFIRMEDCASE2;
-					quarantine_days[i+1]=1;
-					quarantine_responsible[i+1]=i+1;
+					teleworkers[i+1].WorkStatus=Status.UNCONFIRMEDCASE2;
+					teleworkers[i+1].quarantine_days=1;
+					teleworkers[i+1].quarantine_responsible=i+1;
 				}
 			}
 		}
-		if (Mask.nomask[i].getTimes()==6 && WorkStatus[i]==Status.NORMAL && Mask.nomask[i].getDoneTelework()==false) {
+		if (Mask.nomask[i].getTimes()==6 && teleworkers[i].WorkStatus==Status.NORMAL && Mask.nomask[i].getDoneTelework()==false) {
 			Mask.nomask[i].setDoneTelework(true); 
-			WorkStatus[i]=Status.UNCONFIRMEDCASE2;
-			quarantine_days[i]=1;
-			quarantine_responsible[i]=i+1;
+			teleworkers[i].WorkStatus=Status.UNCONFIRMEDCASE2;
+			teleworkers[i].quarantine_days=1;
+			teleworkers[i].quarantine_responsible=i+1;
 		}
 				
 	}
 	int count;
 	for (i=0;i<Employee.employees.length;i++) {
-		if(WorkStatus[i]==Status.UNCONFIRMEDCASE1 || WorkStatus[i]==Status.UNCONFIRMEDCASE2 || WorkStatus[i]==Status.COVIDCASE) {
+		if(teleworkers[i].WorkStatus==Status.UNCONFIRMEDCASE1 || teleworkers[i].WorkStatus==Status.UNCONFIRMEDCASE2 || teleworkers[i].WorkStatus==Status.COVIDCASE) {
 			count++;
+			System.out.println(teleworkers[i].toString())
 		}
-	}
-	for (i=0;i<Employee.employees.length;i++) {
-			if(WorkStatus[i]==Status.UNCONFIRMEDCASE1 || WorkStatus[i]==Status.UNCONFIRMEDCASE2 || WorkStatus[i]==Status.COVIDCASE) {
-				System.out.println(teleworkers[i].toString());
-			}
-	}
+	}}
 		
 	if(count<20)	{
 		int z=20-count;
 		SecureRandom randomNumbers = new SecureRandom();
 		int randomvar;
 		boolean b;
-		for(i=0;i<z;i++) {
+		for(i=0;i<z;i++) {		
 			b=false;
 			randomvar= randomNumbers.nextInt(50);
 			while(b==false) {
-				if(WorkStatus[randomvar]==Status.NORMAL) {
+				if(teleworkers[randomvar].WorkStatus==Status.NORMAL) {
 					b=true;
-					WorkStatus[randomvar]=Status.UNCONFIRMEDCASE2;
-					quarantine_days[randomvar]=1;
-					quarantine_responsible[randomvar]=-1; /* -1 γιατι γινεται τυχαια (στην αρχη της επομενης μερας αυτοι πρεπει να γινουν νορμαλ)*/
+					teleworkers[randomvar].WorkStatus=Status.UNCONFIRMEDCASE2;
+					teleworkers[randomvar].quarantine_days=1;
+					teleworkers[randomvar].quarantine_responsible=-1; /* -1 γιατι γινεται τυχαια (στην αρχη της επομενης μερας αυτοι πρεπει να γινουν νορμαλ)*/
 					System.out.println(teleworkers[randomvar].toString());
 					randomvar= randomNumbers.nextInt(50);
 				}
@@ -84,14 +98,14 @@ public class Telework extends Employee {
 public void checkCovidCase(boolean result, int id) {
 		if (result == false) {
 			for (i=0;i<Employee.employees.length;i++) {
-				if (quarantine_responsible[i] == id) {
-					WorkStatus[i] = Status.NORMAL;
-					quarantine_days[i] = 0;
-					quarantine_responsible[i] = -2;   /* -2 γιατι επιστρεφει στην φυσικη εργασια ( το -1 χρησιμοποιειται ηδη για αλλο σκοπο)*/
+				if (teleworkers[i].quarantine_responsible == id) {
+					teleworkers[i].WorkStatus = Status.NORMAL;
+					teleworkers[i].quarantine_days = 0;
+					teleworkers[i].quarantine_responsible = -2;   /* -2 γιατι επιστρεφει στην φυσικη εργασια ( το -1 χρησιμοποιειται ηδη για αλλο σκοπο)*/
 				}
 			}
 		} else {
-			WorkStatus[id-1] = Status.COVIDCASE;
+			teleworkers[id-1].WorkStatus = Status.COVIDCASE;
 			CovidCases.createCase(id);
 		}
 	}
