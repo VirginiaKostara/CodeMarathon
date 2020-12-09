@@ -3,9 +3,9 @@ package codemarathon;
 public class Mask {
 
 	static int count = 0;
-	private int times;
-	private boolean doneTelework;
-	public static Mask[] nomask = new Mask[50];
+	private int times;    //ιδιωτικό πεδίο το οποίο μετράει τις φορές που ένας εργαζόμενος εμφανίζεται χωρίς μάσκα
+	private boolean doneTelework;    //ιδιωτικό πεδίο το οποίο δείχνει εαν κάποιος έχει μπει σε τηλεργασία λόγω της απουσίας μάσκας ή όχι
+	public static Mask[] nomask = new Mask[50];   //στατικός πίνακας μεγέθους 50 για όλους τους εργαζομένους με τα στοιχεία που αφορούν την παρουσία τους με/χωρίς μάσκα
 
 	public Mask(int times, boolean doneTelework) {
 		nomask[count]= this;
@@ -16,26 +16,28 @@ public class Mask {
 
 	public int getTimes() {
 		return times;
-	}
+	}    // Μέθοδος εμφάνισης των φορών χωρίς μάσκα του αντικειμένου με το οποίο θα καλεστεί
 
 	protected void setTimes(int times) {
 		this.times = times;
-	}
+	}   //μέθοδος με την οποία αλλάζει-αυξάνεται ο αριθμός φορών που δε φορούσε μάσκα ο εργαζόμενος του αντικειμένου εφόσον ο χρήστης υο επιλέξει
 
 	public boolean getDoneTelework() {
 		return doneTelework;
-	}
+	}     // Μέθοδος εμφάνισης εαν το αντικειμενο με το οποίο θα καλεστεί έχει κάνει τηλεργασία επείδη δεν φορούσε μάσκα
 
 	protected void setDoneTelework(boolean doneTelework) {
 		this.doneTelework = doneTelework;
-	}
+	}    //Μέθοδος αλλαγής της κατάστασης εαν ο εργαζόμενος του αντικειμένου πέρασε σε τηλεργασία λόγω της μάσκας
 
 	public static void initialization() {
 		for (int i=0 ; i<49 ; i++) {
-			nomask[i].setDoneTelework(false) ;
-			nomask[i].setTimes(0);
+			new Mask(0,false);
 		}
 	}
+ //στατική μέθοδος που θα κληθεί την πρώτη μέρα μέσω της main ώστε να αρχικοποιηθεί κατάλληλα ο πίνακας
+
+
 	public static void insertnomask(int idemployee) {
 		int currenttimes = nomask[idemployee-1].getTimes() + 1; // δείχνει τις φορές που ο εργαζόμενος δε φορούσε μάσκα μαζί με την παρούσα φορά
 		nomask[idemployee-1].setTimes(currenttimes);
@@ -52,7 +54,7 @@ public class Mask {
 		} else {
 			System.out.println("Δεν χρειάζεται επίπληξη");
 		}
-	}
+	}   //στατική μέθοδος με την οποία ανάλογα με τον εργαζόμενο που δε φοράει τη συγκεκριμένη ημέρα μάσκα, εμφανίζει κατάλληλο μήνυμα επίπληξης ή όχι
 
 
 }
