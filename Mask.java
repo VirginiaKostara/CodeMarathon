@@ -42,17 +42,17 @@ public class Mask {
 		int currenttimes = nomask[idemployee-1].getTimes() + 1; // δείχνει τις φορές που ο εργαζόμενος δε φορούσε μάσκα μαζί με την παρούσα φορά
 		nomask[idemployee-1].setTimes(currenttimes);
 		if (currenttimes==3) {
-			System.out.println("Πρώτη επίπληξη εργαζομένου");
+			System.out.println(Employee.employees[idemployee-1].getName() +" "+ Employee.employees[idemployee-1].getSurname() + ": Πρώτη επίπληξη εργαζομένου");
 
 		} else if (currenttimes==6) {
-			System.out.println("Δεύτερη επίπληξη εργαζομένου");
+			System.out.println(Employee.employees[idemployee-1].getName() +" "+ Employee.employees[idemployee-1].getSurname() + ": Δεύτερη επίπληξη εργαζομένου, ο εργαζόμενος μπαίνει σε τηλεργασία");
 
 		} else if (currenttimes==9) {
-			System.out.println("Τρίτη επίπληξη εργαζομένου, ο εργαζόμενος απολύεται");
-			Employee.fireEmployee(idemployee);
+			System.out.println(Employee.employees[idemployee-1].getName() +" "+ Employee.employees[idemployee-1].getSurname() + ": Τρίτη επίπληξη εργαζομένου, ο εργαζόμενος απολύεται");
+			Employee.fireEmployee(idemployee-1);
 			nomask[idemployee-1].setTimes(99); //Εφόσον ο εργαζόμενος απολύθηκε, στη θέση του μετρητή φορών χωρίς μάσκα μπαίνει ένας μεγάλος αριθμός ως ένδειξη
 		} else {
-			System.out.println("Δεν χρειάζεται επίπληξη");
+			System.out.println(Employee.employees[idemployee-1].getName() +" "+ Employee.employees[idemployee-1].getSurname() + ": Δεν χρειάζεται επίπληξη");
 		}
 	}   //στατική μέθοδος με την οποία ανάλογα με τον εργαζόμενο που δε φοράει τη συγκεκριμένη ημέρα μάσκα, εμφανίζει κατάλληλο μήνυμα επίπληξης ή όχι
 
