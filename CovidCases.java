@@ -56,6 +56,7 @@ public class CovidCases {
 		}
 		if (count == 0 ) {
 			System.out.println("Δεν έχει υπάρξει κρούσμα ως τώρα");
+			System.out.println();
 		} else {
 			System.out.println("Οι εργαζόμενοι που έχουν υπάρξει κρούσματα ή είναι αυτή τη στιγμή είναι οι:");
 			for(int i=0 ; i<cases.length ; i++) {
@@ -63,6 +64,7 @@ public class CovidCases {
 					cases[i].toString();
 				}
 			}
+			System.out.println();
 		}
 	}
 
@@ -86,6 +88,7 @@ public class CovidCases {
 		}
 		if (count == 0) {
 			System.out.println("Δεν υπάρχει κανένα ενεργό κρούσμα");
+			System.out.println();
 		}else {
 			System.out.println("Οι εργαζόμενοι που είναι ενεργά κρούσματα είναι οι:");
 			for(int i=0 ; i<casesnow.length ; i++) {
@@ -93,6 +96,7 @@ public class CovidCases {
 					System.out.println(casesnow[i]);
 				}
 			}
+			System.out.println();
 		}
 	}
 
