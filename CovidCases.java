@@ -23,7 +23,7 @@ public class CovidCases {
 		return "casesnow [idcases=" + idcases + ", name=" + name + ", surname=" + surname + ", daysleft=" + daysleft + "]" ;
 	}
 
-	public void setDaysleft(int daysleft) {
+	protected void setDaysleft(int daysleft) {
 		this.daysleft = daysleft;
 	}
 
