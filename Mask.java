@@ -31,7 +31,7 @@ public class Mask {
 	}    //Μέθοδος αλλαγής της κατάστασης εαν ο εργαζόμενος του αντικειμένου πέρασε σε τηλεργασία λόγω της μάσκας
 
 	public static void initialization() {
-		for (int i=0 ; i<49 ; i++) {
+		for (int i=0 ; i<50 ; i++) {
 			new Mask(0,false);
 		}
 	}
