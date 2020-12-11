@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 import codemarathon.Telework.Status;
 
-public class Mainapp {
+public class Main {
 	public static int day = 0;
 
 	public static void main(String[] args) {
+
 		Readfile r=new Readfile();
 		CreateFile c = new CreateFile();
 		r.openFile();
@@ -15,11 +16,11 @@ public class Mainapp {
 		r.closeFile();
 		if (day == 0) {
 			Mask.initialization(); //Την ημέρα 0 αρχικοποιούμε τα δεδομένα μας
-
 		}
-		Scanner sc = new Scanner (System.in);
-		Scanner keyboard = new Scanner(System.in);
-		Scanner lines= new Scanner(System.in);
+
+		Scanner sc = new Scanner (System.in); //Εισαγωγή δεδομένων τύπου double
+		Scanner keyboard = new Scanner(System.in); //Εισαγωγή δεδομένων τύπου int
+		Scanner lines= new Scanner(System.in); //Εισαγωγή δεδομένων τύπου String
 
 		int flag=0;
 		boolean stop=true;
@@ -64,8 +65,60 @@ public class Mainapp {
 					}
 				}
 			} else if (flag == 2) {
+				String more = "ΝΑΙ"; //αρχικοποιούμε στο ναι ώστε να τρέξει σίγουρα μια φορά
+				 while (!(more.equals("ΟΧΙ") ) ) {
+					 if (more.equals("ΝΑΙ")) {
+						 //Η επανάληψη αυτή είναι ώστε η γραμματεία να μπορεί να εισάγει παραπάνω από ένα χωρίς να χρειάζεται ξανά το αρχικό μενού
+						System.out.println("Παρακαλώ εισάγετε id εργαζομένου που θερμομετρήθηκε: ");
+						int idtherm = -99;  //αρχικοποιούμε τυχαία έναν πολύ μικρό αριθμό ώστε να τρέξει σίγουρα η πρώτη επανάληψη
+						while (idtherm > 50 && idtherm < 0) {
+							idtherm = keyboard.nextInt();
+							if (idtherm<50 && idtherm >= 0 && Telework.teleworkers[idtherm-1].getWorkStatus() == Status.NORMAL ) {
+							Thermometer.a(idtherm);
+							System.out.print("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+							more = lines.nextLine();
+							} else {
+								System.out.println("Λάθος εισαγωγή");
+								System.out.println("Παρακαλώ εισάγετε id εργαζομένου που θερμομετρήθηκε: ");
+							}
+						}  //Η επανάληψη χρησιμοποιείται ώστε να έχουμε σωστή εισαγωγή δεδομένων αλλιώς εμφανίζουμε ξανά το μήνυμα
+				 	}
+					if (!(more.equals("ΝΑΙ")) && !(more.equals("ΟΧΙ"))) {
+						  System.out.print("Λάθος Επιλογή");
+						  System.out.print("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+						  more = lines.nextLine();
+					  } //Αν δε λάβουμε σωστή απάντηση για τερματισμό της επιλογής ζητάμε ξανά καταχώρηση
+				} //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
 
-			}
+		  } else if (flag == 3) {
+			  int wear = -99; //αρχικοποιούμε τυχαία έναν πολύ μικρό αριθμό ώστε να τρέξει σίγουρα η πρώτη επανάληψη
+			  String more = "ΝΑΙ"; //αρχικοποιούμε στο ναι ώστε να τρέξει σίγουρα μια φορά
+			  while (!(more.equals("ΟΧΙ") )){
+				//Η επανάληψη αυτή είναι ώστε η γραμματεία να μπορεί να εισάγει παραπάνω από ένα χωρίς να χρειάζεται ξανά το αρχικό μενού
+				  if (more.equals("ΝΑΙ")) {
+					  System.out.print("Παρακαλώ καταγράψτε το id του εργαζομένου που δεν φορούσε μάσκα:");
+					  while (wear<0 && wear > 50) {
+						  wear = keyboard.nextInt();
+						  if (wear>=0 && wear<50) {
+							Mask.insertnomask(wear);
+							System.out.print("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+							more = lines.nextLine();
+						  } else {
+							  System.out.print("Λάθος Επιλογή");
+							  System.out.print("Παρακαλώ καταγράψτε το id του εργαζομένου που δεν φορούσε μάσκα:");
+						  }
+					  }//Η επανάληψη χρησιμοποιείται ώστε να έχουμε σωστή εισαγωγή δεδομένων αλλιώς εμφανίζουμε ξανά το μήνυμα\
+				  }
+				  if (!(more.equals("ΝΑΙ")) && !(more.equals("ΟΧΙ"))) {
+					  System.out.print("Λάθος Επιλογή");
+					  System.out.print("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+					  more = lines.nextLine();
+				  }  //Αν δε λάβουμε σωστή απάντηση για τερματισμό της επιλογής ζητάμε ξανά καταχώρηση
+			  }  //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
+		  }
+
 		}
 	}
+
+
 }
