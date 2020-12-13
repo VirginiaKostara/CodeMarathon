@@ -44,7 +44,6 @@ public class Main {
 						Telework.teleworkers[i].setQuarantine_days(Telework.teleworkers[i].getQuarantine_days()+1);
 					}
 				}
-				Telework.teleworkers[0].findTeleworkers();
 				Telework.teleworkers[0].changeStatus();
 				for (int i = 0; i < Telework.teleworkers.length; i++) {
 					if (Telework.teleworkers[i].getWorkStatus() == Status.UNCONFIRMEDCASE1 && Telework.teleworkers[i].getQuarantine_days() == 2 ) {
@@ -74,13 +73,14 @@ public class Main {
 						int idtherm = -99;  //αρχικοποιούμε τυχαία έναν πολύ μικρό αριθμό ώστε να τρέξει σίγουρα η πρώτη επανάληψη
 						while (idtherm > 50 || idtherm < 0) {
 							idtherm = keyboard.nextInt();
-							if (idtherm<50 && idtherm >= 0 && Telework.teleworkers[idtherm-1].getWorkStatus() == Status.NORMAL ) {
+							if (idtherm<=50 && idtherm > 0 && Telework.teleworkers[idtherm-1].getWorkStatus() == Status.NORMAL ) {
 								double therm = 0;
 								while(therm < 34 || therm > 43) {
 									System.out.println("Δώσε θερμοκρασία: ");
 									therm = sc.nextDouble();
 									if (therm >34 && therm < 43) {
 									Thermometer.a(idtherm, therm);
+
 									} else {
 										System.out.println("Λάθος εισαγωγή θερμοκρασίας");
 
@@ -101,8 +101,9 @@ public class Main {
 					  }//Αν δε λάβουμε σωστή απάντηση για τερματισμό της επιλογής ζητάμε ξανά καταχώρηση
 					if (more.equals("ΟΧΙ")) {
 						System.out.println("Επιτυχής εκχώρηση!");
+
 					}
-				} //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
+				 } //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
 
 		  } else if (flag == 3) {
 			  String more = "ΝΑΙ"; //αρχικοποιούμε στο ναι ώστε να τρέξει σίγουρα μια φορά
@@ -113,10 +114,11 @@ public class Main {
 					  System.out.println("Παρακαλώ καταγράψτε το id του εργαζομένου που δεν φορούσε μάσκα:");
 					  while (wear<0 || wear > 50) {
 						  wear = keyboard.nextInt();
-						  if (wear>=0 && wear<50) {
+						  if (wear>0 && wear <=50) {
 							Mask.insertnomask(wear);
 							System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
 							more = lines.nextLine();
+
 						  } else {
 							  System.out.println("Λάθος Επιλογή");
 							  System.out.println("Παρακαλώ καταγράψτε το id του εργαζομένου που δεν φορούσε μάσκα:");
@@ -131,21 +133,35 @@ public class Main {
 			  }  //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
 		  } else if (flag == 4) {
 
+
 		  } else if (flag == 5) {
 			  CovidCases.printCasesnow();
 		  } else if (flag == 6) {
 			  CovidCases.printCases();
 		  } else if (flag == 7) {
+			  String more = "ΝΑΙ"; //αρχικοποιούμε στο ναι ώστε να τρέξει σίγουρα μια φορά
+			  while (!(more.equals("ΟΧΙ") )){
+					//Η επανάληψη αυτή είναι ώστε η γραμματεία να μπορεί να εισάγει παραπάνω από ένα χωρίς να χρειάζεται ξανά το αρχικό μενού
 			  int interest = 99;
-			  while(interest>50 || interest < 0) {
-				  System.out.println("Δώσε id εργαζομένου που θέλεις να δεις την κατάσταση του: ");
-				  interest = keyboard.nextInt();
-				  if (interest<=50 && interest >=0) {
-					  System.out.println(Telework.teleworkers[interest-1].toString());
-				  } else {
-					  System.out.println("Λάθος εισαγωγή");
+			  if (more.equals("ΝΑΙ")) {
+				  while(interest>50 || interest < 0) {
+					  System.out.println("Δώσε id εργαζομένου που θέλεις να δεις την κατάσταση του: ");
+					  interest = keyboard.nextInt();
+					  if (interest<=50 && interest >=0) {
+						  System.out.println(Telework.teleworkers[interest-1].toString());
+						  System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+						  more = lines.nextLine();
+					  } else {
+						  System.out.println("Λάθος εισαγωγή");
+					  }
 				  }
-			  }
+			  	}
+				  if (!(more.equals("ΝΑΙ")) && !(more.equals("ΟΧΙ"))) {
+					  System.out.println("Λάθος Επιλογή");
+					  System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+					  more = lines.nextLine();
+				  }  //Αν δε λάβουμε σωστή απάντηση για τερματισμό της επιλογής ζητάμε ξανά καταχώρηση
+			  }  //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
 		  } else if (flag == 8) {
 			  System.out.println("Γίνεται τερματισμός λειτουργίας");
 		  }
