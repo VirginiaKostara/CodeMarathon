@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
+//CaseTreatment.java1
 public class CaseTreatment implements Runnable {
 	private double fever;
-	private String symptoms; // ενα νημα = συμπεριφορα ενος επιβεβαιωμενου κρουσματος μεσα σε 1 μονο μερα!!! προσοχη εδω
-	private boolean hospital; // αν εχει ηπια ή καθολου συμπτωματα ρωταει μια φορα κ τελος. αν εχει εντονα συμπτωματα ή εχει μπει στο νοσοκομειο ρωταει 3 φορες την ιδια μερα
+	private String symptoms; // ΞµΞ½Ξ± Ξ½Ξ·ΞΌΞ± = ΟƒΟ…ΞΌΟ€ΞµΟ�ΞΉΟ†ΞΏΟ�Ξ± ΞµΞ½ΞΏΟ‚ ΞµΟ€ΞΉΞ²ΞµΞ²Ξ±ΞΉΟ‰ΞΌΞµΞ½ΞΏΟ… ΞΊΟ�ΞΏΟ…ΟƒΞΌΞ±Ο„ΞΏΟ‚ ΞΌΞµΟƒΞ± ΟƒΞµ 1 ΞΌΞΏΞ½ΞΏ ΞΌΞµΟ�Ξ±!!! Ο€Ο�ΞΏΟƒΞΏΟ‡Ξ· ΞµΞ΄Ο‰
+	private boolean hospital; // Ξ±Ξ½ ΞµΟ‡ΞµΞΉ Ξ·Ο€ΞΉΞ± Ξ® ΞΊΞ±ΞΈΞΏΞ»ΞΏΟ… ΟƒΟ…ΞΌΟ€Ο„Ο‰ΞΌΞ±Ο„Ξ± Ο�Ο‰Ο„Ξ±ΞµΞΉ ΞΌΞΉΞ± Ο†ΞΏΟ�Ξ± ΞΊ Ο„ΞµΞ»ΞΏΟ‚. Ξ±Ξ½ ΞµΟ‡ΞµΞΉ ΞµΞ½Ο„ΞΏΞ½Ξ± ΟƒΟ…ΞΌΟ€Ο„Ο‰ΞΌΞ±Ο„Ξ± Ξ® ΞµΟ‡ΞµΞΉ ΞΌΟ€ΞµΞΉ ΟƒΟ„ΞΏ Ξ½ΞΏΟƒΞΏΞΊΞΏΞΌΞµΞΉΞΏ Ο�Ο‰Ο„Ξ±ΞµΞΉ 3 Ο†ΞΏΟ�ΞµΟ‚ Ο„Ξ·Ξ½ ΞΉΞ΄ΞΉΞ± ΞΌΞµΟ�Ξ±
 	
 	public CaseTreatment (double fever, String symptoms, boolean hospital) {
 		this.fever = fever;
@@ -70,7 +71,7 @@ public class CaseTreatment implements Runnable {
 			CaseTreatment [] covidcase = new CaseTreatment[Z];
 			Thread[] thread = new Thread[Z];
 			for (int i=0; i<Z; i++) {
-				covidcase[i] = new CaseTreatment (36.6 ,"",false); //μολις εμαθα οτι το τεστ βγηκε θετικο, δεν ξερω τιποτα για την κατασταση του ασθενη
+				covidcase[i] = new CaseTreatment (36.6 ,"",false); //ΞΌΞΏΞ»ΞΉΟ‚ ΞµΞΌΞ±ΞΈΞ± ΞΏΟ„ΞΉ Ο„ΞΏ Ο„ΞµΟƒΟ„ Ξ²Ξ³Ξ·ΞΊΞµ ΞΈΞµΟ„ΞΉΞΊΞΏ, Ξ΄ΞµΞ½ ΞΎΞµΟ�Ο‰ Ο„ΞΉΟ€ΞΏΟ„Ξ± Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞΊΞ±Ο„Ξ±ΟƒΟ„Ξ±ΟƒΞ· Ο„ΞΏΟ… Ξ±ΟƒΞΈΞµΞ½Ξ·
 				thread[i] = new Thread(covidcase[i]);
 			}
 			for (int x=0 ; x<Z ;x++) {
