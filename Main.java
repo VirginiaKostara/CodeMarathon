@@ -64,6 +64,8 @@ public class Main {
 						}
 					}
 				}
+			
+				Telework.teleworkers[0].randomTeleworkers();
 			} else if (flag == 2) {
 				String more = "ΝΑΙ"; //αρχικοποιούμε στο ναι ώστε να τρέξει σίγουρα μια φορά
 				 while (!(more.equals("ΟΧΙ") ) ) {
@@ -71,7 +73,7 @@ public class Main {
 						 //Η επανάληψη αυτή είναι ώστε η γραμματεία να μπορεί να εισάγει παραπάνω από ένα χωρίς να χρειάζεται ξανά το αρχικό μενού
 						System.out.println("Παρακαλώ εισάγετε id εργαζομένου που θερμομετρήθηκε: ");
 						int idtherm = -99;  //αρχικοποιούμε τυχαία έναν πολύ μικρό αριθμό ώστε να τρέξει σίγουρα η πρώτη επανάληψη
-						while (idtherm > 50 || idtherm < 0) {
+						while (idtherm > 50 || idtherm <= 0) {
 							idtherm = keyboard.nextInt();
 							if (idtherm<=50 && idtherm > 0 && Telework.teleworkers[idtherm-1].getWorkStatus() == Status.NORMAL ) {
 								double therm = 0;
@@ -79,8 +81,40 @@ public class Main {
 									System.out.println("Δώσε θερμοκρασία: ");
 									therm = sc.nextDouble();
 									if (therm >34 && therm < 43) {
-									Thermometer.a(idtherm, therm);
-
+										int idNext;
+									  if(!(Employee.employees[idtherm - 1].getTransportation().equals("ΑΤΟΜΙΚΟΜΕΣΟ"))) {
+										idNext = 99 ;
+										int flag1 = 0;
+										while (flag1 != 1){
+											System.out.println("Καθόσουν με κάποιον σήμερα στο λεωφορείο; ΝΑΙ/ΟΧΙ");
+											String ans = lines.nextLine();
+											if (ans.equals("ΝΑΙ")) {
+												while (idNext == 99) {
+												System.out.println("Δώσε επώνυμο του ατόμου:");
+												String sname = lines.nextLine();
+													for (int i = 0; i < 50 ; i++) {
+														if (Employee.employees[i].getSurname() == sname) {
+															idNext = i + 1;
+														}
+													}
+													if (idNext == 99) {
+														System.out.println("Λάθος Απάντηση");
+													}
+											flag1=1;
+												}
+											if (ans.equals("ΟΧΙ")) {
+												flag1=1;
+												System.out.println();
+											}
+											if (!(ans.equals("ΟΧΙ")) && !(ans.equals("ΝΑΙ"))) {
+												System.out.println("Λάθος Απάντηση");
+											}
+										}
+									}
+								}else {
+									idNext = 100;
+								}
+									Thermometer.a(idtherm, therm, idNext);
 									} else {
 										System.out.println("Λάθος εισαγωγή θερμοκρασίας");
 
@@ -90,7 +124,6 @@ public class Main {
 									more = lines.nextLine();
 									}else {
 										System.out.println("Λάθος εισαγωγή");
-										System.out.println("Παρακαλώ εισάγετε id εργαζομένου που θερμομετρήθηκε: ");
 									}
 								}  //Η επανάληψη χρησιμοποιείται ώστε να έχουμε σωστή εισαγωγή δεδομένων αλλιώς εμφανίζουμε ξανά το μήνυμα
 				 	}
@@ -101,9 +134,10 @@ public class Main {
 					  }//Αν δε λάβουμε σωστή απάντηση για τερματισμό της επιλογής ζητάμε ξανά καταχώρηση
 					if (more.equals("ΟΧΙ")) {
 						System.out.println("Επιτυχής εκχώρηση!");
-
+						System.out.println();
+						
 					}
-				 } //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
+				} //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
 
 		  } else if (flag == 3) {
 			  String more = "ΝΑΙ"; //αρχικοποιούμε στο ναι ώστε να τρέξει σίγουρα μια φορά
@@ -112,13 +146,12 @@ public class Main {
 				  int wear = -99; //αρχικοποιούμε τυχαία έναν πολύ μικρό αριθμό ώστε να τρέξει σίγουρα η πρώτη επανάληψη
 				  if (more.equals("ΝΑΙ")) {
 					  System.out.println("Παρακαλώ καταγράψτε το id του εργαζομένου που δεν φορούσε μάσκα:");
-					  while (wear<0 || wear > 50) {
+					  while (wear<=0 || wear > 50) {
 						  wear = keyboard.nextInt();
-						  if (wear>0 && wear <=50) {
+						  if (wear>0 && wear<=50) {
 							Mask.insertnomask(wear);
 							System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
 							more = lines.nextLine();
-
 						  } else {
 							  System.out.println("Λάθος Επιλογή");
 							  System.out.println("Παρακαλώ καταγράψτε το id του εργαζομένου που δεν φορούσε μάσκα:");
@@ -129,10 +162,17 @@ public class Main {
 					  System.out.println("Λάθος Επιλογή");
 					  System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
 					  more = lines.nextLine();
-				  }  //Αν δε λάβουμε σωστή απάντηση για τερματισμό της επιλογής ζητάμε ξανά καταχώρηση
+				  }
+				//Αν δε λάβουμε σωστή απάντηση για τερματισμό της επιλογής ζητάμε ξανά καταχώρηση
+				 if (more.equals("ΟΧΙ")) {
+						System.out.println("Η καταγραφή ολοκληρώθηκε επιτυχώς!");
+						System.out.println();
+				 }
+				   
 			  }  //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
 		  } else if (flag == 4) {
-
+			  Telework.teleworkers[0].printTeleworkers();
+			  System.out.println();
 
 		  } else if (flag == 5) {
 			  CovidCases.printCasesnow();
@@ -144,10 +184,10 @@ public class Main {
 					//Η επανάληψη αυτή είναι ώστε η γραμματεία να μπορεί να εισάγει παραπάνω από ένα χωρίς να χρειάζεται ξανά το αρχικό μενού
 			  int interest = 99;
 			  if (more.equals("ΝΑΙ")) {
-				  while(interest>50 || interest < 0) {
+				  while(interest>50 || interest <= 0) {
 					  System.out.println("Δώσε id εργαζομένου που θέλεις να δεις την κατάσταση του: ");
 					  interest = keyboard.nextInt();
-					  if (interest<=50 && interest >=0) {
+					  if (interest<=50 && interest >0) {
 						  System.out.println(Telework.teleworkers[interest-1].toString());
 						  System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
 						  more = lines.nextLine();
@@ -161,7 +201,12 @@ public class Main {
 					  System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
 					  more = lines.nextLine();
 				  }  //Αν δε λάβουμε σωστή απάντηση για τερματισμό της επιλογής ζητάμε ξανά καταχώρηση
+				  if (more.equals("ΟΧΙ")) {
+						System.out.println();
+				  }
+			  
 			  }  //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
+
 		  } else if (flag == 8) {
 			  System.out.println("Γίνεται τερματισμός λειτουργίας");
 		  }
