@@ -14,7 +14,7 @@ public class CovidCases {
 		this.idcases = idcases;
 		this.name = Employee.employees[idcases-1].getName();
 		this.surname = Employee.employees[idcases-1].getSurname();;
-		this.daysleft = 12; //To testCovid-19 κανει 2 ημερες να βγει, επομένως αντίστροφη μέτρηση απο την 12η ημέρα
+		this.daysleft = 9; //To testCovid-19 κανει 2 ημερες να βγει, επομένως αντίστροφη μέτρηση απο την 13η ημέρα - 2 ΣΚ = 9
 	}
 
 
@@ -68,14 +68,9 @@ public class CovidCases {
 		}
 	}
 
-	public static void deleteCase() { // Κάθε καινούρια μέρα που αλλάζει από την main, καλούμε την deleteCase
-		for(int i=0 ; i<casesnow.length; i++) {
-			if(casesnow[i].daysleft==0) {
+	public static void deleteCase(int i) { // Κάθε καινούρια μέρα που αλλάζει από την main, καλούμε την deleteCase
 				casesnow[i]=null;
 				count--;
-
-			}
-		}
 	}
 
 	public static void printCasesnow() {
