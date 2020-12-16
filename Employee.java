@@ -3,18 +3,20 @@ package codemarathon;
 
 public class Employee {
 
-	static int count=0; //Μετρητής για πίνακα αντικειμένων
-	//
+	static int count = 0; //Μετρητής για πίνακα αντικειμένων
+	//Ιδιωτικά πεδία κλάσης Employee
 	private int id;
 	private String name;
 	private String surname;
 	private String unit;
 	private String transportation;
-	public static Employee[]employees=new Employee[50];
+	private boolean had_covid = false; //ένδειξη αν ο υπάλληλος έχει περάσει κορωνοϊό
+	public static Employee[]employees = new Employee[50];// Στατικός πίνακας με όλα τα αντικείμενα Employee
 
 	// Δημιουργία κατασκευαστή
+
 	public Employee(String name, String surname, String unit, String transportation) {
-		employees[count]= this;
+		employees[count] = this;
 		count++;
 		this.id = count;
 		this.name = name;
@@ -24,7 +26,7 @@ public class Employee {
 
 	}
 
-	//Δημόσιες μέθοδοι get και set για πρόσβαση στα πεδία της κλάσης
+	//Δημόσιες μέθοδοι get και set  για πρόσβαση στα πεδία της κλάσης
 	public int getId() {
 		return id;
 	}
@@ -55,24 +57,25 @@ public class Employee {
 	public void setTransportation(String transportation) {
 		this.transportation = transportation;
 	}
+	public boolean getHad_covid() {
+		return had_covid;
+	}
+
+	public void setHad_covid(boolean had_covid) {
+		this.had_covid = had_covid;
+	}
 
 	//toString μέθοδος για τα αντικείμενα της κλάσης
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", surname=" + surname + ", unit=" + unit + ", transportation="
-				+ transportation + "]";
-	}
-	//Δημόσια στατική μέθοδος για την εκτύπωση του πίνακα των εργαζομένων
-	public static void printEmployees (){
-		for(int i=0;i< employees.length;i++) {
-			if(employees[i]!=null)
-				System.out.println(employees[i]);
 
-		}
-		System.out.println();
+	public String superString() {
+		return  name  + " " + surname + " με id = " + id ;
 	}
+
 	// Δημόσια στατική μέθοδο για την διαγραφή εργαζομένων λόγω απουσίας μάσκας
+
 	public static void fireEmployee(int id) {
-		employees[id-1]=null;
+		employees[id - 1] = null;
 	}
+
+
 }
