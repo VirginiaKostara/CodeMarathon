@@ -10,6 +10,7 @@ public class Employee {
 	private String surname;
 	private String unit;
 	private String transportation;
+	private String sex;
 	private boolean had_covid = false; //ένδειξη αν ο υπάλληλος έχει περάσει κορωνοϊό
 	public static Employee[]employees = new Employee[50];// Στατικός πίνακας με όλα τα αντικείμενα Employee
 
@@ -56,6 +57,12 @@ public class Employee {
 	}
 	public void setTransportation(String transportation) {
 		this.transportation = transportation;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 	public boolean getHad_covid() {
 		return had_covid;
