@@ -16,7 +16,7 @@ public class Employee {
 
 	// Δημιουργία κατασκευαστή
 
-	public Employee(String name, String surname, String unit, String transportation) {
+	public Employee(String name, String surname, String unit, String transportation, String sex) {
 		employees[count] = this;
 		count++;
 		this.id = count;
@@ -24,7 +24,7 @@ public class Employee {
 		this.surname = surname;
 		this.unit = unit;
 		this.transportation = transportation;
-
+		this.sex = sex;
 	}
 
 	//Δημόσιες μέθοδοι get και set  για πρόσβαση στα πεδία της κλάσης
