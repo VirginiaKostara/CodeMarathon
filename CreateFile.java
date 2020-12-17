@@ -9,7 +9,7 @@ public class CreateFile {
 		FileWriter writer;
 		try {
 			//Το αρχείο αυτό την πρώτη μέρα δημιουργείται και τις επόμενες ανανεώνεται
-			writer = new FileWriter(new File("employees2.txt"));
+			writer = new FileWriter(new File("/home/natasa/eclipse-workspace/codemarathon/src/codemarathon/employees2.txt"));
 			//Αποθηκεύουμε την ημέρα λειτουργίας της εφαρμογής
 			writer.write("CURRENT_DAY " + Main.day + "\n");
 			//Αποθηκέυουμε για κάθε υπάλληλο το id και τα στοιχεία του που μπορούν να  μεταβληθούν
@@ -17,7 +17,7 @@ public class CreateFile {
 
 				writer.write("{" + "\n" + "ID " + Telework.teleworkers[i].getId() + "\n"
 						+ "STATUS " + Telework.teleworkers[i].getWorkStatus() + "\n"
-						+ "QUARANTINE_DAYS_LEFT  " + Telework.teleworkers[i].getQuarantine_days() + "\n"
+						+ "QUARANTINE_DAYS " + Telework.teleworkers[i].getQuarantine_days() + "\n"
 						+ "QUARANTINE_RESPONSIBLE " + Telework.teleworkers[i].getQuarantine_responsible() + "\n"
 						+ "TIMESNOMASK " + Mask.nomask[i].getTimes() + "\n"
 						+ "DONE_TELEWORK " + Mask.nomask[i].getDoneTelework() + "\n"
