@@ -1,77 +1,110 @@
 package codemarathon;
 
+import codemarathon.Telework.Status;
+
 public class CovidCases {
-	static int count=0;
-	public static CovidCases[]casesnow=new CovidCases[3];
-	public static Employee[] cases=new Employee[50];
+	static int count = 0;
+	public static CovidCases[]casesnow = new CovidCases[3];
+	public static Employee[] cases = new Employee[50];
 	private int idcases;
 	private String name;
 	private String surname;
 	private int daysleft;
 
-	public CovidCases (int idcases) {
-		casesnow[count]=this;
+	public CovidCases(int idcases) {
+		casesnow[count] = this;
 		count++;
 		this.idcases = idcases;
-		this.name = Employee.employees[idcases-1].getName();
-		this.surname = Employee.employees[idcases-1].getSurname();;
-		this.daysleft = 12; //To testCovid-19 κανει 2 ημερες να βγει, επομένως αντίστροφη μέτρηση απο την 12η ημέρα
+		this.name = Employee.employees[idcases - 1].getName();
+		this.surname = Employee.employees[idcases - 1].getSurname();
+		this.daysleft = 9;
+		//To test κανει 2 ημερες να βγει, άρα μετράμε 9 εργάσιμες ημέρες
 	}
 
 
 	@Override
 	public String toString() {
-		return "casesnow [idcases=" + idcases + ", name=" + name + ", surname=" + surname + ", daysleft=" + daysleft + "]" ;
+		return "casesnow [idcases=" + idcases + ", name=" + name + ", surname="
+				+ surname + ", daysleft=" + daysleft + "]";
 	}
 
-	public void setDaysleft(int daysleft) {
+	protected void setDaysleft(int daysleft) {
 		this.daysleft = daysleft;
 	}
 
+	public static void createCase(int id) {
+		//Αφού γίνει το testCovid-19 στην main και βγει θετικό,καλούμε την createCase
+		cases[id - 1] = Employee.employees[id - 1];
+		boolean flag = false;
 
-	public static void createCase(int id) { //Αφού γίνει το testCovid-19 στην main και βγει θετικό,καλούμε την createCase
-		cases[id-1]=Employee.employees[id-1];
-		boolean flag=false;
-		int i=0;
-		while(flag==false && i<casesnow.length ) {
-			if(casesnow[i]==null) {
+		int i = 0;
+		while (flag == false && i < casesnow.length) {
+			if (casesnow[i] == null) {
 				new CovidCases(id);
-				flag=true;
+				flag = true;
 			} else {
 				i++;
 			}
-			if(i==casesnow.length) {
+			if (i == casesnow.length) {
 				System.out.print("ΥΠΟΧΡΕΩΤΙΚΟ ΚΛΕΙΣΙΜΟ ΕΤΑΙΡΕΙΑΣ!");
 			}
 		}
 	}
 
 
-
 	public static void printCases() {
-		for(int i=0 ; i<cases.length ; i++) {
-			if(cases[i]!=null){
-				cases[i].toString();
+		int counts = 0;
+		for (int i = 0; i < cases.length; i++) {
+			if (cases[i] != null) {
+				counts++;
 			}
+		}
+		if (counts == 0) {
+			System.out.println("Δεν έχει υπάρξει κρούσμα ως τώρα");
+			System.out.println();
+		} else {
+			System.out.println("Οι εργαζόμενοι που έχουν υπάρξει κρούσματα ή "
+					+ "είναι αυτή τη στιγμή είναι οι:");
+			for (int y = 0; y < cases.length; y++) {
+				if (cases[y] != null) {
+					System.out.println(cases[y].superString());
+				}
+			}
+			System.out.println();
 		}
 	}
 
-	public static void deleteCase() { // Κάθε καινούρια μέρα που αλλάζει από την main, καλούμε την deleteCase
-		for(int i=0 ; i<casesnow.length; i++) {
-			if(casesnow[i].daysleft==0) {
-				casesnow[i]=null;
-				count--;
-
-			}
-		}
+	public static void deleteCase(int i) {
+		// Κάθε καινούρια μέρα που αλλάζει από την main, καλούμε την deleteCase
+		casesnow[i] = null;
+		count--;
 	}
 
 	public static void printCasesnow() {
-		for(int i=0 ; i<casesnow.length ; i++) {
-			if(casesnow[i]!=null){
-				System.out.println(casesnow[i]);
+		int count = 0;
+		for (int i = 0; i < casesnow.length; i++) {
+			if (casesnow[i] != null) {
+				count++;
+			}
+		}
+		if (count == 0) {
+			System.out.println("Δεν υπάρχει κανένα ενεργό κρούσμα");
+			System.out.println();
+		} else {
+			System.out.println("Οι εργαζόμενοι που είναι ενεργά κρούσματα είναι οι:");
+			for (int i = 0; i < casesnow.length; i++) {
+				if (casesnow[i] != null) {
+					System.out.println(casesnow[i].toString());
+				}
+			}
+			System.out.println();
+		}
+	}
+	public static void upDateCases() {
+		for (int i = 0; i < cases.length; i++) {
+			if (Telework.teleworkers[i].getWorkStatus().equals(Status.COVIDCASE)) {
+				createCase(i);
 			}
 		}
 	}
-
 }
