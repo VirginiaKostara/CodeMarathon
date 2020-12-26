@@ -1,6 +1,12 @@
 package codemarathon;
 
 
+/**
+ * A class with the information of every Employee that works for this company.
+ * Every employee and his info are saved in the static table Employee.
+ * The fields for the class's constuctor come from the file named employees1.txt
+ * @author codemarathon team
+ */
 public class Employee {
 
 	static int count = 0; //Μετρητής για πίνακα αντικειμένων
@@ -11,12 +17,18 @@ public class Employee {
 	private String unit;
 	private String transportation;
 	private String sex;
+	//το id του υπαλλήλου με τον οποίο είναι παντρεμένοι. το πεδίο αυτό.
+	//Παίρνει τιμή 0 για όσους δεν είναι παντρεμένοι με υπάλληλο της επιχείρησης.
+
+	private int idmarriedto;
 	private boolean had_covid = false; //ένδειξη αν ο υπάλληλος έχει περάσει κορωνοϊό
-	public static Employee[]employees = new Employee[50];// Στατικός πίνακας με όλα τα αντικείμενα Employee
+	// Στατικός πίνακας με όλα τα αντικείμενα Employee
+	public static Employee[]employees = new Employee[50];
 
 	// Δημιουργία κατασκευαστή
 
-	public Employee(String name, String surname, String unit, String transportation, String sex) {
+	public Employee(String name, String surname, String unit, String transportation,
+			String sex, String idmarriedto) {
 		employees[count] = this;
 		count++;
 		this.id = count;
@@ -25,6 +37,7 @@ public class Employee {
 		this.unit = unit;
 		this.transportation = transportation;
 		this.sex = sex;
+		this.idmarriedto = Integer.parseInt(idmarriedto);
 	}
 
 	//Δημόσιες μέθοδοι get και set  για πρόσβαση στα πεδία της κλάσης
@@ -64,6 +77,12 @@ public class Employee {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+	public int getIdmarriedto() {
+		return idmarriedto;
+	}
+	public void setIdmarriedto(int idmarriedto) {
+		this.idmarriedto = idmarriedto;
+	}
 	public boolean getHad_covid() {
 		return had_covid;
 	}
@@ -78,7 +97,9 @@ public class Employee {
 		return  name  + " " + surname + " με id = " + id ;
 	}
 
-	// Δημόσια στατική μέθοδο για την διαγραφή εργαζομένων λόγω απουσίας μάσκας
+	/** Deletes the employee who has been fired from the Employee table
+	 * This method is being used by the class Mask, whenever an employee has gotten 3 strikes
+	 *  for not using a mask at work.  **/
 
 	public static void fireEmployee(int id) {
 		employees[id - 1] = null;
