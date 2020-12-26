@@ -25,7 +25,8 @@ public class Readfile {
 			String c = x.next();
 			String d = x.next();
 			String e = x.next();
-			new Telework(a,b,c,d,e,Status.NORMAL,-2,0);
+			String f = x.next();
+			new Telework(a,b,c,d,e,f,Status.NORMAL,-2,0);
 		}
 
 	}
