@@ -23,7 +23,7 @@ public class MarriedCouple<E1, E2> {
         if (e2.equals(Telework.teleworkers[i])) {
           f = false;
           for (int z = 0; z < Telework.teleworkers.length; z++) {
-            if (e1.equals(Telework.teleworkers[i])) {
+            if (e1.equals(Telework.teleworkers[z])) {
               if (((Telework) e1).getWorkStatus() != Telework.Status.NORMAL
                                     && ((Telework) e2).getWorkStatus() == Telework.Status.NORMAL) {
                 id1 = ((Telework) e1).getId();
