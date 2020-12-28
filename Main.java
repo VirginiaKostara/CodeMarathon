@@ -190,7 +190,16 @@ public class Main {
 								System.out.println();
 							}
 						} //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
-
+					  int idmarried;
+                        		  for (int xyz =0; xyz < Employee.employees.length; xyz++) {
+                            	          	idmarried = Employee.employees[xyz].getIdmarriedto();
+                            			if (idmarried != 0) {
+                              				Telework e1 = Telework.teleworkers[xyz];
+                              				Telework e2 = Telework.teleworkers[idmarried-1];
+                             				MarriedCouple<Telework, Telework> mc = new MarriedCouple<Telework,Telework>(e1, e2);
+                              				mc.compareobjects();
+                            			}
+                        		  }
 					} else if (flag == 3) {
 						String more = "ΝΑΙ"; //αρχικοποιούμε στο ναι ώστε να τρέξει σίγουρα μια φορά
 						while (!(more.equals("ΟΧΙ"))) {
