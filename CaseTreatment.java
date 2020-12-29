@@ -1,8 +1,11 @@
-package CodeMarathon;
+package codemarathon;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CaseTreatment implements Runnable {
+  static Scanner input = new Scanner(System.in);
+  static Scanner input2 = new Scanner(System.in);
   private double fever;
   private String symptoms; // ενα νημα
   //= συμπεριφορα ενος επιβεβαιωμενου κρουσματος μεσα σε 1 μονο μερα!!!
@@ -81,28 +84,72 @@ public class CaseTreatment implements Runnable {
     this.dayhospital = dayhospital;
   }
 
-  Scanner input = new Scanner(System.in);
+  
 
   /** 
    * The fundamental method in order to run/execute the thread.
    */
-  
+  @Override
   public void run() {
+    String abc;
+    String x;
+    double fev = 0;
     try {
-      outer: 
+      outer:
         for (int i = 0; i < 3; i++) {
-          System.out.println("Insert symptoms (none/mild/severe)");
-          setSymptoms(input.nextLine());
-          if (getSymptoms().contentEquals("none") || getSymptoms().equals("NONE")
-                 || getSymptoms().contentEquals("mild") || getSymptoms().contentEquals("MILD")) {
+            
+          System.out.println("Εισάγετε το είδος των συμπτωμάτων"
+                  + " του ασθενούς (καθόλου/ήπια/σοβαρά)");
+          synchronized (input2) {
+          do {
+            abc = input2.nextLine(); 
+            setSymptoms(abc);
+              if (!(abc.equals("καθόλου")) && !(abc.equals("ΚΑΘΟΛΟΥ")) 
+                     && !(abc.equals("ΗΠΙΑ")) && !(abc.equals("ήπια"))
+                     && !(abc.equals("σοβαρά")) && !(abc.equals("ΣΟΒΑΡΑ"))) {
+              System.out.println("Λάθος εισαγωγή είδους συμπτωμάτων. Ξαναπροσπαθήστε");
+              }
+          } while (!(abc.equals("καθόλου")) && !(abc.equals("ΚΑΘΟΛΟΥ")) 
+                  && !(abc.equals("ΗΠΙΑ")) && !(abc.equals("ήπια")) 
+                  && !(abc.equals("σοβαρά")) && !(abc.equals("ΣΟΒΑΡΑ")));
+          if (getSymptoms().contentEquals("καθόλου") || getSymptoms().equals("ΚΑΘΟΛΟΥ")
+                 || getSymptoms().contentEquals("ΗΠΙΑ") || getSymptoms().contentEquals("ήπια")) {
             break outer;
           } else {
-              Thread.sleep(1000);
-              System.out.println("Insert fever");
-              setFever(input.nextDouble());
-              System.out.println("Is the patient at the hospital? (yes/no)");
-              String x = input.nextLine();
-              if (x.contentEquals("yes") || x.contentEquals("YES")) {
+              Thread.sleep(100);
+              System.out.println("Εισάγετε τη θερμοκρασία του ασθενούς");
+              boolean f3 = true;
+              do {
+                f3 = false;
+                try {
+                  fev = input2.nextDouble();
+                  if (fev >= 35.0 && fev <= 42.0) {
+                      setFever(fev);
+                      input2.nextLine(); 
+                  } else {
+                    f3 = true;
+                    System.out.println("Παρακαλώ εισάγετε έναν"
+                            + " αριθμό που να αντιστοιχεί σε θερμοκρασία "
+                            + "ανθρώπινου σώματος");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Παρακαλώ εισάγετε έναν ακέραιο ή δεκαδικό αριθμό");
+                    input2.nextLine();
+                    f3 = true;
+                }
+              } while (f3 == true);
+              System.out.println("Είναι ο ασθενής στο νοσοκομείο; (ΝΑΙ/ΟΧΙ)");
+              do {
+                  x = input2.nextLine();
+                  if (!(x.equals("ΝΑΙ")) && !(x.contentEquals("ναι")) && !(x.contentEquals("όχι")) 
+                          && !(x.contentEquals("ΟΧΙ"))) {
+                    System.out.println("Λάθος εισαγωγή δεδομένων"
+                          + " αναφορικά με την είσοδο του ασθενούς "
+                            + "στο νοσοκομείο. Παρακαλώ ξαναπροσπαθήστε");
+                  }
+              } while (!(x.equals("ΝΑΙ")) && !(x.contentEquals("ναι")) && !(x.contentEquals("όχι")) 
+                      && !(x.contentEquals("ΟΧΙ")));
+              if (x.contentEquals("ΝΑΙ") || x.contentEquals("ναι")) {
                 setHospital(true);
                 if (i == 3 && getCode() >= 0 && getCode() < 50) { // neo
                   casetreatments[getCode()].setDayhospital(getDayhospital() + 1);
@@ -110,45 +157,113 @@ public class CaseTreatment implements Runnable {
               } else {
                 setHospital(false);
               }
+              input2.nextLine();
+              System.out.println("Επιτυχής καταχώρηση");
+              System.out.println();
               if (i == 3 && getCode() >= 0 && getCode() < 50) { // neo
                 casetreatments[getCode()].setDaysymptoms(getDaysymptoms() + 1);
               } // neo
             }
         }
+      }
     } catch (InterruptedException e) {
-      System.err.println("Something went wrong. Please try again later.");
+      System.err.println("Κάτι προέκυψε. Παρακαλώ προσπαθήστε αργότερα.");
     } finally {
-      System.out.println("Insertion is finished");
+      System.out.println("Η εισαγωγή δεδομένων τελείωσε!");
+      System.out.println();
     }
-    input.close();
+
   }
 
+  
+  public static Thread[] thread = new Thread[3];
+  public static CaseTreatment[] covidcase = new CaseTreatment[3];
+  
   /** 
    * Create threads for every patient everyday.
    */
-  
-  public static void createThreads(String[] args) {
+  public static void createThreads() {
     final int Z = CovidCases.count;
+   
+    int code1 = -1;
+    int code2;
     if (Z != 0) {
-      CaseTreatment[] covidcase = new CaseTreatment[Z];
-      Thread[] thread = new Thread[Z];
-      Scanner sc = new Scanner(System.in); // neo
-      for (int i = 0; i < Z; i++) {
-        System.out.println(CovidCases.casesnow.toString()); // neo
+      CovidCases.casesnow[0].printCases(); // neo
+      System.out.println(
+            "Παρακαλώ γράψτε τον κωδικό του εργαζομένου για τον οποίο" 
+             + " ενημερωθήκατε για την κατάσταση της υγείας του "); // neo
+      boolean f1 = true;
+      while (f1 == true) {
+        try {
+          f1 = false;
+          boolean frouros = false;
+          do {
+            code1 = input.nextInt();
+            for (int s = 0; s < Z; s++) {
+              if (code1 == CovidCases.casesnow[s].getIdcases()) {
+                frouros = true;
+              }
+            }
+            if (frouros == false) {
+              System.out.println("Λάθος εισαγωγή id. Ξαναπροσπαθήστε.");
+            }
+          } while (frouros == false);
+          covidcase[0] = new CaseTreatment(36.6, "", false, code1);
+          // μολις εμαθα οτι το τεστ βγηκε θετικο, δεν
+          // ξερω τιποτα για την κατασταση του ασθενη Ή
+          // ειναι πρωι κ δεν εχω μαθει πως ειναι ακομα
+          thread[0] = new Thread(covidcase[0]);
+          thread[0].start(); // δεν μπορει να χειριστει την περιπτωση που 
+        //υπάρχουν 2 ενεργα κρουσματα στην εταιρεία 
+        } catch (InputMismatchException e) {
+          System.out.println("To id που εισάγατε δεν αντιστοιχεί"
+                    + " σε εργαζόμενο. Παρακαλώ ξαναπροσπαθήστε");
+          input.nextLine();
+          f1 = true;
+        }
+      }     
+      if (Z == 2) {
+        try {
+          thread[0].join();
+        } catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        CovidCases.casesnow[0].printCases();
         System.out.println(
-            "ΠΑΡΑΚΑΛΩ ΓΡΑΨΤΕ ΤΟΝ ΚΩΔΙΚΟ ΤΟΥ ΕΡΓΑΖΟΜΕΝΟΥ ΓΙΑ ΤΟΝ ΟΠΟΙΟ"
-            + " ΕΝΗΜΕΡΩΘΗΚΑΤΕ ΓΙΑ ΤΗΝ ΚΑΤΑΣΤΑΣΗ ΤΗΣ ΥΓΕΙΑΣ ΤΟΥ "); // neo
-        int code = sc.nextInt();
-        covidcase[i] = new CaseTreatment(36.6, "", false, code);
-        // μολις εμαθα οτι το τεστ βγηκε θετικο, δεν
-        // ξερω τιποτα για την κατασταση του ασθενη Ή
-        // ειναι πρωι κ δεν εχω μαθει πως ειναι ακομα
-        thread[i] = new Thread(covidcase[i]);
+            "Παρακαλώ γράψτε τον κωδικό του εργαζομένου για τον οποίο"
+            + " ενημερωθήκατε για την κατάσταση της υγείας του "); // neo
+        boolean f2 = true;
+        while (f2 == true) {
+          try {
+            f2 = false;
+            boolean frouros2 = false;
+            do {
+              code2 = input.nextInt();
+              for (int s = 0; s < Z; s++) {
+                if (code2 == CovidCases.casesnow[s].getIdcases() && code2 != code1) {
+                  frouros2 = true;
+                }
+              }
+              if (frouros2 == false) {
+                System.out.println("Λάθος εισαγωγή id. Ξαναπροσπαθήστε.");
+              }
+            } while (frouros2 == false);
+            covidcase[1] = new CaseTreatment(36.6, "", false, code2);
+            thread[1] = new Thread(covidcase[1]);
+            thread[1].start();
+          } catch (InputMismatchException e) {
+            System.out.println("To id που εισάγατε δεν αντιστοιχεί"
+                      + " σε εργαζόμενο. Παρακαλώ ξαναπροσπαθήστε");
+            input.nextLine();
+            f2 = true;
+          }
+        }     
+                
       }
-      for (int x = 0; x < Z; x++) {
-        thread[x].start();
-      }
-      sc.close(); // neo
     }
+    
   }
+
+  
 }
