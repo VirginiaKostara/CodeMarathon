@@ -81,6 +81,24 @@ public class Main {
 							}
 						}
 
+						if (CovidCases.count != 0 ) {
+                            
+                            			  CaseTreatment.createThreads();
+                            			  try {
+                                		    CaseTreatment.thread[0].join();
+                            			  } catch (InterruptedException e) {
+                                		    // TODO Auto-generated catch block
+                                		    e.printStackTrace();
+                            			  }
+                            			  if (CovidCases.count ==2) {
+                                		    try {
+                                    		      CaseTreatment.thread[1].join();
+                                		    } catch (InterruptedException e) {
+                                    		      // TODO Auto-generated catch block
+                                    		      e.printStackTrace();
+                                		    }
+                            			  }
+                        			}
 						Telework.teleworkers[0].randomTeleworkers();
 						//CaseTreatment.treatment();
 					} else if (flag == 2) {
