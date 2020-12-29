@@ -1,5 +1,11 @@
 package codemarathon;
 
+/**
+ * A class with the information about all the Employees that did not wear a mask.
+ * Every time an Employee does not wear a mask it saves at the nomask table the times.
+ * * @author codemarathon team
+ *
+ */
 public class Mask {
 
   static int count = 0;
@@ -9,6 +15,14 @@ public class Mask {
   //ιδιωτικό πεδίο που δείχνει εαν κάποιος έχει μπει σε τηλεργασία λόγω της απουσίας μάσκας ή όχι
   public static Mask[] nomask = new Mask[50];
   //στατικός πίνακαςγια όλους τους εργαζομένους με τα στοιχεία που αφορούν τη μάσκα
+
+  /**
+   * The constructor saves the times and if the Employee has done Telework
+   * because of the mask at the nomask table.
+   * @param times This parameter shows how many times the Employee did not wear a mask.
+   * @param doneTelework This parameter shows if the Employee has done Telework
+   * because he did not wear a mask 6 times.
+   */
 
   public Mask(int times, boolean doneTelework) {
     nomask[count] = this;
@@ -36,6 +50,9 @@ public class Mask {
   }
   //Μέθοδος αλλαγής της κατάστασης εαν ο εργαζόμενος πέρασε σε τηλεργασία λόγω της μάσκας
 
+  /**
+   * This method initializes the Mask table automatically when it's called.
+   */
   public static void initialization() {
     for (int i = 0; i < 50; i++) {
       new Mask(0, false);
@@ -44,6 +61,11 @@ public class Mask {
   //στατική μέθοδος που θα κληθεί την μέρα 0 μέσω της main ώστε να αρχικοποιηθεί κατάλληλα ο πίνακας
 
 
+  /**
+   * This method changes the times an Employee did not wear a mask by 1.
+   * It checks if the times are 3,6 or 9 and shows the right message.
+   * @param idemployee This parameter shows the id of the Employee that did not wear a mask.
+   */
   public static void insertnomask(int idemployee) {
     int currenttimes = nomask[idemployee - 1].getTimes() + 1;
     // δείχνει τις φορές που ο εργαζόμενος δε φορούσε μάσκα μαζί με την παρούσα φορά
