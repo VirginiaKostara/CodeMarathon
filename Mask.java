@@ -3,7 +3,6 @@ package codemarathon;
 /**
  * A class with the information about all the Employees that did not wear a mask.
  * Every time an Employee does not wear a mask it saves at the nomask table the times.
- * * @author codemarathon team
  *
  */
 public class Mask {
