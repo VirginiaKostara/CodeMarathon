@@ -18,10 +18,10 @@ public class CaseTreatment implements Runnable {
   private int code = -1; // neo
   public static CaseTreatment[] casetreatments = new CaseTreatment[50]; // neo
 
-  /** 
+  /**
    * Learn about the condition of the ill employee(thread).
    */
-  
+
   public CaseTreatment(double fever, String symptoms, boolean hospital, int code) {
     this.fever = fever;
     this.symptoms = symptoms;
@@ -37,10 +37,10 @@ public class CaseTreatment implements Runnable {
     this.code = code;
   }
 
-  /** 
+  /**
    * Learn about the condition of the ill employee for statistic reasons.
    */
-  
+
   public CaseTreatment() { // neo
     this.daysymptoms = 0; // neo
     this.dayhospital = 0; // neo
@@ -84,9 +84,9 @@ public class CaseTreatment implements Runnable {
     this.dayhospital = dayhospital;
   }
 
-  
 
-  /** 
+
+  /**
    * The fundamental method in order to run/execute the thread.
    */
   @Override
@@ -97,20 +97,20 @@ public class CaseTreatment implements Runnable {
     try {
       outer:
         for (int i = 0; i < 3; i++) {
-            
+
           System.out.println("Εισάγετε το είδος των συμπτωμάτων"
                   + " του ασθενούς (καθόλου/ήπια/σοβαρά)");
           synchronized (input2) {
           do {
-            abc = input2.nextLine(); 
+            abc = input2.nextLine();
             setSymptoms(abc);
-              if (!(abc.equals("καθόλου")) && !(abc.equals("ΚΑΘΟΛΟΥ")) 
+              if (!(abc.equals("καθόλου")) && !(abc.equals("ΚΑΘΟΛΟΥ"))
                      && !(abc.equals("ΗΠΙΑ")) && !(abc.equals("ήπια"))
                      && !(abc.equals("σοβαρά")) && !(abc.equals("ΣΟΒΑΡΑ"))) {
               System.out.println("Λάθος εισαγωγή είδους συμπτωμάτων. Ξαναπροσπαθήστε");
               }
-          } while (!(abc.equals("καθόλου")) && !(abc.equals("ΚΑΘΟΛΟΥ")) 
-                  && !(abc.equals("ΗΠΙΑ")) && !(abc.equals("ήπια")) 
+          } while (!(abc.equals("καθόλου")) && !(abc.equals("ΚΑΘΟΛΟΥ"))
+                  && !(abc.equals("ΗΠΙΑ")) && !(abc.equals("ήπια"))
                   && !(abc.equals("σοβαρά")) && !(abc.equals("ΣΟΒΑΡΑ")));
           if (getSymptoms().contentEquals("καθόλου") || getSymptoms().equals("ΚΑΘΟΛΟΥ")
                  || getSymptoms().contentEquals("ΗΠΙΑ") || getSymptoms().contentEquals("ήπια")) {
@@ -125,7 +125,7 @@ public class CaseTreatment implements Runnable {
                   fev = input2.nextDouble();
                   if (fev >= 35.0 && fev <= 42.0) {
                       setFever(fev);
-                      input2.nextLine(); 
+                      input2.nextLine();
                   } else {
                     f3 = true;
                     System.out.println("Παρακαλώ εισάγετε έναν"
@@ -141,13 +141,13 @@ public class CaseTreatment implements Runnable {
               System.out.println("Είναι ο ασθενής στο νοσοκομείο; (ΝΑΙ/ΟΧΙ)");
               do {
                   x = input2.nextLine();
-                  if (!(x.equals("ΝΑΙ")) && !(x.contentEquals("ναι")) && !(x.contentEquals("όχι")) 
+                  if (!(x.equals("ΝΑΙ")) && !(x.contentEquals("ναι")) && !(x.contentEquals("όχι"))
                           && !(x.contentEquals("ΟΧΙ"))) {
                     System.out.println("Λάθος εισαγωγή δεδομένων"
                           + " αναφορικά με την είσοδο του ασθενούς "
                             + "στο νοσοκομείο. Παρακαλώ ξαναπροσπαθήστε");
                   }
-              } while (!(x.equals("ΝΑΙ")) && !(x.contentEquals("ναι")) && !(x.contentEquals("όχι")) 
+              } while (!(x.equals("ΝΑΙ")) && !(x.contentEquals("ναι")) && !(x.contentEquals("όχι"))
                       && !(x.contentEquals("ΟΧΙ")));
               if (x.contentEquals("ΝΑΙ") || x.contentEquals("ναι")) {
                 setHospital(true);
@@ -157,7 +157,6 @@ public class CaseTreatment implements Runnable {
               } else {
                 setHospital(false);
               }
-              input2.nextLine();
               System.out.println("Επιτυχής καταχώρηση");
               System.out.println();
               if (i == 3 && getCode() >= 0 && getCode() < 50) { // neo
@@ -175,22 +174,22 @@ public class CaseTreatment implements Runnable {
 
   }
 
-  
+
   public static Thread[] thread = new Thread[3];
   public static CaseTreatment[] covidcase = new CaseTreatment[3];
-  
-  /** 
+
+  /**
    * Create threads for every patient everyday.
    */
   public static void createThreads() {
     final int Z = CovidCases.count;
-   
+
     int code1 = -1;
     int code2;
     if (Z != 0) {
-      CovidCases.casesnow[0].printCases(); // neo
+      CovidCases.printCases(); // neo
       System.out.println(
-            "Παρακαλώ γράψτε τον κωδικό του εργαζομένου για τον οποίο" 
+            "Παρακαλώ γράψτε τον κωδικό του εργαζομένου για τον οποίο"
              + " ενημερωθήκατε για την κατάσταση της υγείας του "); // neo
       boolean f1 = true;
       while (f1 == true) {
@@ -213,23 +212,23 @@ public class CaseTreatment implements Runnable {
           // ξερω τιποτα για την κατασταση του ασθενη Ή
           // ειναι πρωι κ δεν εχω μαθει πως ειναι ακομα
           thread[0] = new Thread(covidcase[0]);
-          thread[0].start(); // δεν μπορει να χειριστει την περιπτωση που 
-        //υπάρχουν 2 ενεργα κρουσματα στην εταιρεία 
+          thread[0].start(); // δεν μπορει να χειριστει την περιπτωση που
+        //υπάρχουν 2 ενεργα κρουσματα στην εταιρεία
         } catch (InputMismatchException e) {
           System.out.println("To id που εισάγατε δεν αντιστοιχεί"
                     + " σε εργαζόμενο. Παρακαλώ ξαναπροσπαθήστε");
           input.nextLine();
           f1 = true;
         }
-      }     
+      }
       if (Z == 2) {
         try {
           thread[0].join();
         } catch (InterruptedException e) {
-          // TODO Auto-generated catch block
+
           e.printStackTrace();
         }
-        CovidCases.casesnow[0].printCases();
+        CovidCases.printCases();
         System.out.println(
             "Παρακαλώ γράψτε τον κωδικό του εργαζομένου για τον οποίο"
             + " ενημερωθήκατε για την κατάσταση της υγείας του "); // neo
@@ -258,12 +257,12 @@ public class CaseTreatment implements Runnable {
             input.nextLine();
             f2 = true;
           }
-        }     
-                
+        }
+
       }
     }
-    
+
   }
 
-  
+
 }
