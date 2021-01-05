@@ -22,17 +22,21 @@ public class Main {
       day++;
       Telework.teleworkers[0].randomTeleworkers();
     }
+
+    r.UpdateData();
+    CovidCases.upDateCases();
     CreateFile c = new CreateFile();
-    c.saveData();
+
     Scanner sc = new Scanner(System.in); //Εισαγωγή δεδομένων τύπου double
     Scanner keyboard = new Scanner(System.in); //Εισαγωγή δεδομένων τύπου int
     Scanner lines = new Scanner(System.in); //Εισαγωγή δεδομένων τύπου String
+
 
     int flag = 0;
     boolean stop = true;
     do {
       try {
-        while (flag != 8) {
+        while (flag != 9) {
           System.out.println("~~~~~~~~~~ Μενού Επιλογών ~~~~~~~~~~");
           System.out.println("1. Μετάβαση σε νέα μέρα.");
           System.out.println("2. Εισαγωγή δεδομένων πρωινής θερμομέτρησης των εργαζομένων.");
@@ -42,11 +46,14 @@ public class Main {
           System.out.println("6. Εμφάνιση επιβεβαιωμένων συνολικών κρουσμάτων");
           System.out.println("7. Εμφάνιση της κατάστασης ενός εργαζομένου με βάση το προσωπικό "
               + "id του.");
-          System.out.println("8. Τερματισμός λειτουργίας.");
-          System.out.println("Εισάγετε επιλογή [1-8]: "); //Επιλογή του χρήστη
+          System.out.println("8. Εμφάνιση στατιστικών δεδομένων αναφορικά "
+                  + "με τον COVID-19.");
+          System.out.println("9. Τερματισμός λειτουργίας.");
+          System.out.println("Εισάγετε επιλογή [1-9]: "); //Επιλογή του χρήστη
           flag = keyboard.nextInt();
           if (flag == 1) {
             day++; //Αυξάνουμε την ημέρα
+            Thermometer.initialize();
             for (int i = 0; i < Telework.teleworkers.length; i++) {
               if (Telework.teleworkers[i].getWorkStatus() != Status.NORMAL) {
                 Telework.teleworkers[i].setQuarantine_days(
@@ -78,24 +85,25 @@ public class Main {
                 }
               }
             }
-            if (CovidCases.count != 0 ){
+            if (CovidCases.count != 0) {
               CaseTreatment.createThreads();
               try {
                 CaseTreatment.thread[0].join();
               } catch (InterruptedException e) {
                 e.printStackTrace();
-             }
-             if (CovidCases.count == 2) {
-               try {
-                 CaseTreatment.thread[1].join();
-               } catch (InterruptedException e) {
-                 e.printStackTrace();
-               }
-             }
-           }
+              }
+              if (CovidCases.count == 2) {
+                try {
+                  CaseTreatment.thread[1].join();
+                } catch (InterruptedException e) {
+                  e.printStackTrace();
+                }
+              }
+            }
             Telework.teleworkers[0].randomTeleworkers();
             //CaseTreatment.treatment();
           } else if (flag == 2) {
+
             String more = "ΝΑΙ"; //αρχικοποιούμε στο ναι ώστε να τρέξει σίγουρα μια φορά
             while (!(more.equals("ΟΧΙ"))) {
               if (more.equals("ΝΑΙ")) {
@@ -103,7 +111,7 @@ public class Main {
                 System.out.println("Παρακαλώ εισάγετε id εργαζομένου που θερμομετρήθηκε: ");
                 int idtherm = -99;
                 //αρχικοποιούμε τυχαία ένανμικρό αριθμό ώστε να τρέξει σίγουρα η πρώτη επανάληψη
-                while (idtherm > 50 || idtherm <= 0) {
+                while (idtherm > 50 || idtherm <= 0 || Thermometer.thermometrhseis[idtherm] != 0) {
                   boolean intloop = true;
                   do {
                     try {
@@ -111,7 +119,7 @@ public class Main {
                       idtherm = keyboard.nextInt();
                       if (idtherm <= 50 && idtherm > 0
                               && Telework.teleworkers[idtherm - 1].getWorkStatus()
-                              == Status.NORMAL) {
+                              == Status.NORMAL && Thermometer.thermometrhseis[idtherm - 1] == 0 ) {
                         double therm = 0;
 
                         while (therm < 34 || therm > 43) {
@@ -178,8 +186,13 @@ public class Main {
                         }
                         System.out.println("Θέλετε να εισάγετε και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
                         more = lines.nextLine();
+                      } else if (!(Thermometer.thermometrhseis[idtherm - 1] == 0)) {
+                        System.out.println("Ο εργαζόμενος έχει ήδη θερμομετρηθεί");
+                      } else if (!(Telework.teleworkers[idtherm - 1].getWorkStatus()
+                              == Status.NORMAL)) {
+                        System.out.println("Ο εργαζόμενος βρίσκεται σε τηλεργασία");
                       } else {
-                        System.out.println("Λάθος εισαγωγή");
+                        System.out.println("Λάθος id εργαζομένου");
                       }
                       intloop = false;
                     } catch (InputMismatchException inputMismatchException5) {
@@ -310,8 +323,46 @@ public class Main {
               }
 
             }  //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
-
           } else if (flag == 8) {
+            int flag2 = 0;
+            boolean stop2 = true;
+            do {
+              try {
+                while (flag2 != 5) {
+                  System.out.println("~~~~~~~~~~ Μενού Επιλογών Στατστικών ~~~~~~~~~~");
+                  System.out.println("1. Στατιστικά Τμημάτων.");
+                  System.out.println("2. Στατιστικά Φύλων.");
+                  System.out.println("3. Στατιστικά Μέσου Μεταφοράς.");
+                  System.out.println("4. Συνολικά Στατιστικά Εργαζομένων.");
+                  System.out.println("5. Έξοδος από στατιστικά");
+                  System.out.println("Εισάγετε επιλογή [1-5]: ");
+                  flag2 = keyboard.nextInt();
+                  if (flag2 == 1) {
+
+                  }
+                  if (flag2 == 2) {
+
+                  }
+                  if (flag2 == 3) {
+
+                  }
+                  if (flag2 == 4) {
+
+                  }
+                  if (flag2 == 5) {
+                    System.out.println("Επιστροφή στο κεντρικό μενού");
+                    System.out.println();
+                  }
+                }
+                stop2 = false;
+              } catch (InputMismatchException inputMismatchException) {
+                keyboard.nextLine();
+                System.out.println("Μπορείτε να επιλέξετε μόνο ακέραιο αριθμό[1-5]. "
+                    + "Παρακαλώ ξαναπροσπαθήστε.");
+                System.out.println();
+              } //τέλος catch
+            } while (stop2);
+          } else if (flag == 9) {
             System.out.println("Γίνεται τερματισμός λειτουργίας");
             c.saveData();
           }
@@ -319,7 +370,7 @@ public class Main {
         stop = false;
       } catch (InputMismatchException inputMismatchException) {
         keyboard.nextLine();
-        System.out.println("Μπορείτε να επιλέξετε μόνο ακέραιο αριθμό[1-8]. "
+        System.out.println("Μπορείτε να επιλέξετε μόνο ακέραιο αριθμό[1-9]. "
             + "Παρακαλώ ξαναπροσπαθήστε.");
         System.out.println();
       } //τέλος catch
