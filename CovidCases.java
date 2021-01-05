@@ -4,7 +4,6 @@ package codemarathon;
  * A class with the information of every Employee that has or had Covid-19.
  * Every Employee that currently has Covid-19 and his info are saved in casesnow table.
  * Every Employee that had/has Covid-19 and his info are saved in cases table.
- * @author codemarathon team
  */
 
 public class CovidCases {
