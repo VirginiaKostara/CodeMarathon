@@ -117,7 +117,7 @@ public class CovidCases {
     for (int i = 0; i < casesnow.length; i++) {
       if (casesnow[i] != null) {
         count++;
-      }h
+      }
     }
     if (count == 0) {
       System.out.println("Δεν υπάρχει κανένα ενεργό κρούσμα");
