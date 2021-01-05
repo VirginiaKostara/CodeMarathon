@@ -132,6 +132,13 @@ public class CovidCases {
       System.out.println();
     }
   }
+  public static void upDateCases() {
+    for(int i = 0; i < cases.length; i++) {
+      if (Telework.teleworkers[i].getWorkStatus().equals(Status.COVIDCASE)) {
+        createCase(i);
+      }
+    }
+  }
 
 
 
