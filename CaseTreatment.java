@@ -14,8 +14,8 @@ public class CaseTreatment implements Runnable {
   // συμπτωματα ή εχει μπει στο νοσοκομειο ρωταει 3 φορες την ιδια μερα
   private int daysymptoms = 0; //neo
   private int dayhospital = 0; //neo
-  private static int c2 = 0; // neo
-  private int code = -1; // neo
+  //private static int c2 = 0; // neo
+  private int code; //= -1; // neo
   public static CaseTreatment[] casetreatments = new CaseTreatment[50]; // neo
 
   /**
@@ -27,6 +27,7 @@ public class CaseTreatment implements Runnable {
     this.symptoms = symptoms;
     this.hospital = hospital;
     this.code = code; // neo
+    casetreatments[code - 1] = this; 
   }
 
   public int getCode() { // neo
@@ -41,11 +42,12 @@ public class CaseTreatment implements Runnable {
    * Learn about the condition of the ill employee for statistic reasons.
    */
 
-  public CaseTreatment() { // neo
-    this.daysymptoms = 0; // neo
-    this.dayhospital = 0; // neo
-    casetreatments[c2] = this; // neo
-    c2++; // neo
+  
+  
+  public static void initializeCaseTreatment() {
+    for (int i = 0; i < 50; i++) {
+      new CaseTreatment(0, "τίποτα", false, i + 1);
+    }
   }
 
   public double getFever() {
@@ -62,6 +64,10 @@ public class CaseTreatment implements Runnable {
 
   public void setSymptoms(String symptoms) {
     this.symptoms = symptoms;
+  }
+  
+  public boolean getHospital() {
+    return hospital;
   }
 
   public void setHospital(boolean hospital) {
