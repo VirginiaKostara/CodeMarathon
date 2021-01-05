@@ -119,7 +119,7 @@ public class Main {
                       idtherm = keyboard.nextInt();
                       if (idtherm <= 50 && idtherm > 0
                               && Telework.teleworkers[idtherm - 1].getWorkStatus()
-                              == Status.NORMAL && Thermometer.thermometrhseis[idtherm - 1] == 0 ) {
+                              == Status.NORMAL && Thermometer.thermometrhseis[idtherm - 1] == 0) {
                         double therm = 0;
 
                         while (therm < 34 || therm > 43) {
@@ -133,34 +133,63 @@ public class Main {
                                 if (therm > 37) {
                                   if (!(Employee.employees[idtherm - 1].getTransportation().equals(
                                           "ΑΤΟΜΙΚΟΜΕΣΟ"))) {
-                                    idNext = 99;
+                                    idNext = 100;
                                     int flag1 = 0;
                                     while (flag1 != 1) {
-                                      System.out.println("Καθόταν με κάποιον σήμερα στο λεωφορείο; "
-                                           + "ΝΑΙ/ΟΧΙ");
-                                      String ans = lines.nextLine();
-                                      if (ans.equals("ΝΑΙ")) {
-                                        while (idNext == 99) {
-                                          System.out.println("Δώσε επώνυμο του ατόμου:");
-                                          String sname = lines.nextLine();
-                                          for (int i = 0; i < 50; i++) {
-                                            if (Employee.employees[i].getSurname().equals(sname)) {
-                                              idNext = i + 1;
-                                            }
-                                          }
-                                          if (idNext == 99) {
-                                            System.out.println("Λάθος Απάντηση");
-                                          }
-                                          flag1 = 1;
+                                      int countem = 0;
+                                      for (int i = 0; i < 50; i++) {
+                                        if (Employee.employees[i].getTransportation().contentEquals(
+                                                Employee.employees[idtherm - 1]
+                                                  .getTransportation())) {
+                                          countem++;
                                         }
                                       }
-                                      if (ans.equals("ΟΧΙ")) {
-                                        flag1 = 1;
-                                        idNext = 100;
-                                        System.out.println();
-                                      }
-                                      if (!(ans.equals("ΟΧΙ")) && !(ans.equals("ΝΑΙ"))) {
-                                        System.out.println("Λάθος Απάντηση");
+                                      if (countem > 1) {
+                                        idNext = 99;
+                                        System.out.println("Καθόταν με κάποιον σήμερα στο "
+                                            + "λεωφορείο; ΝΑΙ/ΟΧΙ");
+                                        String ans = lines.nextLine();
+                                        if (ans.equals("ΝΑΙ")) {
+                                          while (idNext == 99) {
+                                            System.out.println("Δώσε επώνυμο του ατόμου:");
+                                            String sname = lines.nextLine();
+                                            for (int i = 0; i < 50; i++) {
+                                              if (Employee.employees[i].getSurname().equals(
+                                                               sname)) {
+                                                if (Telework.teleworkers[i].getWorkStatus()
+                                                        == Status.NORMAL
+                                                          && Employee.employees[i]
+                                                            .getTransportation().contentEquals(
+                                                              Employee.employees[idtherm - 1]
+                                                                .getTransportation())) {
+                                                  idNext = i + 1;
+                                                } else if (!(Telework.teleworkers[i].getWorkStatus()
+                                                         == Status.NORMAL)) {
+                                                  System.out.println("Το άτομο βρίσκεται σε"
+                                                      + "τηλεργασία");
+                                                } else if (!(Employee.employees[i]
+                                                    .getTransportation().contentEquals(
+                                                      Employee.employees[idtherm - 1]
+                                                          .getTransportation()))) {
+                                                  System.out.println("Το άτομο δε μετακινείται με"
+                                                        + "το ίδιο όχημα");
+                                                }
+                                              }
+                                            }
+                                            if (idNext == 99) {
+                                              System.out.println("Ξαναπροσπαθήστε");
+                                            }
+                                            flag1 = 1;
+                                          }
+                                        }
+                                        if (ans.equals("ΟΧΙ")) {
+                                          flag1 = 1;
+                                          idNext = 100;
+                                          System.out.println();
+                                        }
+                                        if (!(ans.equals("ΟΧΙ")) && !(ans.equals("ΝΑΙ"))) {
+                                          System.out.println("Λάθος Απάντηση");
+                                        }
                                       }
                                     }
                                   } else {
