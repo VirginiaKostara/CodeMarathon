@@ -1,9 +1,15 @@
 package codemarathon;
 
 public class Thermometer {
-  static double thermometrhseis[] = new double[50];
+  static double[] thermometrhseis = new double[50];
+  
+  public static void initialize() {
+    for (int i = 0; i < 50; i++) {
+      thermometrhseis[i] = 0;
+    }
+  }
 
-  public static void a (int idemployee, double b, int idNext) {
+  public static void a(int idemployee, double b, int idNext) {
     thermometrhseis[idemployee - 1] = b;
     if (b > 37) {
       System.out.println("Ο εργαζόμενος πρέπει να ενταχθεί σε τηλεργασία");
