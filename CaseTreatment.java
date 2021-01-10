@@ -101,76 +101,69 @@ public class CaseTreatment implements Runnable {
     String x;
     double fev = 0;
     try {
-      outer:
-        for (int i = 0; i < 3; i++) {
-
-          System.out.println("Εισάγετε το είδος των συμπτωμάτων"
-                  + " του ασθενούς (καθόλου/ήπια/σοβαρά)");
-          synchronized (input2) {
-          do {
-            abc = input2.nextLine();
-            setSymptoms(abc);
-              if (!(abc.equals("καθόλου")) && !(abc.equals("ΚΑΘΟΛΟΥ"))
-                     && !(abc.equals("ΗΠΙΑ")) && !(abc.equals("ήπια"))
-                     && !(abc.equals("σοβαρά")) && !(abc.equals("ΣΟΒΑΡΑ"))) {
-              System.out.println("Λάθος εισαγωγή είδους συμπτωμάτων. Ξαναπροσπαθήστε");
-              }
-          } while (!(abc.equals("καθόλου")) && !(abc.equals("ΚΑΘΟΛΟΥ"))
-                  && !(abc.equals("ΗΠΙΑ")) && !(abc.equals("ήπια"))
-                  && !(abc.equals("σοβαρά")) && !(abc.equals("ΣΟΒΑΡΑ")));
-          if (getSymptoms().contentEquals("καθόλου") || getSymptoms().equals("ΚΑΘΟΛΟΥ")
-                 || getSymptoms().contentEquals("ΗΠΙΑ") || getSymptoms().contentEquals("ήπια")) {
-            break outer;
-          } else {
-              Thread.sleep(100);
-              System.out.println("Εισάγετε τη θερμοκρασία του ασθενούς");
-              boolean f3 = true;
-              do {
-                f3 = false;
-                try {
-                  fev = input2.nextDouble();
-                  if (fev >= 35.0 && fev <= 42.0) {
-                      setFever(fev);
-                      input2.nextLine();
-                  } else {
-                    f3 = true;
-                    System.out.println("Παρακαλώ εισάγετε έναν"
+      System.out.println("Εισάγετε το είδος των συμπτωμάτων"
+              + " του ασθενούς (καθόλου/ήπια/σοβαρά)");
+      synchronized (input2) {
+        do {
+          abc = input2.nextLine();
+          setSymptoms(abc);
+          if (!(abc.equals("καθόλου")) && !(abc.equals("ΚΑΘΟΛΟΥ"))
+                 && !(abc.equals("ΗΠΙΑ")) && !(abc.equals("ήπια"))
+                 && !(abc.equals("σοβαρά")) && !(abc.equals("ΣΟΒΑΡΑ"))) {
+            System.out.println("Λάθος εισαγωγή είδους συμπτωμάτων. Ξαναπροσπαθήστε");
+          }
+        } while (!(abc.equals("καθόλου")) && !(abc.equals("ΚΑΘΟΛΟΥ"))
+              && !(abc.equals("ΗΠΙΑ")) && !(abc.equals("ήπια"))
+              && !(abc.equals("σοβαρά")) && !(abc.equals("ΣΟΒΑΡΑ")));
+        Thread.sleep(100);
+        System.out.println("Εισάγετε τη θερμοκρασία του ασθενούς");
+        boolean f3 = true;
+        do {
+          f3 = false;
+          try {
+            fev = input2.nextDouble();
+            if (fev >= 35.0 && fev <= 42.0) {
+              setFever(fev);
+              input2.nextLine();
+            } else {
+              f3 = true;
+              System.out.println("Παρακαλώ εισάγετε έναν"
                             + " αριθμό που να αντιστοιχεί σε θερμοκρασία "
                             + "ανθρώπινου σώματος");
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("Παρακαλώ εισάγετε έναν ακέραιο ή δεκαδικό αριθμό");
-                    input2.nextLine();
-                    f3 = true;
-                }
-              } while (f3 == true);
-              System.out.println("Είναι ο ασθενής στο νοσοκομείο; (ΝΑΙ/ΟΧΙ)");
-              do {
-                  x = input2.nextLine();
-                  if (!(x.equals("ΝΑΙ")) && !(x.contentEquals("ναι")) && !(x.contentEquals("όχι"))
-                          && !(x.contentEquals("ΟΧΙ"))) {
-                    System.out.println("Λάθος εισαγωγή δεδομένων"
+            }
+          } catch (InputMismatchException e) {
+            System.out.println("Παρακαλώ εισάγετε έναν ακέραιο ή δεκαδικό αριθμό");
+            input2.nextLine();
+            f3 = true;
+          }
+        } while (f3 == true);
+        System.out.println("Είναι ο ασθενής στο νοσοκομείο; (ΝΑΙ/ΟΧΙ)");
+        do {
+          x = input2.nextLine();
+          if (!(x.equals("ΝΑΙ")) && !(x.contentEquals("ναι")) && !(x.contentEquals("όχι"))
+                        && !(x.contentEquals("ΟΧΙ"))) {
+            System.out.println("Λάθος εισαγωγή δεδομένων"
                           + " αναφορικά με την είσοδο του ασθενούς "
                             + "στο νοσοκομείο. Παρακαλώ ξαναπροσπαθήστε");
-                  }
-              } while (!(x.equals("ΝΑΙ")) && !(x.contentEquals("ναι")) && !(x.contentEquals("όχι"))
+          }
+        } while (!(x.equals("ΝΑΙ")) && !(x.contentEquals("ναι")) && !(x.contentEquals("όχι"))
                       && !(x.contentEquals("ΟΧΙ")));
-              if (x.contentEquals("ΝΑΙ") || x.contentEquals("ναι")) {
-                setHospital(true);
-                if (i == 3 && getCode() >= 0 && getCode() < 50) { // neo
-                  casetreatments[getCode()].setDayhospital(getDayhospital() + 1);
-                } // neo
-              } else {
-                setHospital(false);
-              }
-              System.out.println("Επιτυχής καταχώρηση");
-              System.out.println();
-              if (i == 3 && getCode() >= 0 && getCode() < 50) { // neo
-                casetreatments[getCode()].setDaysymptoms(getDaysymptoms() + 1);
-              } // neo
-            }
+        if (x.contentEquals("ΝΑΙ") || x.contentEquals("ναι")) {
+          setHospital(true);
+          if (getCode() >= 0 && getCode() < 50) { // neo
+            casetreatments[getCode()].setDayhospital(getDayhospital() + 1);
+          } // neo
+        } else {
+          setHospital(false);
         }
+        System.out.println("Επιτυχής καταχώρηση");
+        System.out.println();
+        if (getCode() >= 0 && getCode() < 50) { // neo
+          casetreatments[getCode()].setDaysymptoms(getDaysymptoms() + 1);
+        } // neo
       }
+        
+      
     } catch (InterruptedException e) {
       System.err.println("Κάτι προέκυψε. Παρακαλώ προσπαθήστε αργότερα.");
     } finally {
