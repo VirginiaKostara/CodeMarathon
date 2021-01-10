@@ -357,17 +357,18 @@ public class Main {
             boolean stop2 = true;
             do {
               try {
-                while (flag2 != 5) {
-                  System.out.println("~~~~~~~~~~ Μενού Επιλογών Στατστικών ~~~~~~~~~~");
+                while (flag2 != 6) {
+                  System.out.println("~~~~~~~~~~ Μενού Επιλογών Στατιστικών ~~~~~~~~~~");
                   System.out.println("1. Στατιστικά Τμημάτων.");
                   System.out.println("2. Στατιστικά Φύλων.");
                   System.out.println("3. Στατιστικά Μέσου Μεταφοράς.");
                   System.out.println("4. Συνολικά Στατιστικά Εργαζομένων.");
-                  System.out.println("5. Έξοδος από στατιστικά");
-                  System.out.println("Εισάγετε επιλογή [1-5]: ");
+                  System.out.println("5. Στατιστικά Νοσηλείας των Ασθενών");
+                  System.out.println("6. Έξοδος από στατιστικά");
+                  System.out.println("Εισάγετε επιλογή [1-6]: ");
                   flag2 = keyboard.nextInt();
                   if (flag2 == 1) {
-
+                      
                   }
                   if (flag2 == 2) {
 
@@ -379,14 +380,17 @@ public class Main {
 
                   }
                   if (flag2 == 5) {
+                    
+                  }
+                  if (flag == 6) {
                     System.out.println("Επιστροφή στο κεντρικό μενού");
-                    System.out.println();
+                    System.out.println(); 
                   }
                 }
                 stop2 = false;
               } catch (InputMismatchException inputMismatchException) {
                 keyboard.nextLine();
-                System.out.println("Μπορείτε να επιλέξετε μόνο ακέραιο αριθμό[1-5]. "
+                System.out.println("Μπορείτε να επιλέξετε μόνο ακέραιο αριθμό[1-6]. "
                     + "Παρακαλώ ξαναπροσπαθήστε.");
                 System.out.println();
               } //τέλος catch
