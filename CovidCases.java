@@ -1,9 +1,12 @@
 package codemarathon;
 
+import codemarathon.Telework.Status;
+
 /**
  * A class with the information of every Employee that has or had Covid-19.
  * Every Employee that currently has Covid-19 and his info are saved in casesnow table.
  * Every Employee that had/has Covid-19 and his info are saved in cases table.
+ * @author codemarathon team
  */
 
 public class CovidCases {
@@ -42,10 +45,10 @@ public class CovidCases {
   protected void setDaysleft(int daysleft) {
     this.daysleft = daysleft;
   }
-  
+
   protected int getIdcases() {
-	return idcases;
-	  }
+    return idcases;
+  }
 
   /**
    * This method adds the infected's Employee info to the table cases.
@@ -135,9 +138,9 @@ public class CovidCases {
   public static void upDateCases() {
     for(int i = 0; i < cases.length; i++) {
       if (Telework.teleworkers[i].getWorkStatus().equals(Status.COVIDCASE)) {
-        createCase(i);
+    	  createCase(i+1);
       }
-    }
+	  }
   }
 
 
