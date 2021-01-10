@@ -354,4 +354,31 @@ public class Statistics {
       System.out.printf("Δεν υπάρχει κανένας άντρας στα κρούσματα!");
     }
   }
+  /**
+   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό των ασθενών 
+   * με σοβαρά συμπτώματα/πήγαν στο νοσοκομείο.
+   */
+  
+  public static void symptoms_hospital() {
+    int countsymptoms = 0;
+    int counthospital = 0;
+    if (count1 != 0) {
+      for (int x = 0; x < CovidCases.cases.length; x++) {
+        if (CovidCases.cases[x] != null) {
+          if (CaseTreatment.casetreatments[x].getDaysymptoms() > 0) {
+            countsymptoms += 1;
+          }
+          if (CaseTreatment.casetreatments[x].getDayhospital() > 0) {
+            counthospital += 1;
+          }
+        }
+      }
+      System.out.println("To ποσοστό των ασθενών με σοβαρά "
+              + "συμπτώματα ήταν" + countsymptoms / count1 * 100 + "%");
+      System.out.println("To ποσοστό των ασθενών που πήγαν "
+              + "στο νοσοκομείο ήταν" + counthospital / count1 * 100 + "%");
+    } else {
+      System.out.println("Η εταιρεία δεν έχει κανένα κρούσμα!");
+    }
+  }
 }
