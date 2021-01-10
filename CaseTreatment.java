@@ -151,7 +151,7 @@ public class CaseTreatment implements Runnable {
         if (x.contentEquals("ΝΑΙ") || x.contentEquals("ναι")) {
           setHospital(true);
           if (getCode() >= 0 && getCode() < 50) { // neo
-            casetreatments[getCode()].setDayhospital(getDayhospital() + 1);
+            setDayhospital(getDayhospital() + 1);
           } // neo
         } else {
           setHospital(false);
@@ -159,7 +159,9 @@ public class CaseTreatment implements Runnable {
         System.out.println("Επιτυχής καταχώρηση");
         System.out.println();
         if (getCode() >= 0 && getCode() < 50) { // neo
-          casetreatments[getCode()].setDaysymptoms(getDaysymptoms() + 1);
+          if (getSymptoms().equals("ΣΟΒΑΡΑ") || getSymptoms().equals("σοβαρά")) {
+            setDaysymptoms(getDaysymptoms() + 1);
+          }
         } // neo
       }
         
