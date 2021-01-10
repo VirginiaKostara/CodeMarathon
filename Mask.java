@@ -1,5 +1,7 @@
 package codemarathon;
 
+import codemarathon.Telework.Status;
+
 /**
  * A class with the information about all the Employees that did not wear a mask.
  * Every time an Employee does not wear a mask it saves at the nomask table the times.
@@ -34,7 +36,7 @@ public class Mask {
     return times;
   }    // Μέθοδος εμφάνισης των φορών χωρίς μάσκα του αντικειμένου με το οποίο θα καλεστεί
 
-  protected void setTimes(int times) {
+  public void setTimes(int times) {
     this.times = times;
   }
   //μέθοδος η οποία αλλάζει τον αριθμό φορών που δε φορούσε μάσκα ο εργαζόμενος
@@ -68,7 +70,11 @@ public class Mask {
   public static void insertnomask(int idemployee) {
     int currenttimes = nomask[idemployee - 1].getTimes() + 1;
     // δείχνει τις φορές που ο εργαζόμενος δε φορούσε μάσκα μαζί με την παρούσα φορά
+    if (Telework.teleworkers[idemployee -1].getWorkStatus() == Status.NORMAL) {
     nomask[idemployee - 1].setTimes(currenttimes);
+    } else {
+    	System.out.println("Ο εργαζόμενος βρίσκεται σε τηλεργασία");
+    }
     if (currenttimes == 3) {
       System.out.println(Employee.employees[idemployee - 1].getName() + " "
           + Employee.employees[idemployee - 1].getSurname() + ": Πρώτη επίπληξη εργαζομένου");
