@@ -13,7 +13,7 @@ public class Main {
     Readfile r = new Readfile();
 
     r.openFile();
-    r.CreateEmploee();
+    r.createEmploee();
     //Δημιουργούμε και αρχικοποιούμε τους πίνακες employees, teleworkers από βάση δεδομένων
     r.closeFile();
 
@@ -21,9 +21,10 @@ public class Main {
       Mask.initialization(); //Την ημέρα 0 αρχικοποιούμε τα δεδομένα μας
       day++;
       Telework.teleworkers[0].randomTeleworkers();
+      CaseTreatment.initializeCaseTreatment();
     }
 
-    r.UpdateData();
+    r.updateData();
     CovidCases.upDateCases();
     CreateFile c = new CreateFile();
 
@@ -368,23 +369,39 @@ public class Main {
                   System.out.println("Εισάγετε επιλογή [1-6]: ");
                   flag2 = keyboard.nextInt();
                   if (flag2 == 1) {
-                      
+
+                	  Statistics.logistirio();
+                	  Statistics.marketing();
+                	  Statistics.it();
+                	  Statistics.humanResources();
+                	  Statistics.cleaning();
+                	  Statistics.sales();
+                	  Statistics.dieuthunsh();
+                	  Statistics.customerService();
+                	  Statistics.pr();
+                	  Statistics.edu();
+
                   }
                   if (flag2 == 2) {
 
+                	  Statistics.women();
+                	  Statistics.men();
+
                   }
                   if (flag2 == 3) {
-
+                	  Statistics.bus1Covid();
+                	  Statistics.bus2Covid();
+                	  Statistics.atomikomesoCovid();
                   }
                   if (flag2 == 4) {
-
+                	  Statistics.totalCovid();
                   }
                   if (flag2 == 5) {
-                    
+                	  Statistics.symptoms_hospital();
                   }
                   if (flag == 6) {
                     System.out.println("Επιστροφή στο κεντρικό μενού");
-                    System.out.println(); 
+                    System.out.println();
                   }
                 }
                 stop2 = false;
