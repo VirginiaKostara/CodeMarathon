@@ -1,8 +1,7 @@
 package codemarathon;
-
 /**
  * A class with the information about all the employees statistics who had Covid-19.
- * This statistics class convert the data from covidcases table into percentages of employees who 
+ * This statistics class convert the data from covidcases table into percentages of employees who
  * had covid depending on their unit,mean of transport,sex.
  * @author codemarathon team
  */
@@ -15,22 +14,24 @@ public class Statistics {
    * του ποσοστού για τα συνολικά κρούσματα covid.
    */
   //Στατική μέθοδος υπολογισμού ποσοστού για συνολικά κρούσματα covid
-   
+
   public static void totalCovid() {
     for (int i = 0; i < CovidCases.cases.length; i++) {
+    	if (Employee.employees[i].getHad_covid() == true) {
       if (CovidCases.cases != null) {
         count1 = count1 + 1;
       }
     }
+    }
 
     if (count1 > 0) {
-      double posostocovid = (count1 / 50) * 100;
-      System.out.printf("Το Ποσοστό συνολικών κρουσμάτων covid είναι: %d", posostocovid); 
+      double posostocovid = (count1 *100 /50);
+      System.out.println("Το Ποσοστό συνολικών κρουσμάτων covid είναι:" +posostocovid + "%");
     } else {
-      System.out.printf("Δεν έχει υπάρξει μέχρι στιγμής κάποιο κρούσμα στην εταιρεία");  
+      System.out.println("Δεν έχει υπάρξει μέχρι στιγμής κάποιο κρούσμα στην εταιρεία");
     }
   }
-  
+
   /**
    * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
    * του ποσοστού για τα κρούσματα στο τμήμα Εκπαίδευση.
@@ -39,63 +40,69 @@ public class Statistics {
   public static void bus1Covid() {
     int count2 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getTransportation() ==  ("ΛΕΩΦΟΡΕΙΟ 1"))  {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getTransportation().equals("ΛΕΩΦΟΡΕΙΟ1"))  {
         count2 = count2 + 1;
       }
     }
+    }
     if (count2 > 0) {
-      double pososto1bus = (count2 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων που μετακινούνται με το λεωφορείο "
-          + "είναι: %d", pososto1bus);
+      double pososto1bus = (count2 *100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων που μετακινούνται με το λεωφορείο 1 "
+          + "είναι:" + pososto1bus + "%");
     } else {
-      System.out.printf("Δεν έχει υπάρξει κρούσμα ως τώρα που μετακινείται με το λεωφορείο 1"); 
+      System.out.println("Δεν έχει υπάρξει κρούσμα ως τώρα που μετακινείται με το λεωφορείο 1");
     }
   }
-  
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Εκπαίδευση.
-   */                                                                                    
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο λεωφορειο 2
-   
-  public static void bus2Covid() {
-    int count3 = 0;
-    for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getTransportation() == ("ΛΕΩΦΟΡΕΙΟ 2")) {
-        count3 = count3 + 1;
-      }
-    }
-    if (count3 > 0) {
-      double posostobus2 = (count3 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων που μετακινούνται με λεωφορείο "
-          + "είναι: %d", posostobus2);
-    } else {
-      System.out.printf("Δεν έχει υπάρξει κρούσμα ως τώρα που μετακινείται με το λεωφορείο 2"); 
-    }
-  }
-    
+
   /**
    * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
    * του ποσοστού για τα κρούσματα στο τμήμα Εκπαίδευση.
    */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα που μετακινούνται με ατομικό μέσο 
-    
+  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο λεωφορειο 2
+
+  public static void bus2Covid() {
+    int count3 = 0;
+    for (int i = 0; i < CovidCases.cases.length; i++) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getTransportation().equals("ΛΕΩΦΟΡΕΙΟ2")) {
+        count3 = count3 + 1;
+      }
+    }
+    }
+    if (count3 > 0) {
+      double posostobus2 = (count3 * 100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων που μετακινούνται με λεωφορείο 2"
+          + "είναι: " + posostobus2  + "%");
+    } else {
+      System.out.println("Δεν έχει υπάρξει κρούσμα ως τώρα που μετακινείται με το λεωφορείο 2");
+    }
+  }
+
+  /**
+   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
+   * του ποσοστού για τα κρούσματα στο τμήμα Εκπαίδευση.
+   */
+  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα που μετακινούνται με ατομικό μέσο
+
   public static void atomikomesoCovid() {
     int count4 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getTransportation() == ("ΑΤΟΜΙΚΟ ΜΕΣΟ")) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getTransportation().equals("ΑΤΟΜΙΚΟΜΕΣΟ")) {
         count4 = count4 + 1;
       }
     }
+    }
     if (count4 > 0) {
-      double posostoatomikomeso = (count4 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων που μετακινούνται με ατομικό μέσο "
-          + "είναι: %d", posostoatomikomeso);
+      double posostoatomikomeso = (count4 * 100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων που μετακινούνται με ατομικό μέσο "
+          + "είναι: " + posostoatomikomeso  + "%");
     } else {
-      System.out.printf("Δεν έχει υπάρξει κρούσμα ως τώρα που μετακινείται με ατομικό μέσο!");
+      System.out.println("Δεν έχει υπάρξει κρούσμα ως τώρα που μετακινείται με ατομικό μέσο!");
     }
   }
-  
+
   /**
    * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
    * του ποσοστού για τα κρούσματα στο τμήμα Λογιστήριο.
@@ -104,18 +111,22 @@ public class Statistics {
   public static void logistirio() {
     int count5 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getUnit() == ("ΛΟΓΙΣΤΗΡΙΟ")) {
-        count5 = count5 + 1;
+    	if (Employee.employees[i].getHad_covid() == true) {
+        if (CovidCases.cases[i].getUnit().equals("ΛΟΓΙΣΤΗΡΙΟ")) {
+          count5 = count5 + 1;
+        }
       }
     }
     if (count5 > 0) {
-      double posostologistirio = (count5 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων του λογιστηρίου είναι: %d", posostologistirio);
+      double posostologistirio = (count5 *100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων του λογιστηρίου είναι: " + posostologistirio  + "%");
     } else {
-      System.out.printf("Δεν έχει υπάρξει κρούσμα στο λογιστήριο");
+
+      System.out.println("Δεν έχει υπάρξει κρούσμα στο λογιστήριο");
+
     }
   }
-  
+
   /**
    * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
    * του ποσοστού για τα κρούσματα στο τμήμα Μάρκετινγκ.
@@ -125,19 +136,21 @@ public class Statistics {
   public static void marketing() {
     int count6 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getUnit() == ("ΜΑΡΚΕΤΙΝΓΚ")) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getUnit().equals("ΜΑΡΚΕΤΙΝΓΚ")) {
         count6 = count6 + 1;
       }
     }
+    }
     if (count6 > 0) {
-      double posostomarketing = (count6 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων στο τμήμα marketing "
-           + "είναι: %d", posostomarketing);
+      float posostomarketing = (count6 *100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων στο τμήμα marketing "
+           + "είναι: " + posostomarketing  + "%");
     } else {
-      System.out.printf("Δεν έχει υπάρξει κρούσμα στο τμήμα marketing ως τώρα !");
+      System.out.println("Δεν έχει υπάρξει κρούσμα στο τμήμα marketing ως τώρα !");
     }
   }
-  
+
   /**
    * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
    * του ποσοστού για τα κρούσματα στο τμήμα it.
@@ -147,16 +160,19 @@ public class Statistics {
   public static void it() {
     int count7 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getUnit() == ("IT")) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getUnit().equals("IT")) {
         count7 = count7 + 1;
       }
-      if (count7 > 0) {
-        double posostoit = (count7 / 50) * 100;
-        System.out.printf("Το ποσοστό των κρουσμάτων στο τμήμα it είναι: %d", posostoit);
-      } else {
-        System.out.printf("Δεν έχει υπάρξει κρούσμα στο τμήμα it ως τώρα !");
-      }
+    	}
     }
+      if (count7 > 0) {
+        double posostoit = (count7 *100 /50);
+        System.out.println("Το ποσοστό των κρουσμάτων στο τμήμα it είναι: " +posostoit  + "%");
+      } else {
+        System.out.println("Δεν έχει υπάρξει κρούσμα στο τμήμα it ως τώρα !");
+      }
+
   }
 
   /**
@@ -168,19 +184,21 @@ public class Statistics {
   public static void humanResources() {
     int count8 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getUnit() == ("ΑΝΘΡΩΠΙΝΟ-ΔΥΝΑΜΙΚΟ")) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getUnit().equals("ΑΝΘΡΩΠΙΝΟ-ΔΥΝΑΜΙΚΟ")) {
         count8 = count8 + 1;
       }
     }
+    }
     if (count8 > 0) {
-      double posostohr = (count8 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων στο τμήμα Ανθρώπινο-Δυναμικό "
-           + "είναι: %d", posostohr);
+      double posostohr = (count8 *100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων στο τμήμα Ανθρώπινο-Δυναμικό "
+           + "είναι: " + posostohr  + "%");
     } else {
-      System.out.printf("Δεν έχει υπάρξει κρούσμα στο τμήμα Ανθρώπινο-Δυναμικό ως τώρα !");
+      System.out.println("Δεν έχει υπάρξει κρούσμα στο τμήμα Ανθρώπινο-Δυναμικό ως τώρα !");
     }
   }
-  
+
   /**
    * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
    * του ποσοστού για τα κρούσματα στο τμήμα Καθαριότητα.
@@ -190,16 +208,18 @@ public class Statistics {
   public static void cleaning() {
     int count9 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getUnit() == ("ΚΑΘΑΡΙΟΤΗΤΑ")) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getUnit().equals("ΚΑΘΑΡΙΟΤΗΤΑ")) {
         count9 = count9 + 1;
       }
     }
+    }
     if (count9 > 0) {
-      double posostocleaning = (count9 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων στο τμήμα Καθαριότητα "
-           + "είναι: %d", posostocleaning);
+      double posostocleaning = (count9 *100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων στο τμήμα Καθαριότητα "
+           + "είναι: "+ posostocleaning  + "%");
     } else {
-      System.out.printf("Δεν έχει υπάρξει κρούσμα στο τμήμα Καθαριότητα ως τώρα !");
+      System.out.println("Δεν έχει υπάρξει κρούσμα στο τμήμα Καθαριότητα ως τώρα !");
     }
   }
 
@@ -212,38 +232,42 @@ public class Statistics {
   public static void sales() {
     int count10 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getUnit() == ("ΠΩΛΗΣΕΙΣ"))  {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getUnit().equals("ΠΩΛΗΣΕΙΣ"))  {
         count10 = count10 + 1;
       }
     }
+    }
     if (count10 > 0) {
-      double posostosales = (count10 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων στο τμήμα Πωλήσεις "
-           + "είναι: %d", posostosales);
+      double posostosales = (count10 *100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων στο τμήμα Πωλήσεις "
+           + "είναι:" +posostosales  + "%");
     } else {
-      System.out.printf("Δεν έχει υπάρξει κρούσμα στο τμήμα Πωλήσεις ως τώρα !");
+      System.out.println("Δεν έχει υπάρξει κρούσμα στο τμήμα Πωλήσεις ως τώρα !");
     }
   }
-  
+
   /**
    * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
    * του ποσοστού για τα κρούσματα στο τμήμα Διεύθυνση.
-   */  
+   */
   //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο τμήμα της διεύθυνσης
 
   public static void dieuthunsh() {
     int count11 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getUnit() == ("ΔΙΕΥΘΥΝΣΗ")) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getUnit().equals("ΔΙΕΥΘΥΝΣΗ")) {
         count11 = count11 + 1;
       }
     }
+    }
     if (count11 > 0) {
-      double posostodieuthunsh = (count11 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων στο τμήμα Διεύθυνση "
-           + "είναι: %d", posostodieuthunsh);
+      double posostodieuthunsh = (count11 *100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων στο τμήμα Διεύθυνση "
+           + "είναι: " + posostodieuthunsh  + "%");
     } else {
-      System.out.printf("Δεν έχει υπάρξει κρούσμα στο τμήμα Διεύθυνση ως τώρα !");
+      System.out.println("Δεν έχει υπάρξει κρούσμα στο τμήμα Διεύθυνση ως τώρα !");
     }
   }
 
@@ -252,20 +276,22 @@ public class Statistics {
    * του ποσοστού για τα κρούσματα στο τμήμα Εξυπηρέτηση Πελατών.
    */
   //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο τμήμα εξυπηρέτησης πελατών
-  
+
   public static void customerService() {
     int count12 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getUnit() == ("ΕΞΥΠΗΡΕΤΗΣΗ-ΠΕΛΑΤΩΝ")) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getUnit().equals("ΕΞΥΠΗΡΕΤΗΣΗ-ΠΕΛΑΤΩΝ")) {
         count12 = count12 + 1;
       }
-    } 
+    }
+    }
     if (count12 > 0) {
-      double posostocustomerservice = (count12 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων στο τμήμα Εξυπηρέτηση-Πελατών "
-           + "είναι: %d", posostocustomerservice);
+      double posostocustomerservice = (count12 *100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων στο τμήμα Εξυπηρέτηση-Πελατών "
+           + "είναι: " + posostocustomerservice  + "%");
     } else {
-      System.out.printf("Δεν έχει υπάρξει κρούσμα στο τμήμα Εξυπηρέτηση-Πελατών ως τώρα !");
+      System.out.println("Δεν έχει υπάρξει κρούσμα στο τμήμα Εξυπηρέτηση-Πελατών ως τώρα !");
     }
   }
 
@@ -278,19 +304,21 @@ public class Statistics {
   public static void pr() {
     int count13 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getUnit() == ("ΔΗΜΟΣΙΕΣ-ΣΧΕΣΕΙΣ")) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getUnit().equals("ΔΗΜΟΣΙΕΣ-ΣΧΕΣΕΙΣ")) {
         count13 = count13 + 1;
       }
     }
+    }
     if (count13 > 0) {
-      double posostopr = (count13 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων στο τμήμα Δημόσιες Σχέσεις "
-           + "είναι: %d", posostopr);
+      double posostopr = (count13 *100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων στο τμήμα Δημόσιες Σχέσεις "
+           + "είναι: " + posostopr  + "%");
     } else {
-      System.out.printf("Δεν υπάρχει κρούσμα στο τμήμα Δημόσιες Σχέσεις ως τώρα !");
+      System.out.println("Δεν υπάρχει κρούσμα στο τμήμα Δημόσιες Σχέσεις ως τώρα !");
     }
   }
-  
+
   /**
      * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
      * του ποσοστού για τα κρούσματα στο τμήμα Εκπαίδευση.
@@ -300,85 +328,102 @@ public class Statistics {
   public static void edu() {
     int count14 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getUnit() == ("ΕΚΠΑΙΔΕΥΣΗ")) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getUnit().equals("ΕΚΠΑΙΔΕΥΣΗ")) {
         count14 = count14 + 1;
       }
     }
+    }
     if (count14 > 0) {
-      double posostoedu = (count14 / 50) * 100;
-      System.out.printf("Το ποσοστό των κρουσμάτων στο τμήμα Εκπαίδευση "
-          + "είναι: %d", posostoedu);
+      double posostoedu = (count14 *100 /50);
+      System.out.println("Το ποσοστό των κρουσμάτων στο τμήμα Εκπαίδευση "
+          + "είναι: " + posostoedu  + "%");
     } else {
-      System.out.printf("Δεν έχει υπάρξει κρούσμα στο τμήμα Εκπαίδευση ως τώρα !");
+      System.out.println("Δεν έχει υπάρξει κρούσμα στο τμήμα Εκπαίδευση ως τώρα !");
     }
   }
-  
+
   /**
      * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
      * του ποσοστού για τα κρούσματα γυναικών.
      */
   //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα γυναικών
-  
+
   public static void women() {
     int count15 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getSex() == ("Α")) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getSex().equals("Α")) {
         count15 = count15 + 1;
       }
     }
+    }
     if (count15 > 0) {
-      double posostowomen = (count15 / 50) * 100; 
-      System.out.printf("Το ποσοστό γυναικών των κρουσμάτων είναι: %d",  posostowomen);
+      double posostowomen = (count15 *100 /50);
+      System.out.println("Το ποσοστό γυναικών των κρουσμάτων είναι: " + posostowomen + "%");
     } else {
-      System.out.printf("Δεν υπάρχει καμία γυναίκα στα κρούσματα!");
+      System.out.println("Δεν υπάρχει καμία γυναίκα στα κρούσματα!");
     }
   }
-  
+
   /**
    * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
    * του ποσοστού για τα κρούσματα αντρών.
    */
   //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα αντρών
-  
+
   public static void men() {
     int count16 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
-      if (CovidCases.cases[i].getSex() == ("Θ")) {
+    	if (Employee.employees[i].getHad_covid() == true) {
+      if (CovidCases.cases[i].getSex().equals("Θ")) {
         count16 = count16 + 1;
       }
     }
+    }
     if (count16 > 0) {
-      double posostomen = (count16 / 50) * 100;
-      System.out.printf("Το ποσοστό αντρών των κρουσμάτων είναι: %d", posostomen);
+      double posostomen = (count16 *100 /50);
+      System.out.println("Το ποσοστό αντρών των κρουσμάτων είναι: "+ posostomen  + "%");
     } else  {
-      System.out.printf("Δεν υπάρχει κανένας άντρας στα κρούσματα!");
+      System.out.println("Δεν υπάρχει κανένας άντρας στα κρούσματα!");
     }
   }
   /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό των ασθενών 
+   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό των ασθενών
    * με σοβαρά συμπτώματα/πήγαν στο νοσοκομείο.
    */
-  
+
   public static void symptoms_hospital() {
     int countsymptoms = 0;
     int counthospital = 0;
-    if (count1 != 0) {
+    int countp = 0 ;
       for (int x = 0; x < CovidCases.cases.length; x++) {
-        if (CovidCases.cases[x] != null) {
+    	  if (Employee.employees[x].getHad_covid() == true) {
+    		countp++;
           if (CaseTreatment.casetreatments[x].getDaysymptoms() > 0) {
             countsymptoms += 1;
           }
           if (CaseTreatment.casetreatments[x].getDayhospital() > 0) {
             counthospital += 1;
           }
-        }
+
+    	  }
       }
+      if (countsymptoms > 0 && countp != 0) {
       System.out.println("To ποσοστό των ασθενών με σοβαρά "
-              + "συμπτώματα ήταν" + countsymptoms / count1 * 100 + "%");
+              + "συμπτώματα ήταν " + countsymptoms  * 100 /countp  + "%");
+      } else {
+    	  System.out.println("Η εταιρεία δεν έχει κανέναν εργαζόμενο με σοβαρά συμπτώματα!");
+      }
+      if (counthospital > 0 && countp != 0) {
       System.out.println("To ποσοστό των ασθενών που πήγαν "
-              + "στο νοσοκομείο ήταν" + counthospital / count1 * 100 + "%");
-    } else {
-      System.out.println("Η εταιρεία δεν έχει κανένα κρούσμα!");
+              + "στο νοσοκομείο ήταν " + counthospital* 100  / countp + "%");
+      } else {
+    	  System.out.println("Η εταιρεία δεν έχει κανέναν εργαζόμενο που νοσηλεύθηκε στο νοσοκομείο!");
+      }
+
+       {
+
     }
   }
 }
