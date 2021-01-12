@@ -187,7 +187,7 @@ public class CaseTreatment implements Runnable {
 
     int code1 = -1;
     int code2;
-    if (Z != 0) {
+    if (Z < 4) {
       CovidCases.printCases(); // neo
       System.out.println(
             "Παρακαλώ γράψτε τον κωδικό του εργαζομένου για τον οποίο"
