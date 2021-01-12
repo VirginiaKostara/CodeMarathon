@@ -70,8 +70,8 @@ public class CovidCases {
       } else {
         i++;
       }
-      if (i == casesnow.length) {
-        System.out.print("ΥΠΟΧΡΕΩΤΙΚΟ ΚΛΕΙΣΙΜΟ ΕΤΑΙΡΕΙΑΣ!");
+      if (i == casesnow.length - 1) {
+        System.out.println("ΥΠΟΧΡΕΩΤΙΚΟ ΚΛΕΙΣΙΜΟ ΕΤΑΙΡΕΙΑΣ!");
       }
     }
   }
