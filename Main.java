@@ -112,7 +112,7 @@ public class Main {
                 System.out.println("Παρακαλώ εισάγετε id εργαζομένου που θερμομετρήθηκε: ");
                 int idtherm = -99;
                 //αρχικοποιούμε τυχαία ένανμικρό αριθμό ώστε να τρέξει σίγουρα η πρώτη επανάληψη
-                while (idtherm > 50 || idtherm <= 0 || Thermometer.thermometrhseis[idtherm] != 0) {
+                while (idtherm > 50 || idtherm <= 0 || Thermometer.thermometrhseis[idtherm-1] != 0) {
                   boolean intloop = true;
                   do {
                     try {
