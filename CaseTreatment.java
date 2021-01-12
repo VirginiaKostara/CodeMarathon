@@ -148,10 +148,14 @@ public class CaseTreatment implements Runnable {
           }
         } while (!(x.equals("ΝΑΙ")) && !(x.contentEquals("ναι")) && !(x.contentEquals("όχι"))
                       && !(x.contentEquals("ΟΧΙ")));
+
         if (x.contentEquals("ΝΑΙ") || x.contentEquals("ναι")) {
           setHospital(true);
+          
           if (getCode() >= 0 && getCode() < 50) { // neo
+
             setDayhospital(getDayhospital() + 1);
+
           } // neo
         } else {
           setHospital(false);
@@ -159,9 +163,9 @@ public class CaseTreatment implements Runnable {
         System.out.println("Επιτυχής καταχώρηση");
         System.out.println();
         if (getCode() >= 0 && getCode() < 50) { // neo
-          if (getSymptoms().equals("ΣΟΒΑΡΑ") || getSymptoms().equals("σοβαρά")) {
-            setDaysymptoms(getDaysymptoms() + 1);
-          }
+            if (getSymptoms().equals("ΣΟΒΑΡΑ") || getSymptoms().equals("σοβαρά")) {
+          setDaysymptoms(getDaysymptoms() + 1);
+            }
         } // neo
       }
         
@@ -183,12 +187,17 @@ public class CaseTreatment implements Runnable {
    * Create threads for every patient everyday.
    */
   public static void createThreads() {
-    final int Z = CovidCases.count;
-
+    int Z = 0;
+    for (int a = 0 ; a < CovidCases.casesnow.length ; a++) {
+        if (CovidCases.casesnow[a] != null) {
+          Z++;  
+        }
+    }
     int code1 = -1;
     int code2;
-    if (Z < 4) {
-      CovidCases.printCases(); // neo
+    if (Z < 3) {
+      System.out.println();
+      CovidCases.printCasesnow(); // neo
       System.out.println(
             "Παρακαλώ γράψτε τον κωδικό του εργαζομένου για τον οποίο"
              + " ενημερωθήκατε για την κατάσταση της υγείας του "); // neo
