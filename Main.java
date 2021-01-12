@@ -86,14 +86,20 @@ public class Main {
                 }
               }
             }
-            if (CovidCases.count != 0) {
+            int countcases = 0;
+            for (int a = 0 ; a < CovidCases.casesnow.length ; a++) {
+              if (CovidCases.casesnow[a] != null) {
+                countcases++;  
+              }
+            }
+            if (countcases != 0) {
               CaseTreatment.createThreads();
               try {
                 CaseTreatment.thread[0].join();
               } catch (InterruptedException e) {
                 e.printStackTrace();
               }
-              if (CovidCases.count == 2) {
+              if (countcases == 2) {
                 try {
                   CaseTreatment.thread[1].join();
                 } catch (InterruptedException e) {
