@@ -1,4 +1,4 @@
-package CodeMarathon;
+package codemarathon;
 
 public class MarriedCouple<E1, E2> { 
   private E1 e1;
@@ -66,5 +66,39 @@ public class MarriedCouple<E1, E2> {
                     && ((Telework) e1).getUnit() == telework.getUnit()
                     && ((Telework) e1).getTransportation() == telework.getTransportation();
     }
+  }
+  
+  @Override
+  public int hashCode() {  // when you override equals(), you must do the same for hashCode()
+    int result = 1;
+    final int prime = 31;
+    if (f) {
+      result = prime * result + ((Telework) e2).getQuarantine_responsible();
+      result = prime * result + ((Telework) e2).getQuarantine_days();
+      result = prime * result + ((((Telework) e2).getWorkStatus() == null) 
+              ? 0 : ((Telework) e2).getWorkStatus().hashCode());
+      result = prime * result + ((((Telework) e2).getName() == null) 
+              ? 0 : ((Telework) e2).getName().hashCode());
+      result = prime * result + ((((Telework) e2).getSurname() == null) 
+              ? 0 : ((Telework) e2).getSurname().hashCode());
+      result = prime * result + ((((Telework) e2).getUnit() == null) 
+              ? 0 : ((Telework) e2).getUnit().hashCode());
+      result = prime * result + ((((Telework) e2).getTransportation() == null) 
+              ? 0 : ((Telework) e2).getTransportation().hashCode());
+    } else {
+      result = prime * result + ((Telework) e1).getQuarantine_responsible();
+      result = prime * result + ((Telework) e1).getQuarantine_days();
+      result = prime * result + ((((Telework) e1).getWorkStatus() == null)
+              ? 0 : ((Telework) e1).getWorkStatus().hashCode());
+      result = prime * result + ((((Telework) e1).getName() == null)
+              ? 0 : ((Telework) e1).getName().hashCode());
+      result = prime * result + ((((Telework) e1).getSurname() == null)
+              ? 0 : ((Telework) e1).getSurname().hashCode());
+      result = prime * result + ((((Telework) e1).getUnit() == null)
+              ? 0 : ((Telework) e1).getUnit().hashCode());
+      result = prime * result + ((((Telework) e1).getTransportation() == null)
+              ? 0 : ((Telework) e1).getTransportation().hashCode()); 
+    }
+    return result;
   }
 }
