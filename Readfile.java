@@ -1,6 +1,4 @@
-package codemarathon;
 
-import codemarathon.Telework.Status;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -21,8 +19,7 @@ public class Readfile {
    */
   public void openFile() {
     try {
-      x = new Scanner(new File("/home/natasa/eclipse-workspace/"
-        + "codemarathon/src/codemarathon/employees1.txt"));
+      x = new Scanner(new File("employees1.txt"));
     } catch (Exception e) {
       System.out.println("not found file");
     }
@@ -39,7 +36,7 @@ public class Readfile {
       String d = x.next();
       String e = x.next();
       String f = x.next();
-      new Telework(a, b, c, d, e, f, Status.NORMAL, -2, 0);
+      new Telework(a, b, c, d, e, f, Telework.Status.NORMAL, -2, 0);
     }
 
   }
@@ -59,8 +56,7 @@ public class Readfile {
     String temp;
     int counter = 0;
     try {
-      reader = new BufferedReader(new FileReader(new File("/home/natasa/eclipse-workspace/"
-       + "codemarathon/src/codemarathon/employees2.txt")));
+      reader = new BufferedReader(new FileReader(new File("employees2.txt")));
       line = reader.readLine();
       while (line != null) {
         if (line.trim().startsWith("CURRENT_DAY")) {
@@ -76,15 +72,15 @@ public class Readfile {
               } else if (line.trim().startsWith("STATUS")) {
                 temp = line.trim().substring(7);
                 if (temp.equals("NORMAL")) {
-                  Telework.teleworkers[counter].setWorkStatus(Status.NORMAL);
+                  Telework.teleworkers[counter].setWorkStatus(Telework.Status.NORMAL);
                 } else if (temp.equals("UNCONFIRMEDCASE1")) {
                   Telework.teleworkers[counter].setWorkStatus(
-                      Status.UNCONFIRMEDCASE1);
+                		  Telework.Status.UNCONFIRMEDCASE1);
                 } else if (temp.equals("UNCONFIRMEDCASE2")) {
                   Telework.teleworkers[counter].setWorkStatus(
-                      Status.UNCONFIRMEDCASE2);
+                		  Telework.Status.UNCONFIRMEDCASE2);
                 } else if (temp.equals("COVIDCASE")) {
-                  Telework.teleworkers[counter].setWorkStatus(Status.COVIDCASE);
+                  Telework.teleworkers[counter].setWorkStatus(Telework.Status.COVIDCASE);
                 }
 
               } else if (line.trim().startsWith("QUARANTINE_DAYS")) {
@@ -148,5 +144,3 @@ public class Readfile {
     }
   }
 }
-
-
