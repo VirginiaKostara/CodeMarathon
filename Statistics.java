@@ -382,12 +382,13 @@ public class Statistics {
       frame.setVisible(true); 
       frame.getContentPane().setBackground(new Color(203, 239, 240)); 
       JLabel label1 = new JLabel(); 
-      label1.setText(">>Το ποσοστό των κρουσμάτων με βαριά συμπτώματα είναι: " + countsymptoms * 100 / countp + "<<");
+      label1.setText(">> The percentage of covid cases with severe symptoms is: " + countsymptoms * 100 / countp + "% <<");
       label1.setBounds(50, 30, 800, 25);
       label1.setFont(new Font("", Font.BOLD, 15));
       panel.add(label1);
       JLabel label2 = new JLabel();
-     label2.setText(">>Το ποσοστό κρουσμάτων που νοσηλευτηκαν στο νοσοκομείο είναι: "+ counthospital * 100 / countp +"<<");
+     label2.setText(">> The percentage of covid cases who stayed at least
+		    + "one day at the hospital is : "+ counthospital * 100 / countp +"% <<");
       label2.setBounds(50, 50, 800, 25);
       label2.setFont(new Font("", Font.BOLD, 15));
       panel.add(label2);
