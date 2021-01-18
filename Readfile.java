@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
+
 
 
 /**
@@ -13,37 +13,43 @@ import java.util.Scanner;
  *
  */
 public class Readfile {
-  private Scanner x;
-  
-  /** A method that connects the app with the employees1.txt file.
-   */
-  public void openFile() {
-    try {
-      x = new Scanner(new File("employees1.txt"));
-    } catch (Exception e) {
-      System.out.println("not found file");
-    }
-  }
+ 
 
   /**
    *This method calls the Telework constructor to generate the Telework objects
   * as well as the Employee ones.  **/
   public  void createEmploee() {
-    while (x.hasNext()) {
-      String a = x.next();
-      String b = x.next();
-      String c = x.next();
-      String d = x.next();
-      String e = x.next();
-      String f = x.next();
-      new Telework(a, b, c, d, e, f, Telework.Status.NORMAL, -2, 0);
+    BufferedReader reader;
+    String line;
+    try {
+      reader = new BufferedReader(new FileReader(new File("employees1.txt")));
+      line = reader.readLine();
+      while (line != null) {
+        int index = line.indexOf(" ");
+        String a = line.substring(0, index);
+        line = line.substring(index + 1);
+        index = line.indexOf(" ");
+        String b = line.substring(0, index);
+        line = line.substring(index + 1);
+        index = line.indexOf(" ");
+        String c = line.substring(0, index);
+        line = line.substring(index + 1);
+        index = line.indexOf(" ");
+        String d = line.substring(0, index);
+        line = line.substring(index + 1);
+        index = line.indexOf(" ");
+        String e = line.substring(0, index);
+        line = line.substring(index + 1);
+        String f = line;
+        new Telework(a, b, c, d, e, f, Telework.Status.NORMAL, -2, 0);
+        line= reader.readLine();
+      }
+      reader.close();
+    } catch (IOException e) {
+      System.err.println(e);
     }
-
   }
 
-  public void closeFile() {
-    x.close();
-  }
 
   /**
    * This method updates our data and gives memory to the app
@@ -75,10 +81,10 @@ public class Readfile {
                   Telework.teleworkers[counter].setWorkStatus(Telework.Status.NORMAL);
                 } else if (temp.equals("UNCONFIRMEDCASE1")) {
                   Telework.teleworkers[counter].setWorkStatus(
-                		  Telework.Status.UNCONFIRMEDCASE1);
+                      Telework.Status.UNCONFIRMEDCASE1);
                 } else if (temp.equals("UNCONFIRMEDCASE2")) {
                   Telework.teleworkers[counter].setWorkStatus(
-                		  Telework.Status.UNCONFIRMEDCASE2);
+                      Telework.Status.UNCONFIRMEDCASE2);
                 } else if (temp.equals("COVIDCASE")) {
                   Telework.teleworkers[counter].setWorkStatus(Telework.Status.COVIDCASE);
                 }
