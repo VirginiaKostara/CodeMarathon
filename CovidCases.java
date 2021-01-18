@@ -6,7 +6,6 @@ import codemarathon.Telework.Status;
  * A class with the information of every Employee that has or had Covid-19.
  * Every Employee that currently has Covid-19 and his info are saved in casesnow table.
  * Every Employee that had/has Covid-19 and his info are saved in cases table.
- * @author codemarathon team
  */
 
 public class CovidCases {
@@ -32,7 +31,6 @@ public class CovidCases {
     this.name = Employee.employees[idcases - 1].getName();
     this.surname = Employee.employees[idcases - 1].getSurname();
     this.daysleft = 9;
-    //To test κανει 2 ημερες να βγει, άρα μετράμε 9 εργάσιμες ημέρες
   }
 
 
@@ -58,8 +56,6 @@ public class CovidCases {
 
 
   public static void createCase(int id) {
-
-    //Αφού γίνει το testCovid-19 στην main και βγει θετικό,καλούμε την createCase
     cases[id - 1] = Employee.employees[id - 1];
     boolean flag = false;
     int i = 0;
@@ -71,7 +67,7 @@ public class CovidCases {
         i++;
       }
       if (i == casesnow.length - 1) {
-        System.out.println("ΥΠΟΧΡΕΩΤΙΚΟ ΚΛΕΙΣΙΜΟ ΕΤΑΙΡΕΙΑΣ!");
+        System.out.println("THE COMPANY HAS TO CLOSE!");
       }
     }
   }
@@ -87,11 +83,11 @@ public class CovidCases {
       }
     }
     if (counts == 0) {
-      System.out.println("Δεν έχει υπάρξει κρούσμα ως τώρα");
+      System.out.println("No active covid-case until now");
       System.out.println();
     } else {
-      System.out.println("Οι εργαζόμενοι που έχουν υπάρξει κρούσματα ή "
-          + "είναι αυτή τη στιγμή είναι οι:");
+      System.out.println("Employees who have been covid-cases or "
+          + "are covid-cases now:");
       for (int y = 0; y < cases.length; y++) {
         if (cases[y] != null) {
           System.out.println(cases[y].superString());
@@ -106,7 +102,6 @@ public class CovidCases {
    * @param i This parameter is the id of the Employee that recovered -1
    */
   public static void deleteCase(int i) {
-    // Κάθε καινούρια μέρα που αλλάζει από την main, καλούμε την deleteCase
     casesnow[i] = null;
     count--;
   }
@@ -123,10 +118,10 @@ public class CovidCases {
       }
     }
     if (count == 0) {
-      System.out.println("Δεν υπάρχει κανένα ενεργό κρούσμα");
+      System.out.println("No active covid-case");
       System.out.println();
     } else {
-      System.out.println("Οι εργαζόμενοι που είναι ενεργά κρούσματα είναι οι:");
+      System.out.println("Employees who are active covid-cases are: ");
       for (int i = 0; i < casesnow.length; i++) {
         if (casesnow[i] != null) {
           System.out.println(casesnow[i].toString());
