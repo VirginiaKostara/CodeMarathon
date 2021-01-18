@@ -1,5 +1,3 @@
-package codemarathon;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,12 +14,11 @@ public class CreateFile {
   public void saveData() {
     FileWriter writer;
     try {
-      //Το αρχείο αυτό την πρώτη μέρα δημιουργείται και τις επόμενες ανανεώνεται
-      writer = new FileWriter(new File("/home/natasa/eclipse-workspace/codemarathon/src/"
-        + "codemarathon/employees2.txt"));
-      //Αποθηκεύουμε την ημέρα λειτουργίας της εφαρμογής
+      //This file changes every time before the app's termination.
+      writer = new FileWriter(new File("employees2.txt"));
+      //We save the operation day of the app.
       writer.write("CURRENT_DAY " + Main.day + "\n");
-      //Αποθηκέυουμε για κάθε υπάλληλο το id και τα στοιχεία του που μπορούν να  μεταβληθούν
+      //We save for every employee their id and every information that can be changed.
       for (int i = 0; i < 50; i++) {
         writer.write("{" + "\n" + "ID " + Telework.teleworkers[i].getId() + "\n"
             + "STATUS " + Telework.teleworkers[i].getWorkStatus() + "\n"
@@ -38,11 +35,10 @@ public class CreateFile {
             + "}" + "\n");
       }
       writer.close();
-	  //Εξαίρεση σε περίπτωση που υπάρξει πρόβλημα με την συγγραφή του αρχείου
+	  //Exception in case there is a problem with the editing of the file.
     } catch (IOException e) {
       System.err.println("Error writing file.");
     }
   }
 
 }
-
