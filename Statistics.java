@@ -372,12 +372,13 @@ public class Statistics {
     	  }
       }
       JPanel panel = new JPanel();
-	  panel.setLayout(null);
-	  JFrame frame = new JFrame(); 
-	  frame.add(panel);
+      panel.setLayout(null);
+      panel.setBackground(new Color(203, 239, 240));
+      JFrame frame = new JFrame(); 
+      frame.add(panel);
       frame.setTitle(""); 
       frame.setResizable(false); 
-      frame.setSize(650, 150);
+      frame.setSize(850, 150);
       frame.setLocationRelativeTo(null);
       frame.setVisible(true); 
       frame.getContentPane().setBackground(new Color(203, 239, 240)); 
