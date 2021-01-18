@@ -7,9 +7,12 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.util.List;
 import java.util.ArrayList;
-import javax.swing.*;
+import java.util.List;
+import javax.swing.Icon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -142,21 +145,21 @@ public class GraphStats extends JPanel {
 
   static void createAndShowGuitmimata() {
     GraphStats panel = new GraphStats();
-    panel.addHistogramColumn("Λογιστήριο", (int) Statistics.logistirio(), Color.RED);
-    panel.addHistogramColumn("Μάρκετινγκ", (int) Statistics.marketing(), Color.YELLOW);
+    panel.addHistogramColumn("Accounting", (int) Statistics.logistirio(), Color.RED);
+    panel.addHistogramColumn("Marketing", (int) Statistics.marketing(), Color.YELLOW);
     panel.addHistogramColumn("IT", (int) Statistics.it(), Color.BLUE);
-    panel.addHistogramColumn("Ανθρώπινο Δυναμικό", (int) Statistics.humanResources(), Color.ORANGE);
-    panel.addHistogramColumn("Καθαριότητα", (int) Statistics.cleaning(), Color.MAGENTA);
-    panel.addHistogramColumn("Πωλήσεις", (int) Statistics.sales(), Color.CYAN);
-    panel.addHistogramColumn("Διεύθυνση", (int) Statistics.dieuthunsh(), Color.DARK_GRAY);
-    panel.addHistogramColumn("Εξυπηρέτηση Πελατών", 
+    panel.addHistogramColumn("Human Resources", (int) Statistics.humanResources(), Color.ORANGE);
+    panel.addHistogramColumn("Cleaning", (int) Statistics.cleaning(), Color.MAGENTA);
+    panel.addHistogramColumn("Sales", (int) Statistics.sales(), Color.CYAN);
+    panel.addHistogramColumn("Management", (int) Statistics.dieuthunsh(), Color.DARK_GRAY);
+    panel.addHistogramColumn("Customer Service", 
           (int) Statistics.customerService(), Color.GREEN);
-    panel.addHistogramColumn("Δημόσιες Σχέσεις", (int) Statistics.pr(), Color.LIGHT_GRAY);
-    panel.addHistogramColumn("Εκπαίδευση", (int) Statistics.edu(), Color.BLACK);
+    panel.addHistogramColumn("Public Relations", (int) Statistics.pr(), Color.LIGHT_GRAY);
+    panel.addHistogramColumn("Education", (int) Statistics.edu(), Color.BLACK);
     panel.layoutHistogram();
         
 
-    JFrame frame = new JFrame("Ποσοστό κρουσμάτων ανα τμήμα (στρογγυλοποιημένο)");
+    JFrame frame = new JFrame("Percentage of cases per department (rounded)");
     frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     frame.add(panel);
     frame.setLocationByPlatform(true);
@@ -166,10 +169,10 @@ public class GraphStats extends JPanel {
   
   static void createAndShowGuifilo() {
     GraphStats panel2 = new GraphStats();
-    panel2.addHistogramColumn("Γυναίκες", (int) Statistics.women(), Color.RED);
-    panel2.addHistogramColumn("Άνδρες", (int) Statistics.men(), Color.BLUE);
+    panel2.addHistogramColumn("Women", (int) Statistics.women(), Color.RED);
+    panel2.addHistogramColumn("Men", (int) Statistics.men(), Color.BLUE);
     panel2.layoutHistogram();
-    JFrame frame = new JFrame("Ποσοστό κρουσμάτων ανα φύλο (στρογγυλοποιημένο)");
+    JFrame frame = new JFrame("Percentage of cases per sex (rounded)");
     frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     frame.add(panel2);
     frame.setLocationByPlatform(true);
@@ -179,11 +182,11 @@ public class GraphStats extends JPanel {
   
   static void createAndShowGuimm() {
     GraphStats panel3 = new GraphStats();
-    panel3.addHistogramColumn("Λεωφορείο 1", (int) Statistics.bus1Covid(), Color.RED);
-    panel3.addHistogramColumn("Λεωφορείο 2", (int) Statistics.bus2Covid(), Color.BLUE);
-    panel3.addHistogramColumn("Ατομικό Μέσο", (int) Statistics.atomikomesoCovid(), Color.GREEN);
+    panel3.addHistogramColumn("Bus 1", (int) Statistics.bus1Covid(), Color.RED);
+    panel3.addHistogramColumn("Bus 2", (int) Statistics.bus2Covid(), Color.BLUE);
+    panel3.addHistogramColumn("Personal means", (int) Statistics.atomikomesoCovid(), Color.GREEN);
     panel3.layoutHistogram();
-    JFrame frame = new JFrame("Ποσοστό κρουσμάτων ανα μέσο μεταφοράς (στρογγυλοποιημένο)");
+    JFrame frame = new JFrame("Percentage of cases per means of transportation (rounded)");
     frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     frame.add(panel3);
     frame.setLocationByPlatform(true);
@@ -200,7 +203,7 @@ public class GraphStats extends JPanel {
     frame.setVisible(true); 
     frame.getContentPane().setBackground(new Color(203, 239, 240)); 
     JLabel label = new JLabel(); 
-    label.setText("Το ποσοστό κρουσμάτων Covid ανα εργαζόμενο είναι: " 
+    label.setText("The persentage of Covid cases per emploee is: " 
                            + Statistics.totalCovid() + "%");
     label.setFont(new Font("", Font.BOLD, 15));
     label.setVerticalAlignment(JLabel.CENTER); 
