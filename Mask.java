@@ -1,28 +1,26 @@
-package codemarathon;
 
-import codemarathon.Telework.Status;
 
 /**
  * A class with the information about all the Employees that did not wear a mask.
  * Every time an Employee does not wear a mask it saves at the nomask table the times.
  *
  */
+
 public class Mask {
 
   static int count = 0;
   private int times;
-  //ιδιωτικό πεδίο το οποίο μετράει τις φορές που ένας εργαζόμενος εμφανίζεται χωρίς μάσκα
+  //private field counting the times that an employee did not wear a mask.
   private boolean doneTelework;
-  //ιδιωτικό πεδίο που δείχνει εαν κάποιος έχει μπει σε τηλεργασία λόγω της απουσίας μάσκας ή όχι
+  //private field showing if the employee was a teleworker because he did not wear a mask.
   public static Mask[] nomask = new Mask[50];
-  //στατικός πίνακαςγια όλους τους εργαζομένους με τα στοιχεία που αφορούν τη μάσκα
+  //static table for all information regarding masks.
 
   /**
    * The constructor saves the times and if the Employee has done Telework
    * because of the mask at the nomask table.
    * @param times This parameter shows how many times the Employee did not wear a mask.
-   * @param doneTelework This parameter shows if the Employee has done Telework
-   * because he did not wear a mask 6 times.
+   * @param doneTelework This parameter shows if the employee was a teleworker due to mask.
    */
 
   public Mask(int times, boolean doneTelework) {
@@ -34,33 +32,29 @@ public class Mask {
 
   public int getTimes() {
     return times;
-  }    // Μέθοδος εμφάνισης των φορών χωρίς μάσκα του αντικειμένου με το οποίο θα καλεστεί
+  }
 
   public void setTimes(int times) {
     this.times = times;
   }
-  //μέθοδος η οποία αλλάζει τον αριθμό φορών που δε φορούσε μάσκα ο εργαζόμενος
 
   public boolean getDoneTelework() {
     return doneTelework;
   }
-  // Μέθοδος εμφάνισης εαν το αντικειμενο έχει κάνει τηλεργασία επείδη δεν φορούσε μάσκα
 
   protected void setDoneTelework(boolean doneTelework) {
     this.doneTelework = doneTelework;
   }
-  //Μέθοδος αλλαγής της κατάστασης εαν ο εργαζόμενος πέρασε σε τηλεργασία λόγω της μάσκας
-
   /**
    * This method initializes the Mask table automatically when it's called.
    */
+
   public static void initialization() {
     for (int i = 0; i < 50; i++) {
       new Mask(0, false);
     }
   }
-  //στατική μέθοδος που θα κληθεί την μέρα 0 μέσω της main ώστε να αρχικοποιηθεί κατάλληλα ο πίνακας
-
+  //static method called day0 to initialize Mask[].
 
   /**
    * This method changes the times an Employee did not wear a mask by 1.
@@ -69,36 +63,38 @@ public class Mask {
    */
   public static void insertnomask(int idemployee) {
     int currenttimes = nomask[idemployee - 1].getTimes() + 1;
-    // δείχνει τις φορές που ο εργαζόμενος δε φορούσε μάσκα μαζί με την παρούσα φορά
-    if (Telework.teleworkers[idemployee -1].getWorkStatus() == Status.NORMAL) {
-    nomask[idemployee - 1].setTimes(currenttimes);
+    //times that the employee did not wear a mask, including the current one
+    if (Telework.teleworkers[idemployee - 1].getWorkStatus() == Telework.Status.NORMAL) {
+      nomask[idemployee - 1].setTimes(currenttimes);
     } else {
-    	System.out.println("Ο εργαζόμενος βρίσκεται σε τηλεργασία");
+      System.out.println("The employee works from home");
     }
+    //if the employee works from home, the system does not add times without mask
+    //it shows a message indicating wrong input
     if (currenttimes == 3) {
       System.out.println(Employee.employees[idemployee - 1].getName() + " "
-          + Employee.employees[idemployee - 1].getSurname() + ": Πρώτη επίπληξη εργαζομένου");
-
+          + Employee.employees[idemployee - 1].getSurname() + ": First strike");
+      //The company policy says that 3days without a mask lead to a strike to the employee.
     } else if (currenttimes == 6) {
       System.out.println(Employee.employees[idemployee - 1].getName() + " "
           + Employee.employees[idemployee - 1].getSurname()
-             + ": Δεύτερη επίπληξη εργαζομένου, ο εργαζόμενος μπαίνει σε τηλεργασία");
+             + ": Second strike, the employee will work from home");
       Telework.teleworkers[0].maskTeleworkers(idemployee);
+      //At 6days without a mask, the employee becomes a teleworker
     } else if (currenttimes == 9) {
       System.out.println(Employee.employees[idemployee - 1].getName() + " "
               + Employee.employees[idemployee - 1].getSurname()
-                + ": Τρίτη επίπληξη εργαζομένου, ο εργαζόμενος απολύεται");
+                + ": Last strike, the employee is fired");
       Employee.fireEmployee(idemployee - 1);
       nomask[idemployee - 1].setTimes(99);
-      //Εφόσον ο εργαζόμενος απολύθηκε,
-      //στη θέση του μετρητή φορών χωρίς μάσκα μπαίνει ένας μεγάλος αριθμός ως ένδειξη
+      //At 9days the company fires the employee to protect the others.
+      //number 99 as times indicates that the employee is fired
     } else {
       System.out.println(Employee.employees[idemployee - 1].getName() + " "
           + Employee.employees[idemployee - 1].getSurname()
-            + ": Δεν χρειάζεται επίπληξη");
+            + ":No need for a strike");
     }
-  }   //στατική μέθοδος με την οποία ανάλογα με τον εργαζόμενο που δε φοράει τη συγκεκριμένη ημέρα
-  //μάσκα,εμφανίζει κατάλληλο μήνυμα επίπληξης ή όχι
-
+    //In any other case, the employee continues his work normally.
+  }
 
 }
