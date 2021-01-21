@@ -1,5 +1,4 @@
 
-
 /**
  * A class with the information of every Employee that works for this company.
  * Every employee and his info are saved in the static table Employee.
@@ -23,19 +22,19 @@ public class Employee {
   private boolean had_covid = false; //it shows if the employee has been a covid case ever.
   // Static table with every Employee object.
   public static Employee[]employees = new Employee[50];
-  
+
   /**
-   * The constructor Employee uses the data from employees1.txt file 
+   * The constructor Employee uses the data from employees1.txt file
    * and creates the company's employees while filling the static table employees.
    * @param name is the employee's first name
    * @param surname is the employee's last name
    * @param unit is the unit the employee works at
    * @param transportation is the employee's mean to get to work
    * @param sex is the employee's sex (male or female)
-   * @param idmarriedto is the employee's wife's or husband's id, 
+   * @param idmarriedto is the employee's wife's or husband's id,
    * if they work for the company as well.
    */
-   
+
   public Employee(String name, String surname, String unit, String transportation,
         String sex, String idmarriedto) {
     employees[count] = this;
@@ -53,7 +52,7 @@ public class Employee {
   public int getId() {
     return id;
   }
-    
+
   public void setId(int id) {
     this.id = id;
   }
@@ -69,7 +68,7 @@ public class Employee {
   public String getSurname() {
     return surname;
   }
-    
+
   public void setSurname(String surname) {
     this.surname = surname;
   }
@@ -77,19 +76,19 @@ public class Employee {
   public String getUnit() {
     return unit;
   }
-  
+
   public void setUnit(String unit) {
     this.unit = unit;
   }
-    
+
   public String getTransportation() {
     return transportation;
   }
-    
+
   public void setTransportation(String transportation) {
     this.transportation = transportation;
   }
-    
+
   public String getSex() {
     return sex;
   }
@@ -97,15 +96,15 @@ public class Employee {
   public void setSex(String sex) {
     this.sex = sex;
   }
-  
+
   public int getIdmarriedto() {
     return idmarriedto;
   }
-  
+
   public void setIdmarriedto(int idmarriedto) {
     this.idmarriedto = idmarriedto;
   }
-    
+
   public boolean getHad_covid() {
     return had_covid;
   }
@@ -117,16 +116,7 @@ public class Employee {
   //toString method for the class's objects
 
   public String superString() {
-    return  name  + " " + surname + " με id = " + id; 
+    return  name  + " " + surname + " with id = " + id;
   }
-
-  /** Deletes the employee who has been fired from the Employee table
-  * This method is being used by the class Mask, whenever an employee has gotten 3 strikes
-  *  for not using a mask at work.  **/
-
-  public static void fireEmployee(int id) {
-    employees[id - 1] = null;
-  }
-
 
 }
