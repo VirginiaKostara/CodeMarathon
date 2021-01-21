@@ -16,13 +16,11 @@ import javax.swing.JPanel;
 public class Statistics {
   private static int count1 = 0;
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα συνολικά κρούσματα covid.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για συνολικά κρούσματα covid
-
+  /**This method is used for
+  * calculating total covid cases.
+  * @return
+  */ 
+  //Static method 
   public static double totalCovid() {
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
@@ -37,17 +35,17 @@ public class Statistics {
     return posostocovid;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Εκπαίδευση.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο λεωφορείο 1
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that take the bus1.
+  * @return
+  */ 
+  //Static method for calculating bus1 covidcases percentage
   public static double bus1Covid() {
     int count2 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getTransportation().equals("ΛΕΩΦΟΡΕΙΟ1"))  {
+        if (CovidCases.cases[i].getTransportation().equals("BUS1"))  {
           count2 = count2 + 1;
         }
       }
@@ -57,18 +55,18 @@ public class Statistics {
     return posostobus1;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Εκπαίδευση.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο λεωφορειο 2
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that take the bus2.
+  * @return
+  */ 
+  //Static method for calculating bus1 covidcases percentage
 
   public static double bus2Covid() {
     int count3 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getTransportation().equals("ΛΕΩΦΟΡΕΙΟ2")) {
+        if (CovidCases.cases[i].getTransportation().equals("BUS2")) {
           count3 = count3 + 1;
         }
       }
@@ -78,18 +76,18 @@ public class Statistics {
     return posostobus2;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Εκπαίδευση.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα που μετακινούνται με ατομικό μέσο
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that take their personal vehicle.
+  * @return
+  */ 
+  //Static method for calculating pv covidcases percentage
 
   public static double atomikomesoCovid() {
     int count4 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getTransportation().equals("ΑΤΟΜΙΚΟΜΕΣΟ")) {
+        if (CovidCases.cases[i].getTransportation().equals("PV")) {
           count4 = count4 + 1;
         }
       }
@@ -99,17 +97,17 @@ public class Statistics {
     return posostoatomikomeso;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Λογιστήριο.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα του λογιστηρίου
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that work in the accounting department.
+  * @return
+  */ 
+  //Static method for calculating cs percentage
   public static double logistirio() {
     int count5 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getUnit().equals("ΛΟΓΙΣΤΗΡΙΟ")) {
+        if (CovidCases.cases[i].getUnit().equals("CS")) {
           count5 = count5 + 1;
         }
       }
@@ -119,18 +117,18 @@ public class Statistics {
     return posostologistirio;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Μάρκετινγκ.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο τμήμα του marketing
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that work in the marketing department.
+  * @return
+  */ 
+  //Static method for calculating marketing covidcases percentage
 
   public static double marketing() {
     int count6 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getUnit().equals("ΜΑΡΚΕΤΙΝΓΚ")) {
+        if (CovidCases.cases[i].getUnit().equals("MARKETING")) {
           count6 = count6 + 1;
         }
       }
@@ -140,13 +138,12 @@ public class Statistics {
     return posostomarketing;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα it.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο it
-
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that work in the it department.
+  * @return
+  */ 
+  //Static method for calculating it covidcases percentage
   public static double it() {
     int count7 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
@@ -161,18 +158,17 @@ public class Statistics {
     return posostoit;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Ανθρώπινο-Δυναμικό.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο τμήμα Ανθρώπινο-Δυναμικό
-
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that work in the hr department.
+  * @return
+  */ 
+  //Static method for calculating hr covidcases percentage
   public static double humanResources() {
     int count8 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getUnit().equals("ΑΝΘΡΩΠΙΝΟ-ΔΥΝΑΜΙΚΟ")) {
+        if (CovidCases.cases[i].getUnit().equals("HR")) {
           count8 = count8 + 1;
         }
       }
@@ -182,18 +178,18 @@ public class Statistics {
     return posostohr;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Καθαριότητα.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο τμήμα Καθαριότητα
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that work in the cleaning department.
+  * @return
+  */ 
+  //Static method for  calculating cleaning covidcases percentage
 
   public static double cleaning() {
     int count9 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getUnit().equals("ΚΑΘΑΡΙΟΤΗΤΑ")) {
+        if (CovidCases.cases[i].getUnit().equals("CLEANING")) {
           count9 = count9 + 1;
         }
       }
@@ -203,18 +199,17 @@ public class Statistics {
     return posostocleaning;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Πωλήσεις.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο τμήμα των πωλήσεων
-
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that work in the sales department.
+  * @return
+  */ 
+  //Static method for calculating sales covidcases percentage
   public static double sales() {
     int count10 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getUnit().equals("ΠΩΛΗΣΕΙΣ"))  {
+        if (CovidCases.cases[i].getUnit().equals("SALES"))  {
           count10 = count10 + 1;
         }
       }
@@ -224,18 +219,18 @@ public class Statistics {
     return posostosales;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Διεύθυνση.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο τμήμα της διεύθυνσης
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that work in the management department.
+  * @return
+  */ 
+  //Static method for calculating management covidcases percentage
 
   public static double dieuthunsh() {
     int count11 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getUnit().equals("ΔΙΕΥΘΥΝΣΗ")) {
+        if (CovidCases.cases[i].getUnit().equals("MANAGEMENT")) {
           count11 = count11 + 1;
         }
       }
@@ -245,18 +240,17 @@ public class Statistics {
     return posostodieuthunsh;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Εξυπηρέτηση Πελατών.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο τμήμα εξυπηρέτησης πελατών
-
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that work in the customer service department.
+  * @return
+  */ 
+  //Static method for calculating cs covidcases percentage
   public static double customerService() {
     int count12 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getUnit().equals("ΕΞΥΠΗΡΕΤΗΣΗ-ΠΕΛΑΤΩΝ")) {
+        if (CovidCases.cases[i].getUnit().equals("CS")) {
           count12 = count12 + 1;
         }
       }
@@ -266,18 +260,18 @@ public class Statistics {
     return posostocustomerservice;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα στο τμήμα Δημόσιες σχέσεις.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο τμήμα Δημόσιες-Σχέσεις
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that work in the public relations department.
+  * @return
+  */ 
+  //Static method for calculating pr covidcases percentage
 
   public static double pr() {
     int count13 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getUnit().equals("ΔΗΜΟΣΙΕΣ-ΣΧΕΣΕΙΣ")) {
+        if (CovidCases.cases[i].getUnit().equals("PR")) {
           count13 = count13 + 1;
         }
       }
@@ -287,18 +281,18 @@ public class Statistics {
     return posostopr;
   }
 
-  /**
-     * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-     * του ποσοστού για τα κρούσματα στο τμήμα Εκπαίδευση.
- * @return 
-     */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα στο τμήμα Εκπαίδευση
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * that work in the education deparment. 
+  * @return
+  */ 
+  //Static method for calculating edu covidcases percentage
 
   public static double edu() {
     int count14 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getUnit().equals("ΕΚΠΑΙΔΕΥΣΗ")) {
+        if (CovidCases.cases[i].getUnit().equals("EDU")) {
           count14 = count14 + 1;
         }
       }
@@ -308,18 +302,16 @@ public class Statistics {
     return posostoedu;
   }
 
-  /**
-     * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-     * του ποσοστού για τα κρούσματα γυναικών.
- * @return 
-     */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα γυναικών
-
+  /**This method is used for
+  * calculating the percentage of female covid cases.
+  * @return
+  */ 
+  //Static method for calculating female covidcases percentage
   public static double women() {
     int count15 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getSex().equals("Α")) {
+        if (CovidCases.cases[i].getSex().equals("F")) {
           count15 = count15 + 1;
         }
       }
@@ -329,18 +321,17 @@ public class Statistics {
     return posostowomen;
   }
 
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό
-   * του ποσοστού για τα κρούσματα αντρών.
- * @return 
-   */
-  //Στατική μέθοδος υπολογισμού ποσοστού για κρούσματα αντρών
+  /**This method is used for
+  * calculating the percentage of male covid cases.
+  * @return
+  */ 
+  //Static method for calculating male covidcases percentage
 
   public static double men() {
     int count16 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getSex().equals("Θ")) {
+        if (CovidCases.cases[i].getSex().equals("M")) {
           count16 = count16 + 1;
         }
       }
@@ -349,11 +340,13 @@ public class Statistics {
     double posostomen = (count16 * 100 / 50);
     return posostomen;
   }
-  /**
-   * Η μέθοδος αυτή χρησιμοποιείται για τον υπολογισμό των ασθενών
-   * με σοβαρά συμπτώματα/πήγαν στο νοσοκομείο.
-   */
-
+  /**This method is used for
+  * calculating the percentage of covid cases
+  * with severe symptoms.
+  * @return
+  */ 
+  //Static method for calculating covidcases with severe symptoms percentage
+  
   public static void symptoms_hospital() {
     int countsymptoms = 0;
     int counthospital = 0;
