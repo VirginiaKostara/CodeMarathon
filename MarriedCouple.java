@@ -1,5 +1,3 @@
-package codemarathon;
-
 public class MarriedCouple<E1, E2> { 
   private E1 e1;
   private E2 e2;
