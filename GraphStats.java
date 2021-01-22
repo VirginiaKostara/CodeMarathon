@@ -1,5 +1,3 @@
-package codemarathon;
-
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,10 +7,12 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -20,7 +20,7 @@ import javax.swing.border.MatteBorder;
 
 /**
  * This class includes the graphic representation of the statistics of every covid case.
- * It takes the data from the Statistics class and creates bar graphs based. 
+ * It takes the data from the Statistics class and creates bar graphs based.
  * on the emploees that had covid-19.
  * @author codemarathon team
  */
@@ -37,8 +37,8 @@ public class GraphStats extends JPanel {
   /** this is the constructor of the graphics class, it sets the borders and the general.
   * layout of the bar graphs that this class creates based on the statistics of the covid cases.
   */
-  
-  public GraphStats() { 
+
+  public GraphStats() {
     setBorder(new EmptyBorder(10, 10, 10, 10));
     setLayout(new BorderLayout());
 
@@ -61,9 +61,9 @@ public class GraphStats extends JPanel {
   }
 
   /**this method creates the bars of the chart with mathematical calculation so.
-   * it can fit the border 
+   * it can fit the border
    */
-  
+
   public void layoutHistogram() {
     barPanel.removeAll();
     labelPanel.removeAll();
@@ -127,15 +127,18 @@ public class GraphStats extends JPanel {
       this.height = height;
     }
 
-    public int getIconWidth() {
+    @Override
+	public int getIconWidth() {
       return width;
     }
 
-    public int getIconHeight() {
+    @Override
+	public int getIconHeight() {
       return height;
     }
 
-    public void paintIcon(Component c, Graphics g, int x, int y) {
+    @Override
+	public void paintIcon(Component c, Graphics g, int x, int y) {
       g.setColor(color);
       g.fillRect(x, y, width - shadow, height);
       g.setColor(Color.GRAY);
@@ -152,63 +155,81 @@ public class GraphStats extends JPanel {
     panel.addHistogramColumn("Cleaning", (int) Statistics.cleaning(), Color.MAGENTA);
     panel.addHistogramColumn("Sales", (int) Statistics.sales(), Color.CYAN);
     panel.addHistogramColumn("Management", (int) Statistics.dieuthunsh(), Color.DARK_GRAY);
-    panel.addHistogramColumn("Customer Service", 
+    panel.addHistogramColumn("Customer Service",
           (int) Statistics.customerService(), Color.GREEN);
     panel.addHistogramColumn("Public Relations", (int) Statistics.pr(), Color.LIGHT_GRAY);
     panel.addHistogramColumn("Education", (int) Statistics.edu(), Color.BLACK);
     panel.layoutHistogram();
-        
 
-    JFrame frame = new JFrame("Percentage of cases per department (rounded)");
+
+    JFrame frame = new JFrame("Percentage of cases per department (rounded)%");
     frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     frame.add(panel);
     frame.setLocationByPlatform(true);
     frame.pack();
     frame.setVisible(true);
   }
-  
+
   static void createAndShowGuifilo() {
     GraphStats panel2 = new GraphStats();
     panel2.addHistogramColumn("Women", (int) Statistics.women(), Color.RED);
     panel2.addHistogramColumn("Men", (int) Statistics.men(), Color.BLUE);
     panel2.layoutHistogram();
-    JFrame frame = new JFrame("Percentage of cases per sex (rounded)");
+    JFrame frame = new JFrame("Percentage of cases per sex (rounded)%");
     frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     frame.add(panel2);
     frame.setLocationByPlatform(true);
     frame.pack();
     frame.setVisible(true);
   }
-  
+
   static void createAndShowGuimm() {
     GraphStats panel3 = new GraphStats();
     panel3.addHistogramColumn("Bus 1", (int) Statistics.bus1Covid(), Color.RED);
     panel3.addHistogramColumn("Bus 2", (int) Statistics.bus2Covid(), Color.BLUE);
     panel3.addHistogramColumn("Personal means", (int) Statistics.atomikomesoCovid(), Color.GREEN);
     panel3.layoutHistogram();
-    JFrame frame = new JFrame("Percentage of cases per means of transportation (rounded)");
+    JFrame frame = new JFrame("Percentage of cases per means of transportation (rounded)%");
     frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     frame.add(panel3);
     frame.setLocationByPlatform(true);
     frame.pack();
     frame.setVisible(true);
   }
-    
+
   static void createAndShowGuitotal() {
-    JFrame frame = new JFrame(); 
-    frame.setTitle(""); 
-    frame.setResizable(false); 
+    JFrame frame = new JFrame();
+    frame.setTitle("");
+    frame.setResizable(false);
     frame.setSize(650, 150);
     frame.setLocationRelativeTo(null);
-    frame.setVisible(true); 
-    frame.getContentPane().setBackground(new Color(203, 239, 240)); 
-    JLabel label = new JLabel(); 
-    label.setText("The persentage of Covid cases per emploee is: " 
+    frame.setVisible(true);
+    frame.getContentPane().setBackground(new Color(203, 239, 240));
+    JLabel label = new JLabel();
+    label.setText("The persentage of Covid cases per employee is: "
                            + Statistics.totalCovid() + "%");
     label.setFont(new Font("", Font.BOLD, 15));
-    label.setVerticalAlignment(JLabel.CENTER); 
-    label.setHorizontalAlignment(JLabel.CENTER); 
+    label.setVerticalAlignment(JLabel.CENTER);
+    label.setHorizontalAlignment(JLabel.CENTER);
     frame.add(label);
   }
-    
+
+  public static void Text(String message, int time) {
+	JFrame frame = new JFrame(); //dimiourgei frame
+    frame.setTitle(""); //titlos tou frame
+    frame.setResizable(false); //twra de mporei na allaksei to megethos tou frame
+    frame.setSize(650, 150);
+    frame.setLocationRelativeTo(null);
+    frame.setVisible(true); //kanei to frame na fainetai
+	frame.getContentPane().setBackground(new Color(203, 239, 240)); //allazei xrwma tou frame
+	JLabel label = new JLabel(); //dimiourgei label
+	label.setText(message); //kanei set to text
+    label.setFont(new Font("", Font.BOLD, 15)); //allazei to font tou text
+	label.setVerticalAlignment(JLabel.CENTER); //thetei tin vertical thesi tou text kai tis eikonas
+	label.setHorizontalAlignment(JLabel.CENTER); //to idio alla horizontal
+    frame.add(label);
+	new Timer(time, (e) -> { frame.setVisible(false); frame.dispose(); }).start();
+
+	}
+
 }
