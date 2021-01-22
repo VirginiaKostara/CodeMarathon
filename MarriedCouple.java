@@ -1,7 +1,21 @@
+/**
+ * 
+ * The class is used in order to treat both spouses
+ * of a married couple with the same way.
+ * @param <E1> Type Telework
+ * @param <E2> Type Telework
+ */
+
 public class MarriedCouple<E1, E2> { 
   private E1 e1;
   private E2 e2;
     
+  /**
+   * Constructor.
+   * @param e1 spouse no1
+   * @param e2 spouse no2
+   */
+  
   public MarriedCouple(E1 e1, E2 e2) {
     this.e1 = e1;
     this.e2 = e2;
