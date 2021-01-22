@@ -1,14 +1,7 @@
-package codemarathon;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
-import codemarathon.Telework.Status;
 
 
 
@@ -16,97 +9,93 @@ public class Main {
   public static int day = 0;
 
   public static void main(String[] args) {
-    JFrame frame = new JFrame(); //dimiourgei frame
-    frame.setTitle(""); //titlos tou frame
-    frame.setResizable(false); //twra de mporei na allaksei to megethos tou frame
-    frame.setSize(350, 150);
-    frame.setLocationRelativeTo(null);
-    frame.setVisible(true); //kanei to frame na fainetai
-    frame.getContentPane().setBackground(new Color(203, 239, 240)); //allazei xrwma tou frame
-    JLabel label = new JLabel(); //dimiourgei label
-    label.setText("Καλώς Ήρθατε!"); //kanei set to text
-    label.setFont(new Font("", Font.BOLD, 15)); //allazei to font tou text
-    label.setVerticalAlignment(JLabel.CENTER); //thetei tin vertical thesi tou text kai tis eikonas
-    label.setHorizontalAlignment(JLabel.CENTER); //to idio alla horizontal
-    frame.add(label);
+    GraphStats.Text("Welcome!", 5000);
     Readfile r = new Readfile();
-    r.openFile();
     r.createEmploee();
-    //Δημιουργούμε και αρχικοποιούμε τους πίνακες employees, teleworkers από βάση δεδομένων
-    r.closeFile();
     if (day == 0) {
-      Mask.initialization(); //Την ημέρα 0 αρχικοποιούμε τα δεδομένα μας
+      Mask.initialization();
       day++;
       Telework.teleworkers[0].randomTeleworkers();
       CaseTreatment.initializeCaseTreatment();
     }
+
     r.updateData();
     CovidCases.upDateCases();
     CreateFile c = new CreateFile();
-    Scanner sc = new Scanner(System.in); //Εισαγωγή δεδομένων τύπου double
-    Scanner keyboard = new Scanner(System.in); //Εισαγωγή δεδομένων τύπου int
-    Scanner lines = new Scanner(System.in); //Εισαγωγή δεδομένων τύπου String
+    Scanner sc = new Scanner(System.in);
+    Scanner keyboard = new Scanner(System.in);
+    Scanner lines = new Scanner(System.in);
     int flag = 0;
     boolean stop = true;
     do {
       try {
         while (flag != 9) {
-          System.out.println("~~~~~~~~~~ Μενού Επιλογών ~~~~~~~~~~");
-          System.out.println("1. Μετάβαση σε νέα μέρα.");
-          System.out.println("2. Εισαγωγή δεδομένων πρωινής θερμομέτρησης των εργαζομένων.");
-          System.out.println("3. Καταγραφή περιστατικού μη χρήσης μάσκας.");
-          System.out.println("4. Εμφάνιση εργαζομένων που δουλεύουν από απόσταση.");
-          System.out.println("5. Εμφάνιση επιβεβαιωμένων ενεργών κρουσμάτων");
-          System.out.println("6. Εμφάνιση επιβεβαιωμένων συνολικών κρουσμάτων");
-          System.out.println("7. Εμφάνιση της κατάστασης ενός εργαζομένου με βάση το προσωπικό "
-              + "id του.");
-          System.out.println("8. Εμφάνιση στατιστικών δεδομένων αναφορικά "
-              + "με τον COVID-19.");
-          System.out.println("9. Τερματισμός λειτουργίας.");
-          System.out.println("Εισάγετε επιλογή [1-9]: "); //Επιλογή του χρήστη
+          System.out.println("~~~~~~~~~~ Menu ~~~~~~~~~~");
+          System.out.println("1. New Day.");
+          System.out.println("2. Insert morning temperatures.");
+          System.out.println("3. Insert employee without a mask.");
+          System.out.println("4. Show employees working from home.");
+          System.out.println("5. Show current Covid-19 cases");
+          System.out.println("6. Show Covid-19 cases");
+          System.out.println("7. Show employee's working status with id.");
+          System.out.println("8. Show statistics.");
+          System.out.println("9. Close app.");
+          System.out.println("Insert [1-9]: ");
           flag = keyboard.nextInt();
           if (flag == 1) {
-            day++; //Αυξάνουμε την ημέρα
+            day++;
+
             Thermometer.initialize();
             for (int i = 0; i < Telework.teleworkers.length; i++) {
-              if (Telework.teleworkers[i].getWorkStatus() != Status.NORMAL) {
+              if (Telework.teleworkers[i].getWorkStatus() != Telework.Status.NORMAL) {
                 Telework.teleworkers[i].setQuarantine_days(
                     Telework.teleworkers[i].getQuarantine_days() + 1);
               }
-            }
+                for (int m = 0; m < CovidCases.casesnow.length; m++) {
+                	if (CovidCases.casesnow[m] != null) {
+                	  if (CovidCases.casesnow[m].getIdcases() == i + 1)  {
+                		CovidCases.casesnow[m].setDaysleft(9 - Telework.teleworkers[i].getQuarantine_days());
+                	}
+                	}
+
+              }
+          }
+
+            Telework.teleworkers[0].changeStatus();
+            CovidCases.upDateCases();
             if (CovidCases.count == 3) {
               day = + 15;
               for (int i = 0; i < Telework.teleworkers.length; i++) {
-                if (Telework.teleworkers[i].getWorkStatus() != Status.NORMAL) {
-                  Telework.teleworkers[i].setWorkStatus(Status.NORMAL);
+                if (Telework.teleworkers[i].getWorkStatus() != Telework.Status.NORMAL) {
+                  Telework.teleworkers[i].setWorkStatus(Telework.Status.NORMAL);
                 }
               }
+
               for (int j = 0; j < 3; j++) {
                 CovidCases.deleteCase(j);
               }
             }
 
-            Telework.teleworkers[0].changeStatus();
             for (int i = 0; i < Telework.teleworkers.length; i++) {
-              if (Telework.teleworkers[i].getWorkStatus() == Status.UNCONFIRMEDCASE1
+              if (Telework.teleworkers[i].getWorkStatus() == Telework.Status.UNCONFIRMEDCASE1
                     && Telework.teleworkers[i].getQuarantine_days() == 2) {
-                System.out.println("Εκχωρήστε τα αποτελέσματα του τεστ covid19 για τον/την "
+                System.out.println("Insert Covid-19 test's result for "
                       + Telework.teleworkers[i].getName() + " "
                       + Telework.teleworkers[i].getSurname()
-                      + ".(Θετικό/Αρνητικό)");
-                String answer = "ΝΑΙ";
-                while (!(answer.equals("Θετικό")) && !(answer.equals("Αρνητικό"))) {
+                      + ".NEGATIVE OR POSITIVE");
+                String answer = "YES";
+                while (!(answer.equals("POSITIVE")) && !(answer.equals("NEGATIVE"))) {
                   answer = lines.nextLine();
-                  if (answer.equals("Θετικό")) {
+                  if (answer.equals("POSITIVE")) {
                     Telework.teleworkers[0].checkCovidCase(true, i + 1);
-                  } else if (answer.equals("Αρνητικό")) {
+                  } else if (answer.equals("NEGATIVE")) {
                     Telework.teleworkers[0].checkCovidCase(false, i + 1);
                   } else {
-                    System.out.print("Λάθος εκχώρηση.Παρακαλώ ξαναπροσπαθήστε,");
-                    System.out.println("εκχωρήστε τα αποτελέσματα του τεστ covid19 για τον/την "
-                        + Telework.teleworkers[i].getName() + " "
-                        + Telework.teleworkers[i].getSurname()
-                        + ".(Θετικό/Αρνητικό)");
+                    System.out.print("Wrong input please try again,");
+                    System.out.println("Insert Covid-19 test's result for "
+                            + Telework.teleworkers[i].getName() + " "
+                            + Telework.teleworkers[i].getSurname()
+                            + ".NEGATIVE OR POSITIVE");
                   }
                 }
               }
@@ -134,15 +123,13 @@ public class Main {
             }
             Telework.teleworkers[0].randomTeleworkers();
             //CaseTreatment.treatment();
-            frame.setVisible(false); //κλεινει το μηνυμα καλωσορισματος
+            c.saveData();
           } else if (flag == 2) {
-            String more = "ΝΑΙ"; //αρχικοποιούμε στο ναι ώστε να τρέξει σίγουρα μια φορά
-            while (!(more.equals("ΟΧΙ"))) {
-              if (more.equals("ΝΑΙ")) {
-                //επανάληψη ώστε η γραμματεία να μπορεί να εισάγει παραπάνω από ένα
-                System.out.println("Παρακαλώ εισάγετε id εργαζομένου που θερμομετρήθηκε: ");
+            String more = "YES";
+            while (!(more.equals("NO"))) {
+              if (more.equals("YES")) {
+                System.out.println("Please insert employee's id;");
                 int idtherm = -99;
-                //αρχικοποιούμε τυχαία ένανμικρό αριθμό ώστε να τρέξει σίγουρα η πρώτη επανάληψη
                 while (idtherm > 50 || idtherm <= 0) {
                   boolean intloop = true;
                   do {
@@ -150,19 +137,19 @@ public class Main {
                       idtherm = keyboard.nextInt();
                       if (idtherm <= 50 && idtherm > 0
                           && Telework.teleworkers[idtherm - 1].getWorkStatus()
-                          == Status.NORMAL && Thermometer.thermometrhseis[idtherm - 1] == 0) {
+                          == Telework.Status.NORMAL && Thermometer.thermometrhseis[idtherm - 1] == 0) {
                         double therm = 0;
                         while (therm < 34 || therm > 43) {
                           boolean loop = true;
                           do {
                             try {
-                              System.out.println("Δώσε θερμοκρασία: ");
+                              System.out.println("Insert Temperature: ");
                               therm = sc.nextDouble();
                               if (therm >= 34 && therm <= 43) {
                                 int idNext = 0;
                                 if (therm > 37) {
                                   if (!(Employee.employees[idtherm - 1].getTransportation().equals(
-                                      "ΑΤΟΜΙΚΟΜΕΣΟ"))) {
+                                      "ATOMIKOMESO"))) {
                                     idNext = 100;
                                     int flag1 = 0;
                                     while (flag1 != 1) {
@@ -175,48 +162,45 @@ public class Main {
                                       }
                                       if (countem > 1) {
                                         idNext = 99;
-                                        System.out.println("Καθόταν με κάποιον σήμερα στο "
-                                            + "λεωφορείο; ΝΑΙ/ΟΧΙ");
+                                        System.out.println("Was she/he sitting with someone today at the bus? YES/NO");
                                         String ans = lines.nextLine();
-                                        if (ans.equals("ΝΑΙ")) {
+                                        if (ans.equals("YES")) {
                                           while (idNext == 99) {
-                                            System.out.println("Δώσε επώνυμο του ατόμου:");
+                                            System.out.println("Give Last Name:");
                                             String sname = lines.nextLine();
                                             for (int i = 0; i < 50; i++) {
                                               if (Employee.employees[i].getSurname()
                                                      .equals(sname)) {
                                                 if (Telework.teleworkers[i].getWorkStatus()
-                                                       == Status.NORMAL
+                                                       == Telework.Status.NORMAL
                                                     && Employee.employees[i].getTransportation()
                                                     .equals(Employee.employees[idtherm - 1]
                                                       .getTransportation())) {
                                                   idNext = i + 1;
                                                 } else if (!(Telework.teleworkers[i].getWorkStatus()
-                                                    == Status.NORMAL)) {
-                                                  System.out.println("Το άτομο βρίσκεται"
-                                                      + " σε τηλεργασία");
+                                                    == Telework.Status.NORMAL)) {
+                                                	GraphStats.Text("This person works from home", 2000);
                                                 } else if (!(Employee.employees[i]
                                                         .getTransportation().contentEquals(
                                                           Employee.employees[idtherm - 1]
                                                        .getTransportation()))) {
-                                                  System.out.println("Το άτομο δε μετακινείται"
-                                                      + " με το ίδιο όχημα");
+                                                	GraphStats.Text("This person does not use the same vehicle", 2000);
                                                 }
                                               }
                                             }
                                             if (idNext == 99) {
-                                              System.out.println("Ξαναπροσπαθήστε");
+                                            	System.out.println("Try again.");
                                             }
                                             flag1 = 1;
                                           }
                                         }
-                                        if (ans.equals("ΟΧΙ")) {
+                                        if (ans.equals("NO")) {
                                           flag1 = 1;
                                           idNext = 100;
                                           System.out.println();
                                         }
-                                        if (!(ans.equals("ΟΧΙ")) && !(ans.equals("ΝΑΙ"))) {
-                                          System.out.println("Λάθος Απάντηση");
+                                        if (!(ans.equals("NO")) && !(ans.equals("YES"))) {
+                                        	GraphStats.Text("Wrong answer", 2000);
                                         }
                                       }
                                     }
@@ -224,54 +208,50 @@ public class Main {
                                     idNext = 100;
                                   }
                                 }
-                                Thermometer.a(idtherm, therm, idNext);
+                                Thermometer.th(idtherm, therm, idNext);
                               } else {
-                                System.out.println("Λάθος εισαγωγή θερμοκρασίας");
+                            	  GraphStats.Text("Wrong temperature", 2000);
                               }
                               loop = false;
                             } catch (InputMismatchException inputMismatchException5) {
                               sc.nextLine();
-                              System.out.println("Εισάγετε μόνο αριθμούς");
-                              System.out.println("Εαν εισάγατε δεκαδικό παρακαλώ "
-                                  + "χρησιμοποιήστε τελεία αντί για κόμμα");
-                              System.out.print("Παρακαλώ ξαναπροσπαθήστε.");
+                              GraphStats.Text("Insert only numbers. Use . instead of ,please try again.",3000);
                               System.out.println();
-                            } //τέλος catch
+                            }
                           } while (loop);
                         }
-                        System.out.println("Θέλετε να εισάγετε και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+                        System.out.println("Do you want to insert for another employee? YES/NO");
                         more = lines.nextLine();
                       } else if (idtherm <= 50 && idtherm > 0
                               && !(Thermometer.thermometrhseis[idtherm - 1] == 0)) {
-                        System.out.println("Ο εργαζόμενος έχει ήδη θερμομετρηθεί");
+                    	GraphStats.Text("You have already insert temperature for this employee", 2000);
                       } else if (idtherm <= 50 && idtherm > 0
                               && !(Telework.teleworkers[idtherm - 1].getWorkStatus()
-                              == Status.NORMAL)) {
-                        System.out.println("Ο εργαζόμενος βρίσκεται σε τηλεργασία");
+                              == Telework.Status.NORMAL)) {
+                    	GraphStats.Text("This employee works from home", 2000);
                       } else {
-                        System.out.println("Λάθος id εργαζομένου");
+                    	GraphStats.Text("Wrong id", 2000);
+                    	System.out.println("Please insert employee's id;");
                       }
                       intloop = false;
                     } catch (InputMismatchException inputMismatchException5) {
                       keyboard.nextLine();
-                      System.out.println("Εισάγετε μόνο ακέραιους αριθμούς");
-                      System.out.print("Παρακαλώ ξαναπροσπαθήστε.");
+                      GraphStats.Text("Please insert only integers, Try again!", 2000);
                       System.out.println();
-                    } //τέλος catch
+                    }
                   } while (intloop);
-                }  //Η επανάληψη χρησιμοποιείται ώστε να έχουμε σωστή εισαγωγή δεδομένων\
-                //αλλιώς εμφανίζουμε ξανά το μήνυμα
+                }
               }
-              if (!(more.equals("ΝΑΙ")) && !(more.equals("ΟΧΙ"))) {
-                System.out.println("Λάθος Επιλογή");
-                System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+              if (!(more.equals("YES")) && !(more.equals("NO"))) {
+            	GraphStats.Text("Wrong Choice",  2000);
+                System.out.println("Do you want to insert for another employee? YES/NO");
                 more = lines.nextLine();
-              } //Αν δε λάβουμε σωστή απάντηση για τερματισμό της επιλογής ζητάμε ξανά καταχώρηση
-              if (more.equals("ΟΧΙ")) {
-                System.out.println("Επιτυχής εκχώρηση!");
+              }
+              if (more.equals("NO")) {
+            	  GraphStats.Text("Done!", 2000);
                 System.out.println();
               }
-            } //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
+            }
             int idmarried;
             for (int xyz = 0; xyz < Employee.employees.length; xyz++) {
               idmarried = Employee.employees[xyz].getIdmarriedto();
@@ -283,15 +263,14 @@ public class Main {
                 mc.compareobjects();
               }
             }
+            c.saveData();
           } else if (flag == 3) {
-            String more = "ΝΑΙ"; //αρχικοποιούμε στο ναι ώστε να τρέξει σίγουρα μια φορά
-            while (!(more.equals("ΟΧΙ"))) {
-              //Η επανάληψη αυτή είναι ώστε η γραμματεία να εισάγει παραπάνω από ένα
+            String more = "YES";
+            while (!(more.equals("NO"))) {
+
               int wear = -99;
-              //αρχικοποιούμε τυχαία έναν πολύ μικρό αριθμό ώστε να τρέξει σίγουρα η πρώτη επανάληψη
-              if (more.equals("ΝΑΙ")) {
-                System.out.println("Παρακαλώ καταγράψτε το id του εργαζομένου που"
-                    + " δεν φορούσε μάσκα:");
+              if (more.equals("YES")) {
+                System.out.println("Give the id of the employee that did not wear a mask: ");
                 while (wear <= 0 || wear > 50) {
                   boolean intloop = true;
                   do {
@@ -299,166 +278,139 @@ public class Main {
                       wear = keyboard.nextInt();
                       if (wear > 0 && wear <= 50) {
                         Mask.insertnomask(wear);
-                        System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+                        System.out.println("Do you want to insert for another employee? YES/NO");
                         more = lines.nextLine();
                       } else {
-                        System.out.println("Λάθος Επιλογή");
-                        System.out.println("Παρακαλώ καταγράψτε το id του εργαζομένου"
-                            + " που δεν φορούσε μάσκα:");
+                        System.out.println("Wrong Answer");
+                        System.out.println("Give the id of the employee that did not wear a mask: ");
                       }
                       intloop = false;
                     } catch (InputMismatchException inputMismatchException5) {
                       keyboard.nextLine();
-                      System.out.println("Εισάγετε μόνο ακέραιους αριθμούς");
-                      System.out.print("Παρακαλώ ξαναπροσπαθήστε.");
+                      System.out.println("Insert only integers");
+                      System.out.print("Try again");
                       System.out.println();
-                    } //τέλος catch
+                    }
                   } while (intloop);
-                } //Η επανάληψη χρησιμοποιείται ώστε να έχουμε σωστή εισαγωγή
-                //δεδομένων αλλιώς εμφανίζουμε ξανά το μήνυμα
+                }
               }
-              if (!(more.equals("ΝΑΙ")) && !(more.equals("ΟΧΙ"))) {
-                System.out.println("Λάθος Επιλογή");
-                System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+              if (!(more.equals("YES")) && !(more.equals("NO"))) {
+                System.out.println("Wrong Answer");
+                System.out.println("Do you want to insert for another employee? YES/NO");
                 more = lines.nextLine();
               }
-              //Αν δε λάβουμε σωστή απάντηση για τερματισμό της επιλογής ζητάμε ξανά καταχώρηση
-              if (more.equals("ΟΧΙ")) {
-                System.out.println("Η καταγραφή ολοκληρώθηκε επιτυχώς!");
+              if (more.equals("NO")) {
+                System.out.println("Done!");
                 System.out.println();
               }
-            }  //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
+            }
+            c.saveData();
           } else if (flag == 4) {
             Telework.teleworkers[0].printTeleworkers();
+
             System.out.println();
           } else if (flag == 5) {
             CovidCases.printCasesnow();
+
           } else if (flag == 6) {
             CovidCases.printCases();
+
           } else if (flag == 7) {
-            String more = "ΝΑΙ"; //αρχικοποιούμε στο ναι ώστε να τρέξει σίγουρα μια φορά
-            while (!(more.equals("ΟΧΙ"))) {
-              //Η επανάληψη αυτή είναι ώστε η γραμματεία να μπορεί να εισάγει παραπάνω
-              //από ένα χωρίς να χρειάζεται ξανά το αρχικό μενού
+            String more = "YES";
+            while (!(more.equals("NO"))) {
               int interest = 99;
-              if (more.equals("ΝΑΙ")) {
+              if (more.equals("YES")) {
                 while (interest > 50 || interest <= 0) {
                   boolean intloop = true;
                   do {
                     try {
-                      System.out.println("Δώσε id εργαζομένου ώστε να δεις την κατάσταση του: ");
+                      System.out.println("Give the id of the employee you want to know his status: ");
                       interest = keyboard.nextInt();
                       if (interest <= 50 && interest > 0) {
                         System.out.println(Telework.teleworkers[interest - 1].toString());
-                        System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+                        System.out.println("Do you want to insert for another employee? YES/NO");
                         more = lines.nextLine();
                       } else {
-                        System.out.println("Λάθος εισαγωγή");
+                        System.out.println("Wrong Input");
                       }
                       intloop = false;
                     } catch (InputMismatchException inputMismatchException5) {
                       keyboard.nextLine();
-                      System.out.println("Εισάγετε μόνο ακέραιους αριθμούς");
-                      System.out.print("Παρακαλώ ξαναπροσπαθήστε.");
+                      System.out.println("Insert only integers");
+                      System.out.print("Please try again");
                       System.out.println();
-                    } //τέλος catch
+                    }
                   } while (intloop);
                 }
               }
-              if (!(more.equals("ΝΑΙ")) && !(more.equals("ΟΧΙ"))) {
-                System.out.println("Λάθος Επιλογή");
-                System.out.println("Θέλετε να εισάγεται και άλλον εργαζόμενο; ΝΑΙ/ΟΧΙ");
+              if (!(more.equals("YES")) && !(more.equals("NO"))) {
+                System.out.println("Wrong Answer");
+                System.out.println("Do you want to insert for another employee? YES/NO");
                 more = lines.nextLine();
-              }  //Με λάθος απάντηση για τερματισμό της επιλογής ζητάμε ξανά καταχώρηση
-              if (more.equals("ΟΧΙ")) {
+              }
+              if (more.equals("NO")) {
                 System.out.println();
               }
-            }  //Η επανάληψη τελειώνει εφόσον δεν υπάρχει άλλος εργαζόμενος προς καταχώρηση
+            }
+            c.saveData();
           } else if (flag == 8) {
             int flag2 = 0;
             boolean stop2 = true;
             do {
               try {
                 while (flag2 != 6) {
-                  System.out.println("~~~~~~~~~~ Μενού Επιλογών Στατιστικών ~~~~~~~~~~");
-                  System.out.println("1. Στατιστικά Τμημάτων.");
-                  System.out.println("2. Στατιστικά Φύλων.");
-                  System.out.println("3. Στατιστικά Μέσου Μεταφοράς.");
-                  System.out.println("4. Συνολικά Στατιστικά Εργαζομένων.");
-                  System.out.println("5. Στατιστικά Νοσηλείας των Ασθενών");
-                  System.out.println("6. Έξοδος από στατιστικά");
-                  System.out.println("Εισάγετε επιλογή [1-6]: ");
+                  System.out.println("~~~~~~~~~~ Statistcs Menu ~~~~~~~~~~");
+                  System.out.println("1. Department Statistics.");
+                  System.out.println("2. Gender Statistics.");
+                  System.out.println("3. Means of Transport Statistics.");
+                  System.out.println("4. General Statistics.");
+                  System.out.println("5. Today's statistics for patients.");
+                  System.out.println("6. End Statistics");
+                  System.out.println("Choose [1-6]: ");
                   flag2 = keyboard.nextInt();
                   if (flag2 == 1) {
-                    Statistics.logistirio();
-                    Statistics.marketing();
-                    Statistics.it();
-                    Statistics.humanResources();
-                    Statistics.cleaning();
-                    Statistics.sales();
-                    Statistics.dieuthunsh();
-                    Statistics.customerService();
-                    Statistics.pr();
-                    Statistics.edu();
+				    GraphStats.createAndShowGuitmimata();;
+				  }
+				  if (flag2 == 2) {
+				    GraphStats.createAndShowGuifilo();;
+				  }
+				  if (flag2 == 3) {
+				    GraphStats.createAndShowGuimm();;
+				  }
+				  if (flag2 == 4) {
+				    GraphStats.createAndShowGuitotal();
                   }
-                  if (flag2 == 2) {
-                    Statistics.women();
-                    Statistics.men();
-                  }
-                  if (flag2 == 3) {
-                    Statistics.bus1Covid();
-                    Statistics.bus2Covid();
-                    Statistics.atomikomesoCovid();
-                  }
-                  if (flag2 == 4) {
-                    Statistics.totalCovid();
-                  }
-                  if (flag2 == 5) {
-                    Statistics.symptoms_hospital();
-                  }
+				  if (flag2 == 5) {
+				    Statistics.symptoms_hospital();
+				  }
                   if (flag == 6) {
-                    System.out.println("Επιστροφή στο κεντρικό μενού");
+                    System.out.println("Returning to the first menu");
                     System.out.println();
                   }
                 }
                 stop2 = false;
               } catch (InputMismatchException inputMismatchException) {
                 keyboard.nextLine();
-                System.out.println("Μπορείτε να επιλέξετε μόνο ακέραιο αριθμό[1-6]. "
-                    + "Παρακαλώ ξαναπροσπαθήστε.");
+                System.out.println("You can only choose an integer between [1-6]");
                 System.out.println();
-              } //τέλος catch
+              }
             } while (stop2);
+
           } else if (flag == 9) {
-            System.out.println("Γίνεται τερματισμός λειτουργίας");
-            frame.setVisible(false); //κλεινει το μηνυμα καλωσορισματος
-            JFrame frame1 = new JFrame(); //dimiourgei frame
-            frame1.setTitle(""); //titlos tou frame
-            frame1.setResizable(false); //twra de mporei na allaksei to megethos tou frame
-            frame1.setSize(350, 150);
-            frame1.setLocationRelativeTo(null);
-            frame1.setVisible(true); //kanei to frame na fainetai
-            frame1.getContentPane().setBackground(new Color(203, 239, 240));
-            JLabel label1 = new JLabel(); //dimiourgei label
-            label1.setText("Γίνεται τερματισμός λειτουργίας, Αντίο!"); //kanei set to text
-            label1.setFont(new Font("", Font.BOLD, 15)); //allazei to font tou text
-            label1.setVerticalAlignment(JLabel.CENTER);
-            label1.setHorizontalAlignment(JLabel.CENTER); //to idio alla horizontal
-            frame1.add(label1);
+            GraphStats.Text("Closing the app. Goodbye!", 5000);
             c.saveData();
+           
           }
         }
         stop = false;
       } catch (InputMismatchException inputMismatchException) {
         keyboard.nextLine();
-        System.out.println("Μπορείτε να επιλέξετε μόνο ακέραιο αριθμό[1-9]. "
-            + "Παρακαλώ ξαναπροσπαθήστε.");
+        System.out.println("You can only choose an integer between [1-9]");
         System.out.println();
-      } //τέλος catch
+      }
     } while (stop);
     lines.close();
     keyboard.close();
     sc.close();
   }
 }
-
