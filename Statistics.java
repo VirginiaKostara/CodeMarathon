@@ -13,7 +13,22 @@ import javax.swing.JPanel;
  */
 
 public class Statistics {
-  private static int count1 = 0;
+  /**
+   * This method is used to calculate
+   * the total count of Covid cases that have existed in the company until now.
+   * @return The total count Covid Cases.
+   */
+	
+  public static int countIdCases() {
+    int count = 0;
+      for (int i = 0; i < Employee.employees.length; i++) {
+        if (Employee.employees[i].getHad_covid() == true) {
+	  count++;	
+	}
+      }
+      return count;
+  }
+
 
   /**
    * This method is used to calculate
@@ -22,17 +37,19 @@ public class Statistics {
    */
 
   public static double totalCovid() {
+    int count1 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases != null) {
+        if (CovidCases.cases[i] != null) {
           count1 = count1 + 1;
         }
       }
     }
 
-
+    
     double posostocovid = (count1 * 100 / 50);
     return posostocovid;
+    
   }
 
   /**
@@ -50,15 +67,19 @@ public class Statistics {
         }
       }
     }
-
-    double posostobus1 = (count2 * 100 / 50);
+    double posostobus1;
+    if (countIdCases() != 0) {
+      posostobus1 = (count2 * 100 / countIdCases());
+    } else {
+      posostobus1 = 0;
+    }
     return posostobus1;
   }
 
   /**
-    * This method is used to calculate
+   * This method is used to calculate
    * the percentage of covid cases that use Bus no2.
- * @return the percentage of cases using bus 2.
+   * @return the percentage of cases using bus 2.
    */
 
 
@@ -71,15 +92,19 @@ public class Statistics {
         }
       }
     }
-
-    double posostobus2 = (count3 * 100 / 50);
+    double posostobus2;
+    if (countIdCases() != 0) {
+      posostobus2 = (count3 * 100 / countIdCases());
+    } else {
+      posostobus2 = 0;
+    }
     return posostobus2;
   }
 
   /**
-  * This method is used to calculate
+   * This method is used to calculate
    * the percentage of covid cases that use a personal Vehicle.
- * @return the percentage of cases using a personal Vehicle.
+   * @return the percentage of cases using a personal Vehicle.
    */
 
 
@@ -92,8 +117,12 @@ public class Statistics {
         }
       }
     }
-
-    double posostoatomikomeso = (count4 * 100 / 50);
+    double posostoatomikomeso;
+    if (countIdCases() != 0) {
+      posostoatomikomeso = (count4 * 100 / countIdCases());
+    } else {
+      posostoatomikomeso = 0;
+    }
     return posostoatomikomeso;
   }
 
@@ -112,15 +141,19 @@ public class Statistics {
         }
       }
     }
-
-    double posostologistirio = (count5 * 100 / 50);
+    double posostologistirio;
+    if (countIdCases() != 0) {
+      posostologistirio = (count5 * 100 / countIdCases());
+    } else {
+      posostologistirio = 0;
+    }
     return posostologistirio;
   }
 
   /**
    * This method is used to calculate
    * the percentage of covid cases of Marketing Department.
- * @return the percentage of cases in Marketing.
+   * @return the percentage of cases in Marketing.
    */
 
   public static double marketing() {
@@ -132,15 +165,19 @@ public class Statistics {
         }
       }
     }
-
-    double posostomarketing = (count6 * 100 / 50);
+    double posostomarketing;
+    if (countIdCases() != 0) {
+      posostomarketing = (count6 * 100 / countIdCases());
+    } else {
+      posostomarketing = 0;
+    }
     return posostomarketing;
   }
 
   /**
-    * This method is used to calculate
+   * This method is used to calculate
    * the percentage of covid cases of IT Department.
- * @return the percentage of cases in IT.
+   * @return the percentage of cases in IT.
    */
 
   public static double it() {
@@ -152,15 +189,19 @@ public class Statistics {
         }
       }
     }
-
-    double posostoit = (count7 * 100 / 50);
+    double posostoit;
+    if (countIdCases() != 0) {
+      posostoit = (count7 * 100 / countIdCases());
+    } else {
+      posostoit = 0;
+    }
     return posostoit;
   }
 
   /**
-      * This method is used to calculate
+   * This method is used to calculate
    * the percentage of covid cases of HR Department.
- * @return the percentage of cases in HR.
+   * @return the percentage of cases in HR.
    */
 
   public static double humanResources() {
@@ -172,15 +213,19 @@ public class Statistics {
         }
       }
     }
-
-    double posostohr = (count8 * 100 / 50);
+    double posostohr;
+    if (countIdCases() != 0) {
+      posostohr = (count8 * 100 / countIdCases());
+    } else {
+      posostohr = 0;
+    }
     return posostohr;
   }
 
   /**
    * This method is used to calculate
    * the percentage of covid cases of Cleaning Department.
- * @return the percentage of cases in  Cleaning.
+   * @return the percentage of cases in  Cleaning.
    */
 
   public static double cleaning() {
@@ -192,15 +237,19 @@ public class Statistics {
         }
       }
     }
-
-    double posostocleaning = (count9 * 100 / 50);
+    double posostocleaning;
+    if (countIdCases() != 0) {
+      posostocleaning = (count9 * 100 / countIdCases());
+    } else {
+      posostocleaning = 0;
+    }
     return posostocleaning;
   }
 
   /**
    * This method is used to calculate
    * the percentage of covid cases of Sales Department.
- * @return the percentage of cases in Sales.
+   * @return the percentage of cases in Sales.
    */
 
   public static double sales() {
@@ -212,8 +261,12 @@ public class Statistics {
         }
       }
     }
-
-    double posostosales = (count10 * 100 / 50);
+    double posostosales;
+    if (countIdCases() != 0) {
+      posostosales = (count10 * 100 / countIdCases());
+    } else {
+      posostosales = 0;
+    }
     return posostosales;
   }
 
@@ -232,15 +285,19 @@ public class Statistics {
         }
       }
     }
-
-    double posostodieuthunsh = (count11 * 100 / 50);
+    double posostodieuthunsh;
+    if (countIdCases() != 0) {
+      posostodieuthunsh = (count11 * 100 / countIdCases());
+    } else {
+      posostodieuthunsh = 0;
+    }
     return posostodieuthunsh;
   }
 
   /**
    * This method is used to calculate
    * the percentage of covid cases of Customer-Service Department.
- * @return the percentage of cases in Customer-Service.
+   * @return the percentage of cases in Customer-Service.
    */
 
   public static double customerService() {
@@ -252,15 +309,19 @@ public class Statistics {
         }
       }
     }
-
-    double posostocustomerservice = (count12 * 100 / 50);
+    double posostocustomerservice;
+    if (countIdCases() != 0) {
+      posostocustomerservice = (count12 * 100 / countIdCases());
+    } else {
+      posostocustomerservice = 0;
+    }
     return posostocustomerservice;
   }
 
   /**
    * This method is used to calculate
    * the percentage of covid cases of PR Department.
- * @return the percentage of cases in PR.
+   * @return the percentage of cases in PR.
    */
 
   public static double pr() {
@@ -272,16 +333,20 @@ public class Statistics {
         }
       }
     }
-
-    double posostopr = (count13 * 100 / 50);
+    double posostopr;
+    if (countIdCases() != 0) {
+      posostopr = (count13 * 100 / countIdCases());
+    } else {
+      posostopr = 0;
+    }
     return posostopr;
   }
 
   /**
    * This method is used to calculate
    * the percentage of covid cases of Education Department.
- * @return the percentage of cases in Education.
-     */
+   * @return the percentage of cases in Education.
+   */
 
   public static double edu() {
     int count14 = 0;
@@ -292,16 +357,20 @@ public class Statistics {
         }
       }
     }
-
-    double posostoedu = (count14 * 100 / 50);
+    double posostoedu;
+    if (countIdCases() != 0) {
+      posostoedu = (count14 * 100 / countIdCases());
+    } else {
+      posostoedu = 0;
+    }
     return posostoedu;
   }
 
   /**
    * This method is used to calculate
    * the percentage of covid cases of female employees.
- * @return the percentage of female cases.
-     */
+   * @return the percentage of female cases.
+   */
 
   public static double women() {
     int count15 = 0;
@@ -312,15 +381,19 @@ public class Statistics {
         }
       }
     }
-
-    double posostowomen = (count15 * 100 / 50);
+    double posostowomen;
+    if (countIdCases() != 0) {
+      posostowomen = (count15 * 100 / countIdCases());
+    } else {
+      posostowomen = 0;
+    }
     return posostowomen;
   }
 
   /**
    * This method is used to calculate
    * the percentage of covid cases of male employees.
- * @return the percentage of male cases.
+   * @return the percentage of male cases.
    */
 
   public static double men() {
@@ -332,8 +405,12 @@ public class Statistics {
         }
       }
     }
-
-    double posostomen = (count16 * 100 / 50);
+    double posostomen;
+    if (countIdCases() != 0) {
+      posostomen = (count16 * 100 / countIdCases());
+    } else {
+      posostomen = 0;
+    }
     return posostomen;
   }
   /**
@@ -371,17 +448,32 @@ public class Statistics {
     frame.setVisible(true);
     frame.getContentPane().setBackground(new Color(203, 239, 240));
     JLabel label1 = new JLabel();
-    label1.setText("The persentage of Covid cases with severe symptoms today is: "
+    if (countp != 0) {
+      label1.setText("The persentage of Covid cases with severe symptoms today is: "
                                       + countsymptoms * 100 / countp + "%");
-    label1.setBounds(50, 30, 800, 25);
-    label1.setFont(new Font("", Font.BOLD, 15));
-    panel.add(label1);
-    JLabel label2 = new JLabel();
-    label2.setText("The percentage of Covid cases hospitalized today is: "
+      label1.setBounds(50, 30, 800, 25);
+      label1.setFont(new Font("", Font.BOLD, 15));
+      panel.add(label1);
+
+      JLabel label2 = new JLabel();
+      label2.setText("The percentage of Covid cases hospitalized today is: "
                                             + counthospital * 100 / countp + "%");
-    label2.setBounds(50, 50, 800, 25);
-    label2.setFont(new Font("", Font.BOLD, 15));
-    panel.add(label2);
+      label2.setBounds(50, 50, 800, 25);
+      label2.setFont(new Font("", Font.BOLD, 15));
+      panel.add(label2);
+    } else {
+      label1.setText("The persentage of Covid cases with severe symptoms today is: 0.0 %");
+      label1.setBounds(50, 30, 800, 25);
+      label1.setFont(new Font("", Font.BOLD, 15));
+      panel.add(label1);
+
+      JLabel label2 = new JLabel();
+      label2.setText("The percentage of Covid cases hospitalized today is: 0.0 %");
+      label2.setBounds(50, 50, 800, 25);
+      label2.setFont(new Font("", Font.BOLD, 15));
+      panel.add(label2);
+    }
+
 
   }
 }
