@@ -31,8 +31,9 @@ public class CreateFile {
             + "TODAY'S_SYMPTOMS " + CaseTreatment.casetreatments[i].getSymptoms() + "\n"
             + "TODAY'S_HOSPITAL " + CaseTreatment.casetreatments[i].getHospital() + "\n"
             + "DAYS_SYMPTOMS " + CaseTreatment.casetreatments[i].getDaysymptoms() + "\n"
-            + "DAYS_inHOSPITAL " + CaseTreatment.casetreatments[i].getDayhospital() + "\n"
+            + "DAYS_inHOSPITAL " + CaseTreatment.casetreatments[i].getDayHospital() + "\n"
             + "}" + "\n");
+        
       }
       writer.close();
 	  //Exception in case there is a problem with the editing of the file.
