@@ -1,7 +1,6 @@
-package codemarathon;
-
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,11 +15,12 @@ import javax.swing.JPanel;
 public class Statistics {
   private static int count1 = 0;
 
-  /**This method is used for
-  * calculating total covid cases.
-  * @return
-  */ 
-  //Static method 
+  /**
+   * This method is used to calculate
+   * the percentage of the total Covid cases.
+   * @return The total percentage of Covid Cases.
+   */
+
   public static double totalCovid() {
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
@@ -30,17 +30,17 @@ public class Statistics {
       }
     }
 
-   
+
     double posostocovid = (count1 * 100 / 50);
     return posostocovid;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that take the bus1.
-  * @return
-  */ 
-  //Static method for calculating bus1 covidcases percentage
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases that use Bus no1.
+   * @return the percentage of cases using bus 1.
+   */
+
   public static double bus1Covid() {
     int count2 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
@@ -50,17 +50,17 @@ public class Statistics {
         }
       }
     }
-    
+
     double posostobus1 = (count2 * 100 / 50);
     return posostobus1;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that take the bus2.
-  * @return
-  */ 
-  //Static method for calculating bus1 covidcases percentage
+  /**
+    * This method is used to calculate
+   * the percentage of covid cases that use Bus no2.
+ * @return the percentage of cases using bus 2.
+   */
+
 
   public static double bus2Covid() {
     int count3 = 0;
@@ -71,17 +71,17 @@ public class Statistics {
         }
       }
     }
-   
+
     double posostobus2 = (count3 * 100 / 50);
     return posostobus2;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that take their personal vehicle.
-  * @return
-  */ 
-  //Static method for calculating pv covidcases percentage
+  /**
+  * This method is used to calculate
+   * the percentage of covid cases that use a personal Vehicle.
+ * @return the percentage of cases using a personal Vehicle.
+   */
+
 
   public static double atomikomesoCovid() {
     int count4 = 0;
@@ -92,37 +92,36 @@ public class Statistics {
         }
       }
     }
-    
+
     double posostoatomikomeso = (count4 * 100 / 50);
     return posostoatomikomeso;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that work in the accounting department.
-  * @return
-  */ 
-  //Static method for calculating cs percentage
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases in Accounting Department.
+   * @return the percentage of cases in Accounting.
+   */
+
   public static double logistirio() {
     int count5 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
       if (Employee.employees[i].getHad_covid() == true) {
-        if (CovidCases.cases[i].getUnit().equals("CS")) {
+        if (CovidCases.cases[i].getUnit().equals("AC")) {
           count5 = count5 + 1;
         }
       }
     }
-   
+
     double posostologistirio = (count5 * 100 / 50);
     return posostologistirio;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that work in the marketing department.
-  * @return
-  */ 
-  //Static method for calculating marketing covidcases percentage
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases of Marketing Department.
+ * @return the percentage of cases in Marketing.
+   */
 
   public static double marketing() {
     int count6 = 0;
@@ -133,17 +132,17 @@ public class Statistics {
         }
       }
     }
-    
+
     double posostomarketing = (count6 * 100 / 50);
     return posostomarketing;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that work in the it department.
-  * @return
-  */ 
-  //Static method for calculating it covidcases percentage
+  /**
+    * This method is used to calculate
+   * the percentage of covid cases of IT Department.
+ * @return the percentage of cases in IT.
+   */
+
   public static double it() {
     int count7 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
@@ -153,17 +152,17 @@ public class Statistics {
         }
       }
     }
-      
+
     double posostoit = (count7 * 100 / 50);
     return posostoit;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that work in the hr department.
-  * @return
-  */ 
-  //Static method for calculating hr covidcases percentage
+  /**
+      * This method is used to calculate
+   * the percentage of covid cases of HR Department.
+ * @return the percentage of cases in HR.
+   */
+
   public static double humanResources() {
     int count8 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
@@ -173,17 +172,16 @@ public class Statistics {
         }
       }
     }
-    
+
     double posostohr = (count8 * 100 / 50);
     return posostohr;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that work in the cleaning department.
-  * @return
-  */ 
-  //Static method for  calculating cleaning covidcases percentage
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases of Cleaning Department.
+ * @return the percentage of cases in  Cleaning.
+   */
 
   public static double cleaning() {
     int count9 = 0;
@@ -194,17 +192,17 @@ public class Statistics {
         }
       }
     }
-    
+
     double posostocleaning = (count9 * 100 / 50);
     return posostocleaning;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that work in the sales department.
-  * @return
-  */ 
-  //Static method for calculating sales covidcases percentage
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases of Sales Department.
+ * @return the percentage of cases in Sales.
+   */
+
   public static double sales() {
     int count10 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
@@ -214,17 +212,16 @@ public class Statistics {
         }
       }
     }
-   
+
     double posostosales = (count10 * 100 / 50);
     return posostosales;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that work in the management department.
-  * @return
-  */ 
-  //Static method for calculating management covidcases percentage
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases of Management Department.
+ * @return the percentage of cases in Management.
+   */
 
   public static double dieuthunsh() {
     int count11 = 0;
@@ -235,17 +232,17 @@ public class Statistics {
         }
       }
     }
-   
+
     double posostodieuthunsh = (count11 * 100 / 50);
     return posostodieuthunsh;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that work in the customer service department.
-  * @return
-  */ 
-  //Static method for calculating cs covidcases percentage
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases of Customer-Service Department.
+ * @return the percentage of cases in Customer-Service.
+   */
+
   public static double customerService() {
     int count12 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
@@ -255,17 +252,16 @@ public class Statistics {
         }
       }
     }
-    
+
     double posostocustomerservice = (count12 * 100 / 50);
     return posostocustomerservice;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that work in the public relations department.
-  * @return
-  */ 
-  //Static method for calculating pr covidcases percentage
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases of PR Department.
+ * @return the percentage of cases in PR.
+   */
 
   public static double pr() {
     int count13 = 0;
@@ -276,17 +272,16 @@ public class Statistics {
         }
       }
     }
-    
+
     double posostopr = (count13 * 100 / 50);
     return posostopr;
   }
 
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * that work in the education deparment. 
-  * @return
-  */ 
-  //Static method for calculating edu covidcases percentage
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases of Education Department.
+ * @return the percentage of cases in Education.
+     */
 
   public static double edu() {
     int count14 = 0;
@@ -297,16 +292,17 @@ public class Statistics {
         }
       }
     }
-   
+
     double posostoedu = (count14 * 100 / 50);
     return posostoedu;
   }
 
-  /**This method is used for
-  * calculating the percentage of female covid cases.
-  * @return
-  */ 
-  //Static method for calculating female covidcases percentage
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases of female employees.
+ * @return the percentage of female cases.
+     */
+
   public static double women() {
     int count15 = 0;
     for (int i = 0; i < CovidCases.cases.length; i++) {
@@ -316,16 +312,16 @@ public class Statistics {
         }
       }
     }
-    
+
     double posostowomen = (count15 * 100 / 50);
     return posostowomen;
   }
 
-  /**This method is used for
-  * calculating the percentage of male covid cases.
-  * @return
-  */ 
-  //Static method for calculating male covidcases percentage
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases of male employees.
+ * @return the percentage of male cases.
+   */
 
   public static double men() {
     int count16 = 0;
@@ -336,17 +332,17 @@ public class Statistics {
         }
       }
     }
-   
+
     double posostomen = (count16 * 100 / 50);
     return posostomen;
   }
-  /**This method is used for
-  * calculating the percentage of covid cases
-  * with severe symptoms.
-  * @return
-  */ 
-  //Static method for calculating covidcases with severe symptoms percentage
-  
+  /**
+   * This method is used to calculate
+   * the percentage of covid cases with severe symptoms
+   * and went to hospital.
+
+   */
+
   public static void symptoms_hospital() {
     int countsymptoms = 0;
     int counthospital = 0;
@@ -357,7 +353,7 @@ public class Statistics {
         if (CaseTreatment.casetreatments[x].getDaysymptoms() > 0) {
           countsymptoms += 1;
         }
-        if (CaseTreatment.casetreatments[x].getDayhospital() > 0) {
+        if (CaseTreatment.casetreatments[x].getDayHospital() > 0) {
           counthospital += 1;
         }
 
@@ -366,26 +362,26 @@ public class Statistics {
     JPanel panel = new JPanel();
     panel.setLayout(null);
     panel.setBackground(new Color(203, 239, 240));
-    JFrame frame = new JFrame(); 
+    JFrame frame = new JFrame();
     frame.add(panel);
-    frame.setTitle(""); 
-    frame.setResizable(false); 
+    frame.setTitle("");
+    frame.setResizable(false);
     frame.setSize(650, 150);
     frame.setLocationRelativeTo(null);
-    frame.setVisible(true); 
-    frame.getContentPane().setBackground(new Color(203, 239, 240)); 
-    JLabel label1 = new JLabel(); 
-    label1.setText("The persentage of Covid cases with severe symptoms is: " 
+    frame.setVisible(true);
+    frame.getContentPane().setBackground(new Color(203, 239, 240));
+    JLabel label1 = new JLabel();
+    label1.setText("The persentage of Covid cases with severe symptoms today is: "
                                       + countsymptoms * 100 / countp + "%");
     label1.setBounds(50, 30, 800, 25);
     label1.setFont(new Font("", Font.BOLD, 15));
     panel.add(label1);
     JLabel label2 = new JLabel();
-    label2.setText("The percentage of Covid cases hospitalized is: "
+    label2.setText("The percentage of Covid cases hospitalized today is: "
                                             + counthospital * 100 / countp + "%");
     label2.setBounds(50, 50, 800, 25);
     label2.setFont(new Font("", Font.BOLD, 15));
     panel.add(label2);
-       
+
   }
 }
