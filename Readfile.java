@@ -134,7 +134,7 @@ public class Readfile {
                     Integer.parseInt(temp));
               } else if (line.trim().startsWith("DAYS_inHOSPITAL")) {
                 temp = line.trim().substring(16);
-                CaseTreatment.casetreatments[counter].setDayhospital(
+                CaseTreatment.casetreatments[counter].setDayHospital(
                       Integer.parseInt(temp));
               }
               line = reader.readLine();
