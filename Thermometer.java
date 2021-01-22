@@ -1,3 +1,9 @@
+/**
+ * This class is used in order to collect
+ * the employees' temperatures every day.
+ *
+ */
+
 public class Thermometer {
   static double[] thermometrhseis = new double[50];
   /** This method initializes the list in which the temperatures of the employees will be added.
@@ -21,7 +27,7 @@ public class Thermometer {
       GraphStats.Text("The employee must work from home. Get well soon!", 2560);
       Telework.teleworkers[0].thermTeleworkers(idemployee, idNext);
     } else {
-    	 GraphStats.Text("The employee can work normally.", 2500);
+         GraphStats.Text("The employee can work normally.", 2500);
     }
   }
 
