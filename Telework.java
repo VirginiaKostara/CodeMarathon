@@ -1,5 +1,11 @@
 import java.security.SecureRandom;
 
+/**
+ * In this class we keep the data about the current condition
+ * of the employees (if they work from home or at the office).
+ *
+ */
+
 public class Telework extends Employee { // a teleworker is an employee
   public static Telework [] teleworkers = new Telework [50];
 
