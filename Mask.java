@@ -66,35 +66,32 @@ public class Mask {
     //times that the employee did not wear a mask, including the current one
     if (Telework.teleworkers[idemployee - 1].getWorkStatus() == Telework.Status.NORMAL) {
       nomask[idemployee - 1].setTimes(currenttimes);
+      if (currenttimes == 3) {
+        System.out.println(Employee.employees[idemployee - 1].getName() + " "
+            + Employee.employees[idemployee - 1].getSurname() + ": First strike");
+        //The company policy says that 3days without a mask lead to a strike to the employee.
+      } else if (currenttimes > 3 && currenttimes < 6) {
+    	System.out.println(Employee.employees[idemployee - 1].getName() + " " +
+            Employee.employees[idemployee - 1].getSurname() + " has one strike so far."); 
+      } else if (currenttimes == 6) {
+        System.out.println(Employee.employees[idemployee - 1].getName() + " "
+            + Employee.employees[idemployee - 1].getSurname()
+            + ": Second strike, the employee will work from home");
+        Telework.teleworkers[0].maskTeleworkers(idemployee);
+        //At 6days without a mask, the employee becomes a teleworker and the counter starts over.
+        nomask[idemployee - 1].setTimes(0);
+      } else {
+        System.out.println(Employee.employees[idemployee - 1].getName() + " "
+            + Employee.employees[idemployee - 1].getSurname()
+            + ":No need for a strike");
+      }
+      //In any other case, the employee continues his work normally.
     } else {
-      System.out.println("The employee works from home");
+       GraphStats.Text("The employee works from home.", 2500);
     }
     //if the employee works from home, the system does not add times without mask
     //it shows a message indicating wrong input
-    if (currenttimes == 3) {
-      System.out.println(Employee.employees[idemployee - 1].getName() + " "
-          + Employee.employees[idemployee - 1].getSurname() + ": First strike");
-      //The company policy says that 3days without a mask lead to a strike to the employee.
-    } else if (currenttimes == 6) {
-      System.out.println(Employee.employees[idemployee - 1].getName() + " "
-          + Employee.employees[idemployee - 1].getSurname()
-             + ": Second strike, the employee will work from home");
-      Telework.teleworkers[0].maskTeleworkers(idemployee);
-      //At 6days without a mask, the employee becomes a teleworker
-    } else if (currenttimes == 9) {
-      System.out.println(Employee.employees[idemployee - 1].getName() + " "
-              + Employee.employees[idemployee - 1].getSurname()
-                + ": Last strike, the employee is fired");
-      Employee.fireEmployee(idemployee - 1);
-      nomask[idemployee - 1].setTimes(99);
-      //At 9days the company fires the employee to protect the others.
-      //number 99 as times indicates that the employee is fired
-    } else {
-      System.out.println(Employee.employees[idemployee - 1].getName() + " "
-          + Employee.employees[idemployee - 1].getSurname()
-            + ":No need for a strike");
-    }
-    //In any other case, the employee continues his work normally.
+
   }
 
 }
