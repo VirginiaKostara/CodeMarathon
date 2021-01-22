@@ -79,7 +79,12 @@ public class GraphStats extends JPanel {
       label.setHorizontalAlignment(JLabel.CENTER);
       label.setVerticalTextPosition(JLabel.TOP);
       label.setVerticalAlignment(JLabel.BOTTOM);
-      int barHeight = (bar.getValue() * histogramHeight) / maxValue;
+      int barHeight;
+      if (maxValue != 0) {
+        barHeight = (bar.getValue() * histogramHeight) / maxValue;
+      } else {
+        barHeight = 0;
+      }
       Icon icon = new ColorIcon(bar.getColor(), barWidth, barHeight);
       label.setIcon(icon);
       barPanel.add(label);
@@ -201,12 +206,12 @@ public class GraphStats extends JPanel {
     JFrame frame = new JFrame();
     frame.setTitle("");
     frame.setResizable(false);
-    frame.setSize(650, 150);
+    frame.setSize(750, 150);
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
     frame.getContentPane().setBackground(new Color(203, 239, 240));
     JLabel label = new JLabel();
-    label.setText("The persentage of Covid cases per employee is: "
+    label.setText("The persentage of the company's employees that had/have covid is: "
                            + Statistics.totalCovid() + "%");
     label.setFont(new Font("", Font.BOLD, 15));
     label.setVerticalAlignment(JLabel.CENTER);
