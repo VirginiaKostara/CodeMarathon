@@ -1,52 +1,58 @@
-package codemarathon;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+/**
+ * This class is used for creating trheads for every current covid case id and collects
+ * information about his situation while he stays home.
+ * 
+ *
+ */
 
 public class CaseTreatment implements Runnable {
   static Scanner input = new Scanner(System.in);
   static Scanner input2 = new Scanner(System.in);
   private double fever;
-  private String symptoms; // ενα νημα
-  //= συμπεριφορα ενος επιβεβαιωμενου κρουσματος μεσα σε 1 μονο μερα!!!
+  private String symptoms;
+  //how the ill employee is going after 1 day
   private boolean hospital;
-  // αν εχει ηπια ή καθολου συμπτωματα ρωταει μια φορα κ τελος. αν εχει εντονα
-  // συμπτωματα ή εχει μπει στο νοσοκομειο ρωταει 3 φορες την ιδια μερα
-  private int daysymptoms = 0; //neo
-  private int dayhospital = 0; //neo
-  //private static int c2 = 0; // neo
-  private int code; //= -1; // neo
-  public static CaseTreatment[] casetreatments = new CaseTreatment[50]; // neo
+  private int daysymptoms = 0;
+  private int DayHospital = 0;
+  private int code; //= -1;
+  public static CaseTreatment[] casetreatments = new CaseTreatment[50];
 
   /**
    * Learn about the condition of the ill employee(thread).
+   * @param fever the temperature of the covid cases every day
+   * @param symptoms none , mild or severe for every day 
+   * @param hospital true if the patient went to the hospital today
+   * @param code the patient's id 
    */
 
   public CaseTreatment(double fever, String symptoms, boolean hospital, int code) {
     this.fever = fever;
     this.symptoms = symptoms;
     this.hospital = hospital;
-    this.code = code; // neo
-    casetreatments[code - 1] = this; 
+    this.code = code;
+    casetreatments[code - 1] = this;
   }
 
-  public int getCode() { // neo
+  public int getCode() {
     return code;
   }
 
-  public void setCode(int code) { // neo
+  public void setCode(int code) {
     this.code = code;
   }
 
   /**
-   * Learn about the condition of the ill employee for statistic reasons.
+   * This method initialize the fields we will need for statistics reasons.
    */
 
-  
-  
+
+
   public static void initializeCaseTreatment() {
     for (int i = 0; i < 50; i++) {
-      new CaseTreatment(0, "none", false, i + 1);
+      new CaseTreatment(0, "null", false, i + 1);
     }
   }
 
@@ -65,7 +71,7 @@ public class CaseTreatment implements Runnable {
   public void setSymptoms(String symptoms) {
     this.symptoms = symptoms;
   }
-  
+
   public boolean getHospital() {
     return hospital;
   }
@@ -82,12 +88,12 @@ public class CaseTreatment implements Runnable {
     this.daysymptoms = daysymptoms;
   }
 
-  public int getDayhospital() {
-    return dayhospital;
+  public int getDayHospital() {
+    return DayHospital;
   }
 
-  public void setDayhospital(int dayhospital) {
-    this.dayhospital = dayhospital;
+  public void setDayHospital(int DayHospital) {
+    this.DayHospital = DayHospital;
   }
 
 
@@ -97,7 +103,7 @@ public class CaseTreatment implements Runnable {
    */
   @Override
   public void run() {
-    String abc;
+	String abc;
     String x;
     double fev = 0;
     try {
@@ -148,34 +154,34 @@ public class CaseTreatment implements Runnable {
           }
         } while (!(x.equals("YES")) && !(x.contentEquals("yes")) && !(x.contentEquals("no"))
                       && !(x.contentEquals("NO")));
+        if (getCode() >= 0 && getCode() < 50) {
 
         if (x.contentEquals("YES") || x.contentEquals("yes")) {
           setHospital(true);
-          
-          if (getCode() >= 0 && getCode() < 50) { // neo
 
-            setDayhospital(getDayhospital() + 1);
 
-          } // neo
+            setDayHospital(getDayHospital() + 1);
+
         } else {
           setHospital(false);
         }
         System.out.println("Successful Insertion");
         System.out.println();
-        if (getCode() >= 0 && getCode() < 50) { // neo
+
             if (getSymptoms().equals("SEVERE") || getSymptoms().equals("severe")) {
           setDaysymptoms(getDaysymptoms() + 1);
             }
         }
       }
-        
-      
+
+
     } catch (InterruptedException e) {
       System.err.println("Something happened. Please retry");
     } finally {
       System.out.println("The insertion is finished. Thank you!");
       System.out.println();
     }
+
 
   }
 
@@ -190,17 +196,17 @@ public class CaseTreatment implements Runnable {
     int Z = 0;
     for (int a = 0 ; a < CovidCases.casesnow.length ; a++) {
         if (CovidCases.casesnow[a] != null) {
-          Z++;  
+          Z++;
         }
     }
     int code1 = -1;
     int code2;
     if (Z < 3) {
       System.out.println();
-      CovidCases.printCasesnow(); 
+      CovidCases.printCasesnow();
       System.out.println(
             "Please write the employee's id that you want to save"
-             + " his/her today status. "); 
+             + " his/her today status. ");
       boolean f1 = true;
       while (f1 == true) {
         try {
@@ -218,12 +224,11 @@ public class CaseTreatment implements Runnable {
             }
           } while (frouros == false);
           covidcase[0] = new CaseTreatment(36.6, "", false, code1);
-          // μολις εμαθα οτι το τεστ βγηκε θετικο, δεν
-          // ξερω τιποτα για την κατασταση του ασθενη Ή
-          // ειναι πρωι κ δεν εχω μαθει πως ειναι ακομα
+          //When we receive the test results.
           thread[0] = new Thread(covidcase[0]);
-          thread[0].start(); // δεν μπορει να χειριστει την περιπτωση που
-        //υπάρχουν 2 ενεργα κρουσματα στην εταιρεία
+          thread[0].start();
+          //It cannot deal with the case that there are 2
+          //covid cases currently at the company
         } catch (InputMismatchException e) {
           System.out.println("The given id does not belong to any"
                     + " employee. Please retry");
@@ -241,7 +246,7 @@ public class CaseTreatment implements Runnable {
         CovidCases.printCases();
         System.out.println(
             "Please write the employee's id that you want to save"
-             + " his/her today status. "); 
+             + " his/her today status. ");
         boolean f2 = true;
         while (f2 == true) {
           try {
