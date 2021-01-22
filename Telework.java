@@ -1,11 +1,5 @@
 import java.security.SecureRandom;
 
-/**
- * In this class we keep the data about the current condition
- * of the employees (if they work from home or at the office).
- *
- */
-
 public class Telework extends Employee { // a teleworker is an employee
   public static Telework [] teleworkers = new Telework [50];
 
@@ -154,7 +148,8 @@ public class Telework extends Employee { // a teleworker is an employee
     for (int i = 0; i <= 49; i++) {
       if (Telework.teleworkers[i].getWorkStatus() != Status.NORMAL) {
         System.out.println("Mr/Mrs " + Telework.teleworkers[i].getName() + ""
-                + " " + Telework.teleworkers[i].getSurname() + " is working from home for "
+                + " " + Telework.teleworkers[i].getSurname() + "with id: " + Telework.teleworkers[i].getId()+
+        		" is working from home for "
                         +   teleworkers[i].quarantine_days + " days.");
       }
     }
