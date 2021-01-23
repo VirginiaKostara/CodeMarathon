@@ -1,4 +1,3 @@
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -133,17 +132,17 @@ public class GraphStats extends JPanel {
     }
 
     @Override
-	public int getIconWidth() {
+    public int getIconWidth() {
       return width;
     }
 
     @Override
-	public int getIconHeight() {
+    public int getIconHeight() {
       return height;
     }
 
     @Override
-	public void paintIcon(Component c, Graphics g, int x, int y) {
+    public void paintIcon(Component c, Graphics g, int x, int y) {
       g.setColor(color);
       g.fillRect(x, y, width - shadow, height);
       g.setColor(Color.GRAY);
@@ -220,21 +219,24 @@ public class GraphStats extends JPanel {
   }
 
   public static void Text(String message, int time) {
-	JFrame frame = new JFrame(); //dimiourgei frame
+    JFrame frame = new JFrame(); //dimiourgei frame
     frame.setTitle(""); //titlos tou frame
     frame.setResizable(false); //twra de mporei na allaksei to megethos tou frame
     frame.setSize(650, 150);
     frame.setLocationRelativeTo(null);
     frame.setVisible(true); //kanei to frame na fainetai
-	frame.getContentPane().setBackground(new Color(203, 239, 240)); //allazei xrwma tou frame
-	JLabel label = new JLabel(); //dimiourgei label
-	label.setText(message); //kanei set to text
+    frame.getContentPane().setBackground(new Color(203, 239, 240)); //allazei xrwma tou frame
+    JLabel label = new JLabel(); //dimiourgei label
+    label.setText(message); //kanei set to text
     label.setFont(new Font("", Font.BOLD, 15)); //allazei to font tou text
-	label.setVerticalAlignment(JLabel.CENTER); //thetei tin vertical thesi tou text kai tis eikonas
-	label.setHorizontalAlignment(JLabel.CENTER); //to idio alla horizontal
+    label.setVerticalAlignment(JLabel.CENTER); //thetei tin vertical thesi tou text kai tis eikonas
+    label.setHorizontalAlignment(JLabel.CENTER); //to idio alla horizontal
     frame.add(label);
-	new Timer(time, (e) -> { frame.setVisible(false); frame.dispose(); }).start();
+    new Timer(time, (e) -> {
+      frame.setVisible(false);
+      frame.dispose();
+    }).start();
 
-	}
+  }
 
 }
