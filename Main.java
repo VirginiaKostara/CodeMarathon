@@ -149,7 +149,7 @@ public class Main {
                                 int idNext = 0;
                                 if (therm > 37) {
                                   if (!(Employee.employees[idtherm - 1].getTransportation().equals(
-                                      "ATOMIKOMESO"))) {
+                                      "PV"))) {
                                     idNext = 100;
                                     int flag1 = 0;
                                     while (flag1 != 1) {
@@ -399,7 +399,7 @@ public class Main {
           } else if (flag == 9) {
             GraphStats.Text("Closing the app. Goodbye!", 5000);
             c.saveData();
-           
+
           }
         }
         stop = false;
