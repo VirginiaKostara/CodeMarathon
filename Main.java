@@ -51,15 +51,16 @@ public class Main {
                 Telework.teleworkers[i].setQuarantine_days(
                     Telework.teleworkers[i].getQuarantine_days() + 1);
               }
-                for (int m = 0; m < CovidCases.casesnow.length; m++) {
-                	if (CovidCases.casesnow[m] != null) {
-                	  if (CovidCases.casesnow[m].getIdcases() == i + 1)  {
-                		CovidCases.casesnow[m].setDaysleft(9 - Telework.teleworkers[i].getQuarantine_days());
-                	}
-                	}
+              for (int m = 0; m < CovidCases.casesnow.length; m++) {
+                if (CovidCases.casesnow[m] != null) {
+                  if (CovidCases.casesnow[m].getIdcases() == i + 1)  {
+                    CovidCases.casesnow[m].setDaysleft(9
+                        - Telework.teleworkers[i].getQuarantine_days());
+                  }
+                }
 
               }
-          }
+            }
 
             Telework.teleworkers[0].changeStatus();
             CovidCases.upDateCases();
@@ -137,7 +138,8 @@ public class Main {
                       idtherm = keyboard.nextInt();
                       if (idtherm <= 50 && idtherm > 0
                           && Telework.teleworkers[idtherm - 1].getWorkStatus()
-                          == Telework.Status.NORMAL && Thermometer.thermometrhseis[idtherm - 1] == 0) {
+                          == Telework.Status.NORMAL && Thermometer.thermometrhseis[idtherm - 1]
+                              == 0) {
                         double therm = 0;
                         while (therm < 34 || therm > 43) {
                           boolean loop = true;
@@ -162,7 +164,8 @@ public class Main {
                                       }
                                       if (countem > 1) {
                                         idNext = 99;
-                                        System.out.println("Was she/he sitting with someone today at the bus? YES/NO");
+                                        System.out.println("Was she/he sitting with someone today"
+                                            + " at the bus? YES/NO");
                                         String ans = lines.nextLine();
                                         if (ans.equals("YES")) {
                                           while (idNext == 99) {
@@ -179,17 +182,19 @@ public class Main {
                                                   idNext = i + 1;
                                                 } else if (!(Telework.teleworkers[i].getWorkStatus()
                                                     == Telework.Status.NORMAL)) {
-                                                	GraphStats.Text("This person works from home", 2000);
+                                                  GraphStats.Text("This person works "
+                                                      + "from home", 2000);
                                                 } else if (!(Employee.employees[i]
                                                         .getTransportation().contentEquals(
                                                           Employee.employees[idtherm - 1]
                                                        .getTransportation()))) {
-                                                	GraphStats.Text("This person does not use the same vehicle", 2000);
+                                                  GraphStats.Text("This person does not "
+                                                      + "use the same vehicle", 2000);
                                                 }
                                               }
                                             }
                                             if (idNext == 99) {
-                                            	System.out.println("Try again.");
+                                              System.out.println("Try again.");
                                             }
                                             flag1 = 1;
                                           }
@@ -200,7 +205,7 @@ public class Main {
                                           System.out.println();
                                         }
                                         if (!(ans.equals("NO")) && !(ans.equals("YES"))) {
-                                        	GraphStats.Text("Wrong answer", 2000);
+                                          GraphStats.Text("Wrong answer", 2000);
                                         }
                                       }
                                     }
@@ -210,12 +215,13 @@ public class Main {
                                 }
                                 Thermometer.th(idtherm, therm, idNext);
                               } else {
-                            	  GraphStats.Text("Wrong temperature", 2000);
+                                GraphStats.Text("Wrong temperature", 2000);
                               }
                               loop = false;
                             } catch (InputMismatchException inputMismatchException5) {
                               sc.nextLine();
-                              GraphStats.Text("Insert only numbers. Use . instead of ,please try again.",3000);
+                              GraphStats.Text("Insert only numbers. "
+                                  + "Use . instead of , please try again.", 3000);
                               System.out.println();
                             }
                           } while (loop);
@@ -224,14 +230,15 @@ public class Main {
                         more = lines.nextLine();
                       } else if (idtherm <= 50 && idtherm > 0
                               && !(Thermometer.thermometrhseis[idtherm - 1] == 0)) {
-                    	GraphStats.Text("You have already insert temperature for this employee", 2000);
+                        GraphStats.Text("You have already insert temperature "
+                            + "for this employee", 2000);
                       } else if (idtherm <= 50 && idtherm > 0
                               && !(Telework.teleworkers[idtherm - 1].getWorkStatus()
                               == Telework.Status.NORMAL)) {
-                    	GraphStats.Text("This employee works from home", 2000);
+                        GraphStats.Text("This employee works from home", 2000);
                       } else {
-                    	GraphStats.Text("Wrong id", 2000);
-                    	System.out.println("Please insert employee's id;");
+                        GraphStats.Text("Wrong id", 2000);
+                        System.out.println("Please insert employee's id;");
                       }
                       intloop = false;
                     } catch (InputMismatchException inputMismatchException5) {
@@ -243,12 +250,12 @@ public class Main {
                 }
               }
               if (!(more.equals("YES")) && !(more.equals("NO"))) {
-            	GraphStats.Text("Wrong Choice",  2000);
+                GraphStats.Text("Wrong Choice",  2000);
                 System.out.println("Do you want to insert for another employee? YES/NO");
                 more = lines.nextLine();
               }
               if (more.equals("NO")) {
-            	  GraphStats.Text("Done!", 2000);
+                GraphStats.Text("Done!", 2000);
                 System.out.println();
               }
             }
@@ -282,7 +289,8 @@ public class Main {
                         more = lines.nextLine();
                       } else {
                         System.out.println("Wrong Answer");
-                        System.out.println("Give the id of the employee that did not wear a mask: ");
+                        System.out.println("Give the id of the employee that did not "
+                            + "wear a mask: ");
                       }
                       intloop = false;
                     } catch (InputMismatchException inputMismatchException5) {
@@ -324,7 +332,8 @@ public class Main {
                   boolean intloop = true;
                   do {
                     try {
-                      System.out.println("Give the id of the employee you want to know his status: ");
+                      System.out.println("Give the id of the employee you "
+                          + "want to know his status: ");
                       interest = keyboard.nextInt();
                       if (interest <= 50 && interest > 0) {
                         System.out.println(Telework.teleworkers[interest - 1].toString());
@@ -369,20 +378,20 @@ public class Main {
                   System.out.println("Choose [1-6]: ");
                   flag2 = keyboard.nextInt();
                   if (flag2 == 1) {
-				    GraphStats.createAndShowGuitmimata();;
-				  }
-				  if (flag2 == 2) {
-				    GraphStats.createAndShowGuifilo();;
-				  }
-				  if (flag2 == 3) {
-				    GraphStats.createAndShowGuimm();;
-				  }
-				  if (flag2 == 4) {
-				    GraphStats.createAndShowGuitotal();
+                    GraphStats.createAndShowGuitmimata();;
                   }
-				  if (flag2 == 5) {
-				    Statistics.symptoms_hospital();
-				  }
+                  if (flag2 == 2) {
+                    GraphStats.createAndShowGuifilo();;
+                  }
+                  if (flag2 == 3) {
+                    GraphStats.createAndShowGuimm();;
+                  }
+                  if (flag2 == 4) {
+                    GraphStats.createAndShowGuitotal();
+                  }
+                  if (flag2 == 5) {
+                    Statistics.symptoms_hospital();
+                  }
                   if (flag == 6) {
                     System.out.println("Returning to the first menu");
                     System.out.println();
