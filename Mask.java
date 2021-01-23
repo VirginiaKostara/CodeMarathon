@@ -71,8 +71,8 @@ public class Mask {
             + Employee.employees[idemployee - 1].getSurname() + ": First strike");
         //The company policy says that 3days without a mask lead to a strike to the employee.
       } else if (currenttimes > 3 && currenttimes < 6) {
-    	System.out.println(Employee.employees[idemployee - 1].getName() + " " +
-            Employee.employees[idemployee - 1].getSurname() + " has one strike so far."); 
+        System.out.println(Employee.employees[idemployee - 1].getName() + " "
+            + Employee.employees[idemployee - 1].getSurname() + " has one strike so far.");
       } else if (currenttimes == 6) {
         System.out.println(Employee.employees[idemployee - 1].getName() + " "
             + Employee.employees[idemployee - 1].getSurname()
@@ -87,7 +87,7 @@ public class Mask {
       }
       //In any other case, the employee continues his work normally.
     } else {
-       GraphStats.Text("The employee works from home.", 2500);
+      GraphStats.Text("The employee works from home.", 2500);
     }
     //if the employee works from home, the system does not add times without mask
     //it shows a message indicating wrong input
