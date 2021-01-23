@@ -103,7 +103,7 @@ public class CaseTreatment implements Runnable {
    */
   @Override
   public void run() {
-	String abc;
+    String abc;
     String x;
     double fev = 0;
     try {
@@ -155,22 +155,20 @@ public class CaseTreatment implements Runnable {
         } while (!(x.equals("YES")) && !(x.contentEquals("yes")) && !(x.contentEquals("no"))
                       && !(x.contentEquals("NO")));
         if (getCode() >= 0 && getCode() < 50) {
-
-        if (x.contentEquals("YES") || x.contentEquals("yes")) {
-          setHospital(true);
+          if (x.contentEquals("YES") || x.contentEquals("yes")) {
+            setHospital(true);
 
 
             setDayHospital(getDayHospital() + 1);
+          } else {
+            setHospital(false);
+          }
+          System.out.println("Successful Insertion");
+          System.out.println();
 
-        } else {
-          setHospital(false);
-        }
-        System.out.println("Successful Insertion");
-        System.out.println();
-
-            if (getSymptoms().equals("SEVERE") || getSymptoms().equals("severe")) {
-          setDaysymptoms(getDaysymptoms() + 1);
-            }
+          if (getSymptoms().equals("SEVERE") || getSymptoms().equals("severe")) {
+            setDaysymptoms(getDaysymptoms() + 1);
+          }
         }
       }
 
@@ -193,15 +191,15 @@ public class CaseTreatment implements Runnable {
    * Create threads for every patient everyday.
    */
   public static void createThreads() {
-    int Z = 0;
-    for (int a = 0 ; a < CovidCases.casesnow.length ; a++) {
-        if (CovidCases.casesnow[a] != null) {
-          Z++;
-        }
+    int z = 0;
+    for (int a = 0; a < CovidCases.casesnow.length; a++) {
+      if (CovidCases.casesnow[a] != null) {
+        z++;
+      }
     }
     int code1 = -1;
     int code2;
-    if (Z < 3) {
+    if (z < 3) {
       System.out.println();
       CovidCases.printCasesnow();
       System.out.println(
@@ -214,9 +212,11 @@ public class CaseTreatment implements Runnable {
           boolean frouros = false;
           do {
             code1 = input.nextInt();
-            for (int s = 0; s < Z; s++) {
-              if (code1 == CovidCases.casesnow[s].getIdcases()) {
-                frouros = true;
+            for (int s = 0; s < z; s++) {
+              if (CovidCases.casesnow[s] != null) {
+                if (code1 == CovidCases.casesnow[s].getIdcases()) {
+                  frouros = true;
+                }
               }
             }
             if (frouros == false) {
@@ -236,7 +236,7 @@ public class CaseTreatment implements Runnable {
           f1 = true;
         }
       }
-      if (Z == 2) {
+      if (z == 2) {
         try {
           thread[0].join();
         } catch (InterruptedException e) {
@@ -254,9 +254,11 @@ public class CaseTreatment implements Runnable {
             boolean frouros2 = false;
             do {
               code2 = input.nextInt();
-              for (int s = 0; s < Z; s++) {
-                if (code2 == CovidCases.casesnow[s].getIdcases() && code2 != code1) {
-                  frouros2 = true;
+              for (int s = 0; s < z; s++) {
+                if (CovidCases.casesnow[s] != null) {
+                  if (code2 == CovidCases.casesnow[s].getIdcases() && code2 != code1) {
+                    frouros2 = true;
+                  } 
                 }
               }
               if (frouros2 == false) {
