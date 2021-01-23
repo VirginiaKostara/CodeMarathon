@@ -18,15 +18,15 @@ public class Statistics {
    * the total count of Covid cases that have existed in the company until now.
    * @return The total count Covid Cases.
    */
-	
+
   public static int countIdCases() {
     int count = 0;
-      for (int i = 0; i < Employee.employees.length; i++) {
-        if (Employee.employees[i].getHad_covid() == true) {
-	  count++;	
-	}
+    for (int i = 0; i < Employee.employees.length; i++) {
+      if (Employee.employees[i].getHad_covid() == true) {
+        count++;
       }
-      return count;
+    }
+    return count;
   }
 
 
@@ -46,10 +46,10 @@ public class Statistics {
       }
     }
 
-    
+
     double posostocovid = (count1 * 100 / 50);
     return posostocovid;
-    
+
   }
 
   /**
@@ -417,7 +417,6 @@ public class Statistics {
    * This method is used to calculate
    * the percentage of covid cases with severe symptoms
    * and went to hospital.
-
    */
 
   public static void symptoms_hospital() {
