@@ -1,3 +1,4 @@
+
 /**
  * A class with the information of every Employee that has or had Covid-19.
  * Every Employee that currently has Covid-19 and his info are saved in casesnow table.
@@ -64,8 +65,8 @@ public class CovidCases {
       }
     }
     if (i == 2) {
-        System.out.println("THE COMPANY HAS TO CLOSE!");
-      }
+      System.out.println("THE COMPANY HAS TO CLOSE!");
+    }
   }
   /**
    * This method is used to print all the Employees that had/have Covid-19.
@@ -98,23 +99,23 @@ public class CovidCases {
    * @param i This parameter is the id of the Employee that recovered -1
    */
   public static void deleteCase(int i) {
-	  for (int j = 0; j < 2; j++) {
-		  if (casesnow[j] != null ) {
-		  if (casesnow[j].getIdcases() == i + 1 ) {
-			  casesnow[j] = null;
-		      count--;
-		  }
-		  }
-	  }
+    for (int j = 0; j < 2; j++) {
+      if (casesnow[j] != null) {
+        if (casesnow[j].getIdcases() == i + 1) {
+          casesnow[j] = null;
+          count--;
+        }
+      }
+    }
 
   }
 
   public void setIdcases(int idcases) {
-	this.idcases = idcases;
-}
+    this.idcases = idcases;
+  }
 
 
-/**
+  /**
    * This method is used to print all the Employees that have Covid-19 at that moment.
    */
 
@@ -138,23 +139,23 @@ public class CovidCases {
       System.out.println();
     }
   }
+
   public static void upDateCases() {
-    for(int i = 0; i < cases.length; i++) {
+    for (int i = 0; i < cases.length; i++) {
       if (Telework.teleworkers[i].getWorkStatus().equals(Telework.Status.COVIDCASE)) {
         if (cases[i] == null) {
-    	  createCase(i + 1);
+          createCase(i + 1);
         }
-      }
-      else if (Employee.employees[i].getHad_covid() == true) {
+      } else if (Employee.employees[i].getHad_covid() == true) {
         cases[i] = Employee.employees[i];
       }
-	}
+    }
   }
 
 
-public int getDaysleft() {
-	return daysleft;
-}
+  public int getDaysleft() {
+    return daysleft;
+  }
 
 
 
